@@ -84,6 +84,11 @@ public:
 private:
 	State m_State = IDLE;
 	int m_CurrentMenu = GAME_START;
+
+	// TODO: 변수 이름 바꾸기
+	const COORD m_SelectCrd[4] = {
+		{8 , 15}, { 8, 29}, {10, 15}, {10, 29}
+	};
 	const WCHAR* m_TitleScreen[100] = {
 		L"***************************************************",
 		L"*                                                 *",
