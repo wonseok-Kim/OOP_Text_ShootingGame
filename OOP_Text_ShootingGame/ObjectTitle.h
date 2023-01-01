@@ -2,7 +2,9 @@
 
 #include "ObjectBase.h"
 #include "ObjectType.h"
+#include "Renderer.h"
 #include "SceneManager.h"
+#include "SceneGame.h"
 
 class ObjectTitle : public ObjectBase
 {
@@ -52,8 +54,7 @@ public:
 			switch (m_CurrentMenu)
 			{
 			case GAME_START:
-				// TODO : Game Scene 넣기
-				// SceneManager::Instance().LoadScene();
+				SceneManager::Instance().LoadScene(new SceneGame());
 				break;
 
 			case EXIT:
@@ -74,9 +75,25 @@ public:
 		m_State = IDLE;
 	}
 
-	virtual void Render() override
+	virtual void Render(Renderer* renderer) override
 	{
+		for (int i = 0; i < 19; ++i)
+			renderer->drawString(0, i, s_TitleScreen[i]);
 
+		if (m_CurrentMenu == MenuKind::GAME_START)
+		{
+			renderer->draw(m_SelectCrd[0].X, m_SelectCrd[0].Y, L'>');
+			renderer->draw(m_SelectCrd[0].X + 1, m_SelectCrd[0].Y, L'>');
+			renderer->draw(m_SelectCrd[1].X, m_SelectCrd[1].Y, L'<');
+			renderer->draw(m_SelectCrd[1].X + 1, m_SelectCrd[1].Y, L'<');
+		}
+		else if (m_CurrentMenu == MenuKind::EXIT)
+		{
+			renderer->draw(m_SelectCrd[2].X, m_SelectCrd[2].Y, L'>');
+			renderer->draw(m_SelectCrd[2].X + 1, m_SelectCrd[2].Y, L'>');
+			renderer->draw(m_SelectCrd[3].X, m_SelectCrd[3].Y, L'<');
+			renderer->draw(m_SelectCrd[3].X + 1, m_SelectCrd[3].Y, L'<');
+		}
 	}
 
 	void SetState(State state) { m_State = state; }
@@ -87,9 +104,10 @@ private:
 
 	// TODO: 변수 이름 바꾸기
 	const COORD m_SelectCrd[4] = {
-		{8 , 15}, { 8, 29}, {10, 15}, {10, 29}
+		{16, 8}, { 30, 8}, {16, 10}, {30, 10}	
 	};
-	const WCHAR* m_TitleScreen[100] = {
+
+	WCHAR s_TitleScreen[19][52] = {
 		L"***************************************************",
 		L"*                                                 *",
 		L"*                                                 *",
@@ -98,14 +116,14 @@ private:
 		L"*                SHOOTING GAME                    *",
 		L"*                                                 *",
 		L"*                                                 *",
-		L"*               >> GAME START <<                  *",
+		L"*                  GAME START                     *",
 		L"*                                                 *",
 		L"*                     EXIT                        *",
 		L"*                                                 *",
 		L"*                                                 *",
 		L"*                                                 *",
 		L"*                                                 *",
-		L"*  MOVE : ← → ↑ ↓                                 *",
+		L"*  MOVE : Arrow Keys                              *",
 		L"*  ATTACK, SELECT : SPACE BAR                     *",
 		L"*                                                 *",
 		L"***************************************************"

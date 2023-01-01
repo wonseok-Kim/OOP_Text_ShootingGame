@@ -2,6 +2,7 @@
 #include "SceneBase.h"
 
 class ObjectTitle;
+class Renderer;
 
 class SceneTitle : public SceneBase
 {
@@ -10,7 +11,7 @@ public:
 	virtual ~SceneTitle() override;
 
 	virtual void Update() override;
-	virtual void Render() override;
+	virtual void Render(Renderer* renderer) override;
 
 private:
 	ObjectTitle* m_Title;

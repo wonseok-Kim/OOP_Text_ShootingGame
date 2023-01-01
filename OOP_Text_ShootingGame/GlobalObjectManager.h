@@ -2,6 +2,8 @@
 
 #include "ObjectList.h"
 
+class Renderer;
+
 class GlobalObjectManager
 {
 public:
@@ -18,7 +20,7 @@ public:
 	}
 
 	void Update();
-	void Render();
+	void Render(Renderer* renderer);
 
 private:
 	GlobalObjectManager() = default;

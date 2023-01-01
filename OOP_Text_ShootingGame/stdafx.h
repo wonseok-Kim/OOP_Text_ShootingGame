@@ -1,13 +1,14 @@
 #pragma once
 
+#pragma comment(lib, "Winmm.lib")
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#include <wchar.h>
 #include <windows.h>
 #include <timeapi.h>
-
-#pragma comment(lib, "Winmm.lib")
 
 #define PrintError(msg, ...) do \
 { \

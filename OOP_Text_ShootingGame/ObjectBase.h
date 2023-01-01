@@ -1,5 +1,7 @@
 #pragma once
 
+class Renderer;
+
 class ObjectBase
 {
 public:
@@ -7,7 +9,7 @@ public:
 	virtual ~ObjectBase();
 
 	virtual void Update() = 0;
-	virtual void Render() = 0;
+	virtual void Render(Renderer* renderer) = 0;
 
 	int GetObjectType() { return m_ObjectType; }
 

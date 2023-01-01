@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneTitle.h"
 
+#include "Input.h"
 #include "ObjectTitle.h"
 #include "ObjectBase.h"
 
@@ -21,17 +22,19 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::Update()
 {	
-	if ((GetAsyncKeyState(VK_RIGHT) & 0x8001) ||
-		(GetAsyncKeyState(VK_DOWN) & 0x8001))
+	Input& input = Input::Instance();
+
+	if (input.GetKey(VK_RIGHT).released ||
+		input.GetKey(VK_UP).released)
 	{
 		m_Title->SetState(ObjectTitle::KEY_DOWN);
 	}
-	if ((GetAsyncKeyState(VK_LEFT) & 0x8001) ||
-		(GetAsyncKeyState(VK_UP) & 0x8001))
+	if (input.GetKey(VK_LEFT).released ||
+		input.GetKey(VK_DOWN).released)
 	{
 		m_Title->SetState(ObjectTitle::KEY_UP);
 	}
-	if ((GetAsyncKeyState(VK_SPACE) & 0x8001))
+	if (input.GetKey(VK_SPACE).released)
 	{
 		m_Title->SetState(ObjectTitle::KEY_PRESSED);
 	}
@@ -42,10 +45,10 @@ void SceneTitle::Update()
 	}
 }
 
-void SceneTitle::Render()
+void SceneTitle::Render(Renderer* renderer)
 {
 	for (ObjectBase* obj : m_ObjectList)
 	{
-		obj->Render();
+		obj->Render(renderer);
 	}
 }

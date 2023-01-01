@@ -11,11 +11,11 @@ void GlobalObjectManager::Update()
 	}
 }
 
-void GlobalObjectManager::Render()
+void GlobalObjectManager::Render(Renderer* renderer)
 {
 	// TODO: Render는 const가 맞을 지도?
 	for (ObjectBase* obj : m_ObjectList)
 	{
-		obj->Render();
+		obj->Render(renderer);
 	}
 }

@@ -1,47 +1,135 @@
 #pragma once
 
+#include "Sprite.h"
+
 class Renderer
 {
 public:
-	Renderer(int width, int height)
-		: m_Width{ width }
-		, m_Height{ height }
-	{
-		m_pScreenBuffer = new WCHAR[(width + 1) * (height + 1)];
+    Renderer(int width, int height)
+        : m_Width{ width }
+        , m_Height{ height }
+    {
+        m_ScreenBuffer = new WCHAR[width * height];
+        wmemset(m_ScreenBuffer, L' ', width * height);
 
-		//memset
-	}
+        m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	~Renderer()
-	{
-		delete[] m_pScreenBuffer;
-	}
+        SMALL_RECT rectWindow = { 0, 0, 1, 1 };
+        SetConsoleWindowInfo(m_hConsole, TRUE, &rectWindow);
 
-	void Render()
-	{
-		//sputwchar()
-	}
+        COORD coord = { (short)width, (short)height };
+        SetConsoleScreenBufferSize(m_hConsole, coord);
 
-	void ClearScreen()
-	{
-		system("cls");
-	}
+        m_RectWindow = { 0, 0, (short)(width - 1), (short)(height - 1) };
+        SetConsoleWindowInfo(m_hConsole, TRUE, &m_RectWindow);
 
-	void ClearBuffer()
-	{
-		for (int y = 1; y <= m_Height; ++y)
-		{
-			for (int x = 1; x <= m_Width; ++x)
-			{
-				int idx = x + y * m_Width;
-				m_pScreenBuffer[idx] = L' ';
-			}
-		}
-	}
+        CONSOLE_FONT_INFOEX cfi{ 0, };
+        cfi.cbSize = sizeof(cfi);
+        cfi.nFont = 0;
+        cfi.dwFontSize.X = 10;
+        cfi.dwFontSize.Y = 15;
+        cfi.FontFamily = FF_DONTCARE;
+        cfi.FontWeight = FW_NORMAL;
+
+        wcscpy_s(cfi.FaceName, L"Consolas");
+        SetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+
+        //CONSOLE_FONT_INFOEX cfi;
+        //BOOL hr = GetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+
+
+        CONSOLE_CURSOR_INFO stConsoleCursor;
+        stConsoleCursor.bVisible = FALSE;
+        stConsoleCursor.dwSize = 1;
+
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stConsoleCursor);
+    }
+
+    ~Renderer()
+    {
+        delete[] m_ScreenBuffer;
+    }
+
+    void draw(int x, int y, WCHAR wchar)
+    {
+        if (y >= m_Height || y < 0)
+            return;
+        if (x >= m_Width || x < 0)
+            return;
+
+        m_ScreenBuffer[x + y * m_Width] = wchar;
+    }
+
+    void drawString(int x, int y, const WCHAR* wcs)
+    {
+        Assert(wcs, "wcs must not be null");
+
+        if (y >= m_Height || y < 0)
+            return;
+        if (x >= m_Width || x < 0)
+            return;
+
+        int len = (int)wcslen(wcs);
+        if (len - 1 >= m_Width - x)
+        {
+            len = m_Width - x ;
+        }
+
+        for (int i = 0; i < len; ++i)
+        {
+            m_ScreenBuffer[x + y * m_Width + i] = wcs[i];
+        }
+    }
+
+    void drawSprite(int x, int y, Sprite* sprite)
+    {
+        for (int row = 0; row < sprite->Height(); ++row)
+        {
+            for (int col = 0; col < sprite->Width(); ++col)
+            {
+                WCHAR glyph = sprite->GetGlyph(col, row);
+                if (glyph != L' ')
+                    draw(x + col, y + row, glyph);
+            }
+        }
+    }
+
+    void Output()
+    {
+        DWORD bytesWritten;
+        WriteConsoleOutputCharacterW(m_hConsole, m_ScreenBuffer, m_Width * m_Height, { 0, 0 }, &bytesWritten);
+
+        //for (int i = 0; i < m_Height; ++i)
+        //{
+        //    MoveCursor(0, i);
+        //    for (int j = 0; j < m_Width; ++j)
+        //    {
+        //        putwchar(m_ScreenBuffer[j + i * m_Width]);
+        //    }
+        //    //putwchar(L'\n');
+        //}
+    }
+
+    void ClearBuffer()
+    {
+        wmemset(m_ScreenBuffer, L' ', m_Width * m_Height);
+    }
 
 private:
-	WCHAR* m_pScreenBuffer;
-	int m_Width;
-	int m_Height;
+    void MoveCursor(int iPosX, int iPosY)
+    {
+        COORD stCoord;
+        stCoord.X = iPosX;
+        stCoord.Y = iPosY;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), stCoord);
+    }
+
+private:
+    WCHAR* m_ScreenBuffer;
+    int m_Width;
+    int m_Height;
+
+    HANDLE m_hConsole;
+    SMALL_RECT m_RectWindow;
 };
 

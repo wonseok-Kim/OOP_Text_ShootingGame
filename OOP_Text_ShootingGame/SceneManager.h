@@ -1,6 +1,8 @@
 #pragma once
 
 #include "GlobalObjectManager.h"
+#include "Input.h"
+#include "Renderer.h"
 #include "SceneBase.h"
 
 class SceneManager
@@ -18,7 +20,7 @@ public:
 		delete m_NextScene;
 	}
 
-	void Run()
+	void Run(Renderer* renderer)
 	{
 		if (m_NextScene)
 		{
@@ -31,11 +33,16 @@ public:
 
 		auto& globalObjectManager = GlobalObjectManager::Instance();
 
+		Input::Instance().Handle();
+
 		m_CurrentScene->Update();
 		globalObjectManager.Update();
 
-		m_CurrentScene->Render();
-		globalObjectManager.Render();
+		m_CurrentScene->Render(renderer);
+		globalObjectManager.Render(renderer);
+
+		renderer->Output();
+		renderer->ClearBuffer();
 	}
 
 	void LoadScene(SceneBase* nextScene)
@@ -52,7 +59,7 @@ public:
 	SceneManager& operator=(SceneManager&&) = delete;
 
 private:
-	SceneManager() {}
+	SceneManager() = default;
 
 private:
 	SceneBase* m_CurrentScene = nullptr;

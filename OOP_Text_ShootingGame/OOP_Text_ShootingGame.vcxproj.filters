@@ -10,9 +10,6 @@
     <Filter Include="3. ShootingGame">
       <UniqueIdentifier>{e9f98a67-5a37-46f2-a916-71e761f26bbe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="4. Resource Loader">
-      <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="5. Main">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -20,6 +17,9 @@
     <Filter Include="6. Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="4. Resource">
+      <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,9 +51,24 @@
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
     <ClCompile Include="ResourceLoader.cpp">
-      <Filter>4. Resource Loader</Filter>
+      <Filter>4. Resource</Filter>
     </ClCompile>
     <ClCompile Include="ObjectTitle.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGame.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>4. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootingGame.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,12 +104,27 @@
       <Filter>1.Engine</Filter>
     </ClInclude>
     <ClInclude Include="ResourceLoader.h">
-      <Filter>4. Resource Loader</Filter>
+      <Filter>4. Resource</Filter>
     </ClInclude>
     <ClInclude Include="ObjectTitle.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
     <ClInclude Include="ObjectType.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGame.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>4. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootingGame.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>
