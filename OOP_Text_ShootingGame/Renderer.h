@@ -37,7 +37,6 @@ public:
         //CONSOLE_FONT_INFOEX cfi;
         //BOOL hr = GetCurrentConsoleFontEx(m_hConsole, false, &cfi);
 
-
         CONSOLE_CURSOR_INFO stConsoleCursor;
         stConsoleCursor.bVisible = FALSE;
         stConsoleCursor.dwSize = 1;
@@ -50,7 +49,7 @@ public:
         delete[] m_ScreenBuffer;
     }
 
-    void draw(int x, int y, WCHAR wchar)
+    void Draw(int x, int y, WCHAR wchar)
     {
         if (y >= m_Height || y < 0)
             return;
@@ -60,7 +59,7 @@ public:
         m_ScreenBuffer[x + y * m_Width] = wchar;
     }
 
-    void drawString(int x, int y, const WCHAR* wcs)
+    void DrawString(int x, int y, const WCHAR* wcs)
     {
         Assert(wcs, "wcs must not be null");
 
@@ -81,7 +80,7 @@ public:
         }
     }
 
-    void drawSprite(int x, int y, Sprite* sprite)
+    void DrawSprite(int x, int y, Sprite* sprite)
     {
         for (int row = 0; row < sprite->Height(); ++row)
         {
@@ -89,7 +88,7 @@ public:
             {
                 WCHAR glyph = sprite->GetGlyph(col, row);
                 if (glyph != L' ')
-                    draw(x + col, y + row, glyph);
+                    Draw(x + col, y + row, glyph);
             }
         }
     }

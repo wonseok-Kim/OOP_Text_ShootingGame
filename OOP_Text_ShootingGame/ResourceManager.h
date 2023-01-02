@@ -4,7 +4,7 @@
 
 enum SpriteKind
 {
-    SpriteKind_Player,
+    SpriteKind_Player = 0,
     SpriteKind_Enemy1,
 };
 
@@ -27,6 +27,16 @@ public:
     {
         // TODO: 예외처리
         m_Sprites[m_SpritesCount++] = sprite;
+    }
+
+    Sprite* GetSprite(SpriteKind kind)
+    {
+        int idx = (int)kind;
+        
+        if (idx >= m_SpritesCount)
+            return nullptr;
+
+        return m_Sprites[idx];
     }
 
 private:

@@ -141,6 +141,7 @@
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GlobalObjectManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="list.h" />
     <ClInclude Include="GlobalObjectManager.h" />
     <ClInclude Include="ObjectType.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="ResourceManager.h" />

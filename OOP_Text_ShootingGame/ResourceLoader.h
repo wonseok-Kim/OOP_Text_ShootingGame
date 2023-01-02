@@ -29,7 +29,7 @@ public:
                 return false;
             }
 
-            WCHAR filename[MAX_PATH + 1];
+            WCHAR filename[MAX_PATH];
             for (int i = 0; i < spritesCount; ++i)
             {
                 result = fwscanf_s(file, L"%s", filename, _countof(filename));
