@@ -13,7 +13,7 @@ public:
         ///////////////////////////////////////////
         {
             FILE* file = nullptr;
-            _wfopen_s(&file, L"sprites.txt", L"r");
+            _wfopen_s(&file, L"Resources/sprites.txt", L"r");
             if (file == nullptr)
             {
                 PrintError("fopen err");
@@ -41,7 +41,7 @@ public:
                 }
 
                 Sprite* sprite = new Sprite;
-                if (sprite->Load(filename))
+                if (!sprite->Load(filename))
                 {
                     PrintError("Sprite::Load() err");
                     fclose(file);

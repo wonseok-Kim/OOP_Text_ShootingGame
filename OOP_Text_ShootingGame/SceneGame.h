@@ -2,6 +2,8 @@
 
 #include "SceneBase.h"
 
+class Player;
+
 class SceneGame : public SceneBase
 {
 public:
@@ -12,6 +14,6 @@ public:
     virtual void Render(Renderer* renderer) override;
 
 private:
-
+    Player* m_Player;
 };
 

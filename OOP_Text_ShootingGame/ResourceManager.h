@@ -27,6 +27,8 @@ public:
     {
         // TODO: 예외처리
         m_Sprites[m_SpritesCount++] = sprite;
+
+        return true;
     }
 
     Sprite* GetSprite(SpriteKind kind)

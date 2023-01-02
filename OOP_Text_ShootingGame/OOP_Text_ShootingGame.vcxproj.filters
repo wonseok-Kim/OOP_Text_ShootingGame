@@ -71,6 +71,9 @@
     <ClCompile Include="ShootingGame.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -125,6 +128,12 @@
       <Filter>4. Resource</Filter>
     </ClInclude>
     <ClInclude Include="ShootingGame.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDefine.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>

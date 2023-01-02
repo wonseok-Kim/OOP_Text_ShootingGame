@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBase.h" />
+    <ClInclude Include="GameDefine.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ObjectTitle.h" />
     <ClInclude Include="ObjectList.h" />

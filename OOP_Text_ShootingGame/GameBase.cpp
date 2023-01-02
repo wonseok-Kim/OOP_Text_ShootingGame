@@ -46,5 +46,7 @@ void GameBase::Run()
 		wchar_t s[256];
 		swprintf_s(s, 256, L"FPS: %3.2f", 1.0f / fElapsedTime);
 		SetConsoleTitleW(s);
+
+		Sleep(20);
 	}
 }
