@@ -110,7 +110,7 @@ protected:
                 if (braceCount == 0)
                     break;
                 else
-                    goto out_and_print_err;
+                    braceCount--;
             }
 
             ++m_Current;
@@ -176,28 +176,25 @@ protected:
             return false;
 
         m_Current++;
-        SkipWhiteSpace();
 
         int temp;
         GetNumberLiteral(&temp);
         coord->X = (short)temp;
-        SkipWhiteSpace();
 
+        SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::Comma)
             return false;
 
         ++m_Current;
-        SkipWhiteSpace();
-
 
         GetNumberLiteral(&temp);
         coord->X = (short)temp;
+        
         SkipWhiteSpace();
-
         if (GetCharType(*m_Current) != CharType::CloseParenthesis)
             return false;
-        ++m_Current;
 
+        ++m_Current;
         return true;
     }
 

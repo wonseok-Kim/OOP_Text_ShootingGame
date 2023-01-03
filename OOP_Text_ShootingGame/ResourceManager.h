@@ -33,7 +33,7 @@ public:
 
         for (int i = 0; i < m_BulletInfosCount; ++i)
         {
-            delete m_BulletInfoFilenames[i];
+            delete m_ShotInfoFilenames[i];
         }
 
         for (int i = 0; i < m_PatternListsCount; ++i)
@@ -96,10 +96,10 @@ public:
         int newIdx = m_BulletInfosCount++;
 
         size_t len = wcslen(filename);
-        m_BulletInfoFilenames[newIdx] = new WCHAR[len + 1];
-        wcscpy_s(m_BulletInfoFilenames[newIdx], len + 1, filename);
+        m_ShotInfoFilenames[newIdx] = new WCHAR[len + 1];
+        wcscpy_s(m_ShotInfoFilenames[newIdx], len + 1, filename);
 
-        if (!m_BulletInfos[newIdx].Load(filename))
+        if (!m_ShotInfos[newIdx].Load(filename))
         {
             PrintError(L"bullet info load err");
             return false;
@@ -113,14 +113,14 @@ public:
         int i;
         for (i = 0; i < m_BulletInfosCount; ++i)
         {
-            if (wcscmp(m_BulletInfoFilenames[i], filename) == 0)
+            if (wcscmp(m_ShotInfoFilenames[i], filename) == 0)
                 break;
         }
 
         if (i == m_BulletInfosCount)
             return nullptr;
 
-        return &m_BulletInfos[i];
+        return &m_ShotInfos[i];
     }
 
     PatternList* GetPatternList(const WCHAR* filename)
@@ -150,8 +150,8 @@ private:
     WCHAR* m_SpriteFilenames[MAX_SPRITES];
     int m_SpritesCount = 0;
 
-    ShotInfo m_BulletInfos[MAX_BULLETS];
-    WCHAR* m_BulletInfoFilenames[MAX_BULLETS];
+    ShotInfo m_ShotInfos[MAX_BULLETS];
+    WCHAR* m_ShotInfoFilenames[MAX_BULLETS];
     int m_BulletInfosCount = 0;
 
     PatternList m_PatternLists[MAX_PATTERN_LISTS];
