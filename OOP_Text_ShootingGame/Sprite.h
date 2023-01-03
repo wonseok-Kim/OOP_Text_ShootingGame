@@ -47,13 +47,13 @@ public:
             return false;
 
         if (fwrite(&m_Width, sizeof(int), 1, file) != 1)
-            PrintError("fwrite err");
+            PrintError(L"fwrite err");
 
         if (fwrite(&m_Height, sizeof(int), 1, file) != 1)
-            PrintError("fwrite err");
+            PrintError(L"fwrite err");
 
         if (fwrite(m_Glyphs, sizeof(WCHAR), m_Width * m_Height, file) != m_Width * m_Height)
-            PrintError("fwrite err");
+            PrintError(L"fwrite err");
 
         fclose(file);
         return true;
@@ -65,6 +65,7 @@ public:
         m_Width = 0;
         m_Height = 0;
 
+        size_t size;
         bool success = true;
         FILE* file = nullptr;
         _wfopen_s(&file, filename, L"rb");
@@ -87,8 +88,9 @@ public:
 
         Init(m_Width, m_Height);
 
-        result = fread(m_Glyphs, sizeof(WCHAR), m_Width * m_Height, file);
-        if (result != m_Width * m_Height)
+        size = m_Width * m_Height; 
+        result = fread(m_Glyphs, sizeof(WCHAR), size, file);
+        if (result != size)
         {
             success = false;
         }

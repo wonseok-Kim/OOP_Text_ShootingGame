@@ -74,6 +74,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
+    <ClCompile Include="StageParser.cpp">
+      <Filter>4. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletInfo.cpp">
+      <Filter>4. Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +141,18 @@
     </ClInclude>
     <ClInclude Include="GameDefine.h">
       <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletInfo.h">
+      <Filter>4. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="StageParser.h">
+      <Filter>4. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>4. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternParser.h">
+      <Filter>4. Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

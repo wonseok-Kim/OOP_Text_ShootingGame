@@ -25,11 +25,11 @@ public:
 	Player(int x, int y)
 		:ObjectBase(ObjectType_Player, x, y)
 	{
-		m_Sprite = ResourceManager::Instance().GetSprite(SpriteKind_Player);
+		m_Sprite = ResourceManager::Instance().GetSprite(L"Resources/Sprite/player.sp");
 		if (!m_Sprite)
 		{
 			// TODO: 예외 처리
-			PrintError("sprite doesn't exists");
+			PrintError(L"sprite doesn't exists");
 		}
 	}
 

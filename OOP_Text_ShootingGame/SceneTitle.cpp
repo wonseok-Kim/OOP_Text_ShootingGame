@@ -24,8 +24,8 @@ void SceneTitle::Update()
 {	
 	Input& input = Input::Instance();
 
-	if (input.GetKey(VK_RIGHT).released ||
-		input.GetKey(VK_UP).released)
+	if (input.GetKey(VK_RIGHT).pressed ||
+		input.GetKey(VK_UP).pressed)
 	{
 		m_Title->SetState(ObjectTitle::KEY_DOWN);
 	}

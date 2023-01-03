@@ -135,12 +135,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletInfo.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="ObjectTitle.cpp" />
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GlobalObjectManager.cpp" />
+    <ClCompile Include="StageParser.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceLoader.cpp" />
@@ -159,8 +161,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulletInfo.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="GameDefine.h" />
+    <ClInclude Include="PatternParser.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ObjectTitle.h" />
     <ClInclude Include="ObjectList.h" />
@@ -168,6 +172,8 @@
     <ClInclude Include="list.h" />
     <ClInclude Include="GlobalObjectManager.h" />
     <ClInclude Include="ObjectType.h" />
+    <ClInclude Include="Parser.h" />
+    <ClInclude Include="StageParser.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ResourceLoader.h" />

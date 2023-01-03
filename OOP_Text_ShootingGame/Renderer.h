@@ -14,34 +14,40 @@ public:
 
         m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        SMALL_RECT rectWindow = { 0, 0, 1, 1 };
-        SetConsoleWindowInfo(m_hConsole, TRUE, &rectWindow);
+        // 콘솔 화면 크기를 m_Width * m_Height로 딱 맞추기
+        {
+            SMALL_RECT rectWindow = { 0, 0, 1, 1 };
+            SetConsoleWindowInfo(m_hConsole, TRUE, &rectWindow);
 
-        COORD coord = { (short)width, (short)height };
-        SetConsoleScreenBufferSize(m_hConsole, coord);
+            COORD coord = { (short)width, (short)height };
+            SetConsoleScreenBufferSize(m_hConsole, coord);
 
-        m_RectWindow = { 0, 0, (short)(width - 1), (short)(height - 1) };
-        SetConsoleWindowInfo(m_hConsole, TRUE, &m_RectWindow);
+            m_RectWindow = { 0, 0, (short)(width - 1), (short)(height - 1) };
+            SetConsoleWindowInfo(m_hConsole, TRUE, &m_RectWindow);
+        }
 
-        CONSOLE_FONT_INFOEX cfi{ 0, };
-        cfi.cbSize = sizeof(cfi);
-        cfi.nFont = 0;
-        cfi.dwFontSize.X = 10;
-        cfi.dwFontSize.Y = 15;
-        cfi.FontFamily = FF_DONTCARE;
-        cfi.FontWeight = FW_NORMAL;
+        // 폰트 크기 조정하기
+        {
+            CONSOLE_FONT_INFOEX cfi{ 0, };
+            cfi.cbSize = sizeof(cfi);
+            cfi.nFont = 0;
+            cfi.dwFontSize.X = 10;
+            cfi.dwFontSize.Y = 15;
+            cfi.FontFamily = FF_DONTCARE;
+            cfi.FontWeight = FW_NORMAL;
 
-        wcscpy_s(cfi.FaceName, L"Consolas");
-        SetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+            wcscpy_s(cfi.FaceName, L"Consolas");
+            SetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+        }
 
-        //CONSOLE_FONT_INFOEX cfi;
-        //BOOL hr = GetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+        // 커서 숨기기
+        {
+            CONSOLE_CURSOR_INFO stConsoleCursor;
+            stConsoleCursor.bVisible = FALSE;
+            stConsoleCursor.dwSize = 1;
 
-        CONSOLE_CURSOR_INFO stConsoleCursor;
-        stConsoleCursor.bVisible = FALSE;
-        stConsoleCursor.dwSize = 1;
-
-        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stConsoleCursor);
+            SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stConsoleCursor);
+        }
     }
 
     ~Renderer()
@@ -61,7 +67,7 @@ public:
 
     void DrawString(int x, int y, const WCHAR* wcs)
     {
-        Assert(wcs, "wcs must not be null");
+        Assert(wcs, L"wcs must not be null");
 
         if (y >= m_Height || y < 0)
             return;
@@ -69,9 +75,9 @@ public:
             return;
 
         int len = (int)wcslen(wcs);
-        if (len - 1 >= m_Width - x)
+        if (x + len - 1 >= m_Width)
         {
-            len = m_Width - x ;
+            len = m_Width - x;
         }
 
         for (int i = 0; i < len; ++i)
@@ -97,16 +103,6 @@ public:
     {
         DWORD bytesWritten;
         WriteConsoleOutputCharacterW(m_hConsole, m_ScreenBuffer, m_Width * m_Height, { 0, 0 }, &bytesWritten);
-
-        //for (int i = 0; i < m_Height; ++i)
-        //{
-        //    MoveCursor(0, i);
-        //    for (int j = 0; j < m_Width; ++j)
-        //    {
-        //        putwchar(m_ScreenBuffer[j + i * m_Width]);
-        //    }
-        //    //putwchar(L'\n');
-        //}
     }
 
     void ClearBuffer()

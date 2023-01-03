@@ -62,13 +62,13 @@ public:
 				break;
 
 			default:
-				Assert(0, "invalid case");
+				Assert(0, L"invalid case");
 				break;
 			}
 			break;
 
 		default:
-			Assert(0, "invalid case");
+			Assert(0, L"invalid case");
 			break;
 		}
 

@@ -1,0 +1,10 @@
+2
+Resources/ShotInfo/player_shot.txt
+Resources/ShotInfo/default_enemy_shot.txt
+
+
+
+bullet 파일적는 법
+"발싸할 총알 개수"
+"개수 만큼 프레임 마다 이동할 상대 좌표 적기"
+"총알 스프라이트 파일 이름"

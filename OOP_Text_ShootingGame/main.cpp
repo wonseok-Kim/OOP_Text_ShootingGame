@@ -10,6 +10,8 @@ static void MakeSprite();
 
 int wmain()
 {
+	MakeSprite();
+
 	timeBeginPeriod(1);
 	_wsetlocale(LC_ALL, L"");
 
@@ -29,7 +31,7 @@ static void MakeSprite()
 	//player.SetGlyph(2, 0, L'*');
 	//player.SetGlyph(3, 0, L'-');
 	//player.SetGlyph(4, 0, L'>');
-	//player.Save(L"Resources/player.sp");
+	//player.Save(L"Resources/Sprite/player.sp");
 
 	//Sprite enemy1{ 5, 1 };
 	//enemy1.SetGlyph(0, 0, L'[');
@@ -37,5 +39,11 @@ static void MakeSprite()
 	//enemy1.SetGlyph(2, 0, L'|');
 	//enemy1.SetGlyph(3, 0, L'-');
 	//enemy1.SetGlyph(4, 0, L']');
-	//enemy1.Save(L"Resources/enemy1.sp");
+	//enemy1.Save(L"Resources/Sprite/enemy1.sp");
+
+	//Sprite playerBullet{ 1, 1 };
+	//playerBullet.SetGlyph(0, 0, L'.');
+	//playerBullet.Save(L"Resources/Sprite/player_bullet.sp");
+
 }
+

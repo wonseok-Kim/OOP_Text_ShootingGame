@@ -6,47 +6,76 @@
 
 GameBase::GameBase(SceneBase* firstScene, int width, int height)
 {
-	if (firstScene == nullptr)
-	{
-		PrintError("firstScene must not be null.");
-		abort();
-	}
+    if (firstScene == nullptr)
+    {
+        PrintError(L"firstScene must not be null.");
+        abort();
+    }
 
-	SceneManager::Instance().LoadScene(firstScene);
+    SceneManager::Instance().LoadScene(firstScene);
 
-	m_Renderer = new Renderer(width, height);
+    m_Renderer = new Renderer(width, height);
 }
 
 GameBase::~GameBase()
 {
-	delete m_Renderer;
+    delete m_Renderer;
 }
 
 void GameBase::Run()
 {
-	auto& sceneManager = SceneManager::Instance();
+    auto& sceneManager = SceneManager::Instance();
 
-	LARGE_INTEGER freq;
-	QueryPerformanceFrequency(&freq);
+    constexpr DWORD framesPerSecond = 50;
+    constexpr DWORD ticksPerFrame = 1000 / framesPerSecond;
 
-	LARGE_INTEGER t1;
-	QueryPerformanceCounter(&t1);
-	LARGE_INTEGER t2;
-	QueryPerformanceCounter(&t2);
+    DWORD standardTick = timeGetTime(); // 게임의 기준이 되는 시간
+    DWORD previousTick = standardTick;
+    DWORD elapsedTick = 0;
+    DWORD errorTick = 0;  // 오차 누적
+    DWORD frameCount = 0;
+    DWORD incrementsOf1000ms = 1000;
 
-	while (true)
-	{
-		QueryPerformanceCounter(&t2);
-		LONGLONG elapsed = t2.QuadPart - t1.QuadPart;
-		t1 = t2;
-		float fElapsedTime = (float)elapsed / freq.QuadPart;
+    while (true)
+    {
+        DWORD nowTick = timeGetTime();
+        elapsedTick += nowTick - previousTick;
+        previousTick = nowTick;
 
-		sceneManager.Run(m_Renderer);
+        if (elapsedTick >= incrementsOf1000ms)
+        {
+            wchar_t s[30];
+            swprintf_s(s, 30, L"FPS: %3.2f, frameCount: %u\n", frameCount / (elapsedTick / 1000.f), frameCount);
+            OutputDebugStringW(s);
+            // SetConsoleTitleW(s);
 
-		wchar_t s[256];
-		swprintf_s(s, 256, L"FPS: %3.2f", 1.0f / fElapsedTime);
-		SetConsoleTitleW(s);
+            incrementsOf1000ms += 1000;
+        }
 
-		Sleep(20);
-	}
+        if (errorTick >= ticksPerFrame)
+        {
+            sceneManager.Run(nullptr); // 렌더링 건너띄기
+
+            errorTick -= ticksPerFrame;
+        }
+        else
+        {
+            sceneManager.Run(m_Renderer);
+
+            Sleep(rand() % 50); // 렉 유발
+        }
+
+        standardTick += ticksPerFrame;
+        nowTick = timeGetTime();
+        if (nowTick < standardTick)
+        {
+            Sleep(standardTick - nowTick);
+        }
+        else
+        {
+            errorTick += nowTick - standardTick;
+        }
+
+        frameCount++;
+    }
 }

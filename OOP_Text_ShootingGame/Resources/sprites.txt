@@ -1,3 +1,0 @@
-2
-Resources/player.sp
-Resources/enemy1.sp

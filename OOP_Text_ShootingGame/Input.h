@@ -47,7 +47,7 @@ public:
 
 	KeyState GetKey(int vKeyCode) 
 	{ 
-		Assert(vKeyCode >= 0 && vKeyCode < 256, "vKeyCode ¹üÀ§ ¹þ¾î³²");
+		Assert(vKeyCode >= 0 && vKeyCode < 256, L"vKeyCode ¹üÀ§ ¹þ¾î³²");
 
 		return m_Keys[vKeyCode]; 
 	}
