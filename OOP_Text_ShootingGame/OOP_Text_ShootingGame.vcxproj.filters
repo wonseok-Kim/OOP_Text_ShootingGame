@@ -80,6 +80,9 @@
     <ClCompile Include="BulletInfo.cpp">
       <Filter>4. Resource</Filter>
     </ClCompile>
+    <ClCompile Include="PatternParser.cpp">
+      <Filter>4. Resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

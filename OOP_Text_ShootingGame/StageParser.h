@@ -365,7 +365,8 @@ private:
         while (GetCharType(*m_Current) != CharType::StringLiteral)
             ++m_Current;
 
-        int result = MultiByteToWideChar(CP_ACP, 0, begin, m_Current - begin, wcs, cchwcs);
+        int cbMultiByte = (int)(m_Current - begin);
+        int result = MultiByteToWideChar(CP_ACP, 0, begin, cbMultiByte, wcs, cchwcs);
         if (result == 0)
         {
             PrintError(L"MultiByteToWideChar err : %d", GetLastError());

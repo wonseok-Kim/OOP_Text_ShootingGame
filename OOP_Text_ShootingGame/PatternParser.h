@@ -3,7 +3,7 @@
 #include "Parser.h"
 #include "BulletInfo.h"
 
-class Pattern;
+struct Pattern;
 
 class PatternParser : public Parser
 {

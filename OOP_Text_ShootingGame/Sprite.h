@@ -52,7 +52,8 @@ public:
         if (fwrite(&m_Height, sizeof(int), 1, file) != 1)
             PrintError(L"fwrite err");
 
-        if (fwrite(m_Glyphs, sizeof(WCHAR), m_Width * m_Height, file) != m_Width * m_Height)
+        size_t size = (size_t)(m_Width * m_Height);
+        if (fwrite(m_Glyphs, sizeof(WCHAR), size, file) != size)
             PrintError(L"fwrite err");
 
         fclose(file);

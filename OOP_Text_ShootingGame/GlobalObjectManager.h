@@ -13,11 +13,7 @@ public:
 		return inst;
 	}
 
-	~GlobalObjectManager()
-	{
-		for (ObjectBase* obj : m_ObjectList)
-			delete obj;
-	}
+	~GlobalObjectManager();
 
 	void Update();
 	void Render(Renderer* renderer);

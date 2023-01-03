@@ -142,6 +142,7 @@
     <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GlobalObjectManager.cpp" />
+    <ClCompile Include="PatternParser.cpp" />
     <ClCompile Include="StageParser.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />

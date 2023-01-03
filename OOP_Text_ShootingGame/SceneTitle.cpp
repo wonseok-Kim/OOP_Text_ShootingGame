@@ -29,12 +29,12 @@ void SceneTitle::Update()
 	{
 		m_Title->SetState(ObjectTitle::KEY_DOWN);
 	}
-	if (input.GetKey(VK_LEFT).released ||
-		input.GetKey(VK_DOWN).released)
+	if (input.GetKey(VK_LEFT).pressed ||
+		input.GetKey(VK_DOWN).pressed)
 	{
 		m_Title->SetState(ObjectTitle::KEY_UP);
 	}
-	if (input.GetKey(VK_SPACE).released)
+	if (input.GetKey(VK_SPACE).pressed)
 	{
 		m_Title->SetState(ObjectTitle::KEY_PRESSED);
 	}

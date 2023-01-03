@@ -3,6 +3,12 @@
 
 #include "ObjectBase.h"
 
+GlobalObjectManager::~GlobalObjectManager()
+{
+	for (ObjectBase* obj : m_ObjectList)
+		delete obj;
+}
+
 void GlobalObjectManager::Update()
 {
 	for (ObjectBase* obj : m_ObjectList)

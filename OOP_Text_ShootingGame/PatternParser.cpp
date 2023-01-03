@@ -3,11 +3,11 @@
 
 #include "ResourceManager.h"
 
-inline bool PatternParser::Run()
+bool PatternParser::Run()
 {
     int* pCount = &(ResourceManager::Instance().m_PatternListsCount);
 
-    while (m_Current != '\0')
+    while (*m_Current != '\0')
     {
         PatternList* pPatternList = &(ResourceManager::Instance().m_PatternLists[*pCount]);
         WCHAR** pPatternFilename = &(ResourceManager::Instance().m_PatternFilenames[*pCount]);
@@ -133,4 +133,6 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
             return false;
         }
     }
+
+    return true;
 }

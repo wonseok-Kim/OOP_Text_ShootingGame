@@ -44,8 +44,8 @@ void GameBase::Run()
 
         if (elapsedTick >= incrementsOf1000ms)
         {
-            wchar_t s[30];
-            swprintf_s(s, 30, L"FPS: %3.2f, frameCount: %u\n", frameCount / (elapsedTick / 1000.f), frameCount);
+            wchar_t s[50];
+            swprintf_s(s, 50, L"FPS: %3.2f, frameCount: %u\n", frameCount / (elapsedTick / 1000.f), frameCount);
             OutputDebugStringW(s);
             // SetConsoleTitleW(s);
 
@@ -62,7 +62,7 @@ void GameBase::Run()
         {
             sceneManager.Run(m_Renderer);
 
-            Sleep(rand() % 50); // 렉 유발
+            // Sleep(rand() % 50); // 렉 유발
         }
 
         standardTick += ticksPerFrame;
