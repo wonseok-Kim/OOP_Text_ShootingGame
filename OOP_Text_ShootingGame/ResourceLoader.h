@@ -19,9 +19,7 @@ public:
             return false;
 
         if (!LoadStage())
-        {
             return false;
-        }
 
         return true;
     }

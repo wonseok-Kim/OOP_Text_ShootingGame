@@ -10,7 +10,7 @@ inline bool PatternParser::Run()
     while (m_Current != '\0')
     {
         PatternList* pPatternList = &(ResourceManager::Instance().m_PatternLists[*pCount]);
-        WCHAR** pPatternFilename = &(ResourceManager::Instance().m_PatternFilename[*pCount]);
+        WCHAR** pPatternFilename = &(ResourceManager::Instance().m_PatternFilenames[*pCount]);
 
         size_t size = wcslen(m_PatternFilename) + 1;
         (*pPatternFilename) = new WCHAR[size];
@@ -36,10 +36,10 @@ inline bool PatternParser::Run()
     return true;
 }
 
-bool PatternParser::ParsePattern(SubString texts, Pattern* p)
+bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
 {
-    const char* keys[6] = { "duration", "moveTo", "moveInterval", "shotInfo", "shotInterval", "shotChance" };
-    size_t keysLength = sizeof(keys) / sizeof(char*);
+    const char* identifiers[6] = { "duration", "moveTo", "moveInterval", "shotInfo", "shotInterval", "shotChance" };
+    size_t identifiersLength = sizeof(identifiers) / sizeof(char*);
 
     m_Current = texts.begin;
 
@@ -58,12 +58,9 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
         ++m_Current;
 
         int i;
-        for (i = 0; i < keysLength; ++i)
-            if (key.equal(keys[i]))
+        for (i = 0; i < identifiersLength; ++i)
+            if (key.equal(identifiers[i]))
                 break;
-        if (i == keysLength)
-            return false;
-
 
         switch (i)
         {
@@ -73,7 +70,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             {
                 return false;
             }
-            GetNumberLiteral(&p->duration);
+            GetNumberLiteral(&out_Pattern->duration);
             break;
         }
         case 1:
@@ -82,7 +79,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             {
                 return false;
             }
-            GetCoord(&p->moveTo);
+            GetCoord(&out_Pattern->moveTo);
             break;
         }
         case 2:
@@ -93,7 +90,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             }
             int temp;
             GetNumberLiteral(&temp);
-            p->moveInterval = (DWORD)temp;
+            out_Pattern->moveInterval = (DWORD)temp;
             break;
         }
         case 3:
@@ -109,7 +106,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             if (!pShotInfo)
                 return false;
 
-            p->shotInfo = pShotInfo;
+            out_Pattern->shotInfo = pShotInfo;
             break;
         }
         case 4:
@@ -120,7 +117,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             }
             int temp;
             GetNumberLiteral(&temp);
-            p->shotInterval = (DWORD)temp;
+            out_Pattern->shotInterval = (DWORD)temp;
             break;
         }
         case 5:
@@ -129,7 +126,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* p)
             {
                 return false;
             }
-            GetNumberLiteral(&p->shotChance);
+            GetNumberLiteral(&out_Pattern->shotChance);
             break;
         }
         default:
