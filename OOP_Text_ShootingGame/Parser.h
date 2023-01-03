@@ -71,7 +71,7 @@ public:
 
         Assert(result < size, L"버퍼 오버런 컴파일러 경고 막기용");
         m_Texts[result] = '\0';
-        m_Current = m_Texts;        
+        m_Current = m_Texts;
         return true;
     }
 
@@ -109,8 +109,10 @@ protected:
             {
                 if (braceCount == 0)
                     break;
-                else
+                else if (braceCount > 0)
                     braceCount--;
+                else
+                    goto out_and_print_err;
             }
 
             ++m_Current;
@@ -189,7 +191,7 @@ protected:
 
         GetNumberLiteral(&temp);
         coord->X = (short)temp;
-        
+
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::CloseParenthesis)
             return false;
