@@ -15,11 +15,11 @@
     <Filter Include="0. Container">
       <UniqueIdentifier>{84dfaeb9-1606-4388-a9fc-894a3a98800a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Resource">
-      <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3. ShootingGame">
       <UniqueIdentifier>{e9f98a67-5a37-46f2-a916-71e761f26bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Resource">
+      <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="source\stdafx.h">
       <Filter>5. Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>2. Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

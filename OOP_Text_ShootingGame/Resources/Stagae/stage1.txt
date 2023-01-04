@@ -12,7 +12,7 @@ Enemy 5
 	pattern: "Resources/Pattern/stage1_enemy.txt"
 }
 {
-	sprite: "Resources/enemy1.sp"
+	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (5, 5)
 	loopPattern: 1
 	pattern: 2
@@ -36,7 +36,7 @@ Enemy 5
 	}
 }
 {
-	sprite: "Resources/enemy1.sp"
+	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (5, 5)
 	loopPattern: 1
 	pattern: 2
@@ -60,7 +60,7 @@ Enemy 5
 	}
 }
 {
-	sprite: "Resources/enemy1.sp"
+	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (5, 5)
 	loopPattern: 1
 	pattern: 2
@@ -84,7 +84,7 @@ Enemy 5
 	}
 }
 {
-	sprite: "Resources/enemy1.sp"
+	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (5, 5)
 	loopPattern: 1
 	pattern: 2

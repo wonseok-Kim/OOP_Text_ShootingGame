@@ -63,6 +63,7 @@ public:
         if (result == 0)
         {
             PrintError(L"'%s' file read err", filename);
+            fclose(file);
             return false;
         }
         fclose(file);
@@ -165,7 +166,7 @@ protected:
 
         while (GetCharType(*m_Current) != CharType::StringLiteral)
         {
-            if (GetCharType(*m_Current) == CharType::Error)
+            if (*m_Current == L'\0')
             {
                 PrintError(L"\"\"짝이 안맞는다. %s file", m_Filename);
                 return false;
@@ -199,7 +200,7 @@ protected:
         }
         m_Current++;
 
-        if (GetNumberLiteral(&temp))
+        if (!GetNumberLiteral(&temp))
             return false;
         coord->X = (short)temp;
 
@@ -212,9 +213,9 @@ protected:
         }
         ++m_Current;
 
-        if (GetNumberLiteral(&temp))
+        if (!GetNumberLiteral(&temp))
             return false;
-        coord->X = (short)temp;
+        coord->Y = (short)temp;
 
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::CloseParenthesis)
@@ -239,7 +240,7 @@ protected:
             bMinus = true;
         }
 
-        if (type != CharType::NumberLiteral)
+        if (GetCharType(*m_Current) != CharType::NumberLiteral)
         {
             int errorLine;
             GetLine(m_Current, &errorLine);
@@ -314,6 +315,8 @@ protected:
             search++;
         }
         *out_Line = line;
+
+        return true;
     }
 
 protected:

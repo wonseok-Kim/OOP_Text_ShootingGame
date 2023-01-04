@@ -12,10 +12,6 @@ bool PatternParser::Run()
 		PatternList* pPatternList = &(ResourceManager::Instance().m_PatternLists[*pCount]);
 		WCHAR** pPatternFilename = &(ResourceManager::Instance().m_PatternFilenames[*pCount]);
 
-		size_t size = wcslen(m_Filename) + 1;
-		(*pPatternFilename) = new WCHAR[size];
-		wcscpy_s(*pPatternFilename, size, m_Filename);
-
 		int count;
 		GetNumberLiteral(&count);
 
@@ -26,9 +22,17 @@ bool PatternParser::Run()
 				return false;
 
 			Pattern* p = new Pattern;
-			ParsePattern(block, p);
+			if (!ParsePattern(block, p))
+			{
+				delete p;
+				return false;
+			}
 			pPatternList->push_back(p);
 		}
+
+		size_t size = wcslen(m_Filename) + 1;
+		(*pPatternFilename) = new WCHAR[size];
+		wcscpy_s(*pPatternFilename, size, m_Filename);
 
 		++(*pCount);
 	}
@@ -49,8 +53,8 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
 		if (m_Current == texts.end)
 			break;
 
-		SubString key;
-		GetIdentifier(&key);
+		SubString Identifier;
+		GetIdentifier(&Identifier);
 
 		SkipWhiteSpace();
 		if (GetCharType(*m_Current) != CharType::Colon)
@@ -59,7 +63,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
 
 		int i;
 		for (i = 0; i < identifiersLength; ++i)
-			if (key.equal(identifiers[i]))
+			if (Identifier.equal(identifiers[i]))
 				break;
 
 		ShotInfo* pShotInfo;
@@ -96,22 +100,24 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
 			break;
 
 		case 4:
-			if (GetNumberLiteral(&temp))
+			if (!GetNumberLiteral(&temp))
 				return false;
 
 			out_Pattern->shotInterval = (DWORD)temp;
 			break;
 
 		case 5:
-			if (GetNumberLiteral(&out_Pattern->shotChance))
+			if (!GetNumberLiteral(&out_Pattern->shotChance))
 				return false;
 			break;
 
 		default:
-			Assert(0, L"Invalid case");
+			*Identifier.end = '\0';
+			PrintError(L"존재하지 않는 필드 명 '%hs'", Identifier.begin);
 			return false;
 		}
 	}
 
+	m_Current++;
 	return true;
 }

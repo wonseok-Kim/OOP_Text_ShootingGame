@@ -186,6 +186,7 @@
     <ClInclude Include="source\ResourceManager.h" />
     <ClInclude Include="source\StageParser.h" />
     <ClInclude Include="source\stdafx.h" />
+    <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

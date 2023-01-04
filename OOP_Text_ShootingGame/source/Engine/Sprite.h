@@ -89,7 +89,7 @@ public:
 
         Init(m_Width, m_Height);
 
-        size = m_Width * m_Height; 
+        size = size_t(m_Width * m_Height); 
         result = fread(m_Glyphs, sizeof(WCHAR), size, file);
         if (result != size)
         {
@@ -103,8 +103,9 @@ public:
 
     void Init(int width, int height)
     {
-        m_Glyphs = new WCHAR[width * height];
-        wmemset(m_Glyphs, L' ', width * height);
+        size_t size = (size_t)(width * height);
+        m_Glyphs = new WCHAR[size];
+        wmemset(m_Glyphs, L' ', size);
 
         m_Width = width;
         m_Height = height;
