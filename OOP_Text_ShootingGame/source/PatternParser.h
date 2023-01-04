@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Parser.h"
-#include "BulletInfo.h"
+#include "Stage.h"
 
 struct Pattern;
 
@@ -13,8 +13,6 @@ public:
         
     bool InitByFilename(const WCHAR* filename)
     {
-        wcscpy_s(m_PatternFilename, MAX_PATH, filename);
-
         return Parser::InitByFilename(filename);
     }
 
@@ -22,7 +20,4 @@ public:
 
 private:
     bool ParsePattern(SubString texts, Pattern* p);
-
-private:
-    WCHAR m_PatternFilename[MAX_PATH];
 };

@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "SceneTitle.h"
 
-#include "Input.h"
+#include "Engine/Input.h"
+#include "Engine/ObjectBase.h"
+
 #include "ObjectTitle.h"
-#include "ObjectBase.h"
 
 SceneTitle::SceneTitle()
 	: SceneBase()

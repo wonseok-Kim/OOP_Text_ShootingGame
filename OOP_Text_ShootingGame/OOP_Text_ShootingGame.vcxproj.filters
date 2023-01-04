@@ -4,12 +4,6 @@
     <Filter Include="1.Engine">
       <UniqueIdentifier>{e0876941-da80-444f-9ddf-7e40c4761574}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Container">
-      <UniqueIdentifier>{84dfaeb9-1606-4388-a9fc-894a3a98800a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="3. ShootingGame">
-      <UniqueIdentifier>{e9f98a67-5a37-46f2-a916-71e761f26bbe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="5. Main">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -18,144 +12,150 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="4. Resource">
+    <Filter Include="0. Container">
+      <UniqueIdentifier>{84dfaeb9-1606-4388-a9fc-894a3a98800a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Resource">
       <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. ShootingGame">
+      <UniqueIdentifier>{e9f98a67-5a37-46f2-a916-71e761f26bbe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="source\Engine\GameBase.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\GlobalObjectManager.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\Input.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\ObjectBase.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\Renderer.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\SceneBase.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\SceneManager.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Engine\Sprite.cpp">
+      <Filter>1.Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\ObjectTitle.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\Player.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\SceneGame.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\SceneTitle.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\ShootingGame.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Stage.cpp">
+      <Filter>2. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PatternParser.cpp">
+      <Filter>2. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ResourceLoader.cpp">
+      <Filter>2. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ResourceManager.cpp">
+      <Filter>2. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StageParser.cpp">
+      <Filter>2. Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="source\main.cpp">
       <Filter>5. Main</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="source\stdafx.cpp">
       <Filter>5. Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectBase.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="GlobalObjectManager.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneBase.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameBase.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLoader.cpp">
-      <Filter>4. Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectTitle.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGame.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>1.Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>4. Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="ShootingGame.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
-    <ClCompile Include="StageParser.cpp">
-      <Filter>4. Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletInfo.cpp">
-      <Filter>4. Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="PatternParser.cpp">
-      <Filter>4. Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="source\Engine\GameBase.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\GlobalObjectManager.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\Input.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\ObjectBase.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\ObjectList.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\Renderer.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\SceneBase.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\SceneManager.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Engine\Sprite.h">
+      <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Container\list.h">
+      <Filter>0. Container</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\GameDefine.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\ObjectTitle.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\ObjectType.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\Player.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\SceneGame.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\SceneTitle.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\ShootingGame.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Stage.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Parser.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PatternParser.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ResourceLoader.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ResourceManager.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\StageParser.h">
+      <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\stdafx.h">
       <Filter>5. Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectBase.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="GlobalObjectManager.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="list.h">
-      <Filter>2. Container</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneBase.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameBase.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectList.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceLoader.h">
-      <Filter>4. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectTitle.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectType.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGame.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>1.Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>4. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="ShootingGame.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="GameDefine.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletInfo.h">
-      <Filter>4. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="StageParser.h">
-      <Filter>4. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
-      <Filter>4. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="PatternParser.h">
-      <Filter>4. Resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

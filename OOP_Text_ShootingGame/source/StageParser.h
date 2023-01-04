@@ -1,8 +1,6 @@
 #pragma once
 
-#include "list.h"
-
-#include "BulletInfo.h"
+#include "Stage.h"
 #include "ResourceManager.h"
 
 class StageParser
@@ -263,6 +261,8 @@ private:
                 return false;
             }
         }
+
+        return true;
     }
 
     bool ParseEnemyInfo(const SubString& texts, EnemyInfo* enemy)
@@ -346,6 +346,8 @@ private:
                 return false;
             }
         }
+
+        return true;
     }
 
     void GetIdentifier(SubString* sub)

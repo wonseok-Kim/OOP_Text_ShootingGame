@@ -1,7 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
-
 class Parser
 {
 protected:
@@ -68,6 +66,8 @@ public:
             return false;
         }
         fclose(file);
+
+        wcscpy_s(m_Filename, MAX_PATH, filename);
 
         Assert(result < size, L"버퍼 오버런 컴파일러 경고 막기용");
         m_Texts[result] = '\0';
@@ -154,10 +154,24 @@ protected:
     bool GetStringLiteral(WCHAR* wcs, int cchwcs)
     {
         SkipWhiteSpace();
+        if (GetCharType(*m_Current) != CharType::StringLiteral)
+        {
+            int temp;
+            GetLine(m_Current, &temp);
+            PrintError(L"%d in file '%s'\n 이 부분에 \"String Literal\"이 와야된다.", temp, m_Filename);
+            return false;
+        }
         char* begin = ++m_Current;
 
         while (GetCharType(*m_Current) != CharType::StringLiteral)
+        {
+            if (GetCharType(*m_Current) == CharType::Error)
+            {
+                PrintError(L"\"\"짝이 안맞는다. %s file", m_Filename);
+                return false;
+            }
             ++m_Current;
+        }
 
         int cbMultiByte = (int)(m_Current - begin);
         int result = MultiByteToWideChar(CP_ACP, 0, begin, cbMultiByte, wcs, cchwcs);
@@ -174,29 +188,41 @@ protected:
 
     bool GetCoord(COORD* coord)
     {
+        int temp;
+
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::OpenParenthesis)
+        {
+            GetLine(m_Current, &temp);
+            PrintError(L"%d line in '%s' file\n 이 부분에 (이 빠졌습니다.", temp, m_Filename);
             return false;
-
+        }
         m_Current++;
 
-        int temp;
-        GetNumberLiteral(&temp);
+        if (GetNumberLiteral(&temp))
+            return false;
         coord->X = (short)temp;
 
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::Comma)
+        {
+            GetLine(m_Current, &temp);
+            PrintError(L"%d line in '%s' file\n 이 부분에 :이 빠졌습니다.", temp, m_Filename);
             return false;
-
+        }
         ++m_Current;
 
-        GetNumberLiteral(&temp);
+        if (GetNumberLiteral(&temp))
+            return false;
         coord->X = (short)temp;
 
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::CloseParenthesis)
+        {
+            GetLine(m_Current, &temp);
+            PrintError(L"%d line in '%s' file\n 이 부분에 )이 빠졌습니다.", temp, m_Filename);
             return false;
-
+        }
         ++m_Current;
         return true;
     }
@@ -214,7 +240,13 @@ protected:
         }
 
         if (type != CharType::NumberLiteral)
+        {
+            int errorLine;
+            GetLine(m_Current, &errorLine);
+            PrintError(L"%d line in '%s' file\n 이 부분의 숫자를 파싱하다 오류났습니다.", errorLine, m_Filename);
+
             return false;
+        }
 
         *out_int = 0;
 
@@ -269,7 +301,23 @@ protected:
         return CharType::Error;
     }
 
+    bool GetLine(const char* current, int* out_Line)
+    {
+        const char* search = m_Texts;
+        int line = 1;
+
+        while (*search != L'\0')
+        {
+            if (*search == '\n')
+                line++;
+
+            search++;
+        }
+        *out_Line = line;
+    }
+
 protected:
+    WCHAR m_Filename[MAX_PATH];
     char* m_Current;
     char* m_Texts;
 };

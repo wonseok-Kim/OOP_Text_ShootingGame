@@ -1,9 +1,10 @@
 #pragma once
 
-#include "ObjectBase.h"
+#include "Engine/ObjectBase.h"
+#include "Engine/Renderer.h"
+#include "Engine/SceneManager.h"
+
 #include "ObjectType.h"
-#include "Renderer.h"
-#include "SceneManager.h"
 #include "SceneGame.h"
 
 class ObjectTitle : public ObjectBase

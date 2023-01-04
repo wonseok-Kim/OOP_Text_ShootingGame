@@ -1,3 +1,3 @@
 1
 0, 1
-default_bullet.sp
+Resources/Sprite/default_bullet.sp

@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>source;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -135,57 +138,54 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BulletInfo.cpp" />
-    <ClCompile Include="GameBase.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="ObjectTitle.cpp" />
-    <ClCompile Include="ObjectBase.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="GlobalObjectManager.cpp" />
-    <ClCompile Include="PatternParser.cpp" />
-    <ClCompile Include="StageParser.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="ResourceLoader.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="SceneBase.cpp" />
-    <ClCompile Include="SceneGame.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
-    <ClCompile Include="ShootingGame.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Stage.cpp" />
+    <ClCompile Include="source\Engine\GameBase.cpp" />
+    <ClCompile Include="source\Engine\GlobalObjectManager.cpp" />
+    <ClCompile Include="source\Engine\Input.cpp" />
+    <ClCompile Include="source\Engine\ObjectBase.cpp" />
+    <ClCompile Include="source\Engine\Renderer.cpp" />
+    <ClCompile Include="source\Engine\SceneBase.cpp" />
+    <ClCompile Include="source\Engine\SceneManager.cpp" />
+    <ClCompile Include="source\Engine\Sprite.cpp" />
+    <ClCompile Include="source\Game\ObjectTitle.cpp" />
+    <ClCompile Include="source\Game\Player.cpp" />
+    <ClCompile Include="source\Game\SceneGame.cpp" />
+    <ClCompile Include="source\Game\SceneTitle.cpp" />
+    <ClCompile Include="source\Game\ShootingGame.cpp" />
+    <ClCompile Include="source\PatternParser.cpp" />
+    <ClCompile Include="source\ResourceLoader.cpp" />
+    <ClCompile Include="source\ResourceManager.cpp" />
+    <ClCompile Include="source\StageParser.cpp" />
+    <ClCompile Include="source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BulletInfo.h" />
-    <ClInclude Include="GameBase.h" />
-    <ClInclude Include="GameDefine.h" />
-    <ClInclude Include="PatternParser.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="ObjectTitle.h" />
-    <ClInclude Include="ObjectList.h" />
-    <ClInclude Include="ObjectBase.h" />
-    <ClInclude Include="list.h" />
-    <ClInclude Include="GlobalObjectManager.h" />
-    <ClInclude Include="ObjectType.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="StageParser.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="ResourceLoader.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="SceneBase.h" />
-    <ClInclude Include="SceneGame.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneTitle.h" />
-    <ClInclude Include="ShootingGame.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="source\Stage.h" />
+    <ClInclude Include="source\Container\list.h" />
+    <ClInclude Include="source\Engine\GameBase.h" />
+    <ClInclude Include="source\Engine\GlobalObjectManager.h" />
+    <ClInclude Include="source\Engine\Input.h" />
+    <ClInclude Include="source\Engine\ObjectBase.h" />
+    <ClInclude Include="source\Engine\ObjectList.h" />
+    <ClInclude Include="source\Engine\Renderer.h" />
+    <ClInclude Include="source\Engine\SceneBase.h" />
+    <ClInclude Include="source\Engine\SceneManager.h" />
+    <ClInclude Include="source\Engine\Sprite.h" />
+    <ClInclude Include="source\Game\GameDefine.h" />
+    <ClInclude Include="source\Game\ObjectTitle.h" />
+    <ClInclude Include="source\Game\ObjectType.h" />
+    <ClInclude Include="source\Game\Player.h" />
+    <ClInclude Include="source\Game\SceneGame.h" />
+    <ClInclude Include="source\Game\SceneTitle.h" />
+    <ClInclude Include="source\Game\ShootingGame.h" />
+    <ClInclude Include="source\Parser.h" />
+    <ClInclude Include="source\PatternParser.h" />
+    <ClInclude Include="source\ResourceLoader.h" />
+    <ClInclude Include="source\ResourceManager.h" />
+    <ClInclude Include="source\StageParser.h" />
+    <ClInclude Include="source\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

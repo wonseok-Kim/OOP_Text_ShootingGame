@@ -2,9 +2,10 @@
 
 #include <locale.h>
 
-#include "ShootingGame.h"
-#include "SceneTitle.h"
-#include "Sprite.h"
+#include "Engine/Sprite.h"
+
+#include "Game/ShootingGame.h"
+#include "Game/SceneTitle.h"
 
 static void MakeSprite();
 
@@ -44,6 +45,5 @@ static void MakeSprite()
 	//Sprite playerBullet{ 1, 1 };
 	//playerBullet.SetGlyph(0, 0, L'.');
 	//playerBullet.Save(L"Resources/Sprite/player_bullet.sp");
-
 }
 

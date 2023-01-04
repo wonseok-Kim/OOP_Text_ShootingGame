@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameBase.h"
+#include "Engine/GameBase.h"
 
 #include "ResourceLoader.h"
 #include "GameDefine.h"

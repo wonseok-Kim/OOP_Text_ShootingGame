@@ -1,2 +1,2 @@
 1
-stage1_enemy.txt
+Resources/Pattern/stage1_enemy.txt

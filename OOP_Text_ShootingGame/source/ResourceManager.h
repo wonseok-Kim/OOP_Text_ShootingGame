@@ -1,10 +1,10 @@
 #pragma once
 
-#include "list.h"
+#include "Container/list.h"
 
-#include "Sprite.h"
+#include "Engine/Sprite.h"
 
-#include "BulletInfo.h"
+#include "Stage.h"
 #include "PatternParser.h"
 
 using PatternList = wtl::list<Pattern*>;
@@ -118,7 +118,10 @@ public:
         }
 
         if (i == m_BulletInfosCount)
+        {
+            PrintError(L"%s 에 해당하는 ShotInfo가 없다.", filename);
             return nullptr;
+        }
 
         return &m_ShotInfos[i];
     }
