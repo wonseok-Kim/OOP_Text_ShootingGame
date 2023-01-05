@@ -79,21 +79,21 @@ public:
 	virtual void Render(Renderer* renderer) override
 	{
 		for (int i = 0; i < 19; ++i)
-			renderer->DrawString(0, i, s_TitleScreen[i]);
+			renderer->DrawString(13, 10 + i, s_TitleScreen[i]);
 
 		if (m_CurrentMenu == MenuKind::GAME_START)
 		{
-			renderer->Draw(m_SelectCrd[0].X, m_SelectCrd[0].Y, L'>');
-			renderer->Draw(m_SelectCrd[0].X + 1, m_SelectCrd[0].Y, L'>');
-			renderer->Draw(m_SelectCrd[1].X, m_SelectCrd[1].Y, L'<');
-			renderer->Draw(m_SelectCrd[1].X + 1, m_SelectCrd[1].Y, L'<');
+			renderer->Draw(13 + m_SelectCrd[0].X, m_SelectCrd[0].Y + 10, L'>');
+			renderer->Draw(13 + m_SelectCrd[0].X + 1, m_SelectCrd[0].Y + 10, L'>');
+			renderer->Draw(13 + m_SelectCrd[1].X, m_SelectCrd[1].Y + 10, L'<');
+			renderer->Draw(13 + m_SelectCrd[1].X + 1, m_SelectCrd[1].Y + 10, L'<');
 		}
 		else if (m_CurrentMenu == MenuKind::EXIT)
 		{
-			renderer->Draw(m_SelectCrd[2].X, m_SelectCrd[2].Y, L'>');
-			renderer->Draw(m_SelectCrd[2].X + 1, m_SelectCrd[2].Y, L'>');
-			renderer->Draw(m_SelectCrd[3].X, m_SelectCrd[3].Y, L'<');
-			renderer->Draw(m_SelectCrd[3].X + 1, m_SelectCrd[3].Y, L'<');
+			renderer->Draw(13 + m_SelectCrd[2].X, m_SelectCrd[2].Y + 10, L'>');
+			renderer->Draw(13 + m_SelectCrd[2].X + 1, m_SelectCrd[2].Y + 10, L'>');
+			renderer->Draw(13 + m_SelectCrd[3].X, m_SelectCrd[3].Y + 10, L'<');
+			renderer->Draw(13 + m_SelectCrd[3].X + 1, m_SelectCrd[3].Y + 10, L'<');
 		}
 	}
 
