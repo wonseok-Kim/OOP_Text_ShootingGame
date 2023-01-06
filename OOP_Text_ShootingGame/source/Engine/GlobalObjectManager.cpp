@@ -11,10 +11,15 @@ GlobalObjectManager::~GlobalObjectManager()
 
 void GlobalObjectManager::Update()
 {
+	// TODO: °íÄ¡±â
+	static DWORD framesCount = 0;
+
 	for (ObjectBase* obj : m_ObjectList)
 	{
-		obj->Update();
+		obj->Update(framesCount);
 	}
+
+	framesCount++;
 }
 
 void GlobalObjectManager::Render(Renderer* renderer)

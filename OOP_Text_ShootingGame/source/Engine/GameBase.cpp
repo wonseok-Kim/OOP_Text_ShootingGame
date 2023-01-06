@@ -46,8 +46,8 @@ void GameBase::Run()
         {
             wchar_t s[50];
             swprintf_s(s, 50, L"FPS: %3.2f, frameCount: %u\n", frameCount / (elapsedTick / 1000.f), frameCount);
-            OutputDebugStringW(s);
-            // SetConsoleTitleW(s);
+            //OutputDebugStringW(s);
+             SetConsoleTitleW(s);
 
             incrementsOf1000ms += 1000;
         }

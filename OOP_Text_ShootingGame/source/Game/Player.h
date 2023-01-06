@@ -9,40 +9,35 @@ class Sprite;
 
 typedef union
 {
-	struct
-	{
-		bool up;
-		bool down;
-		bool left;
-		bool right;
-		bool attack;
-	};
-	bool keys[5];
+    struct
+    {
+        bool up;
+        bool down;
+        bool left;
+        bool right;
+        bool attack;
+    };
+    bool keys[5];
 } PlayerKeyState;
 
 class Player : public ObjectBase
 {
 public:
-	Player(int x, int y)
-		:ObjectBase(ObjectType_Player, x, y)
-	{
-		m_Sprite = ResourceManager::Instance().GetSprite(L"Resources/Sprite/player.sp");
-		if (!m_Sprite)
-		{
-			// TODO: 예외 처리
-			PrintError(L"sprite doesn't exists");
-		}
-	}
+    Player(PlayerInfo* pInfo)
+        :ObjectBase(ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
+        , m_Sprite{ pInfo->sprite }
+    {
+    }
 
-	virtual ~Player() override = default;
+    virtual ~Player() override = default;
 
-	virtual void Update() override;
-	virtual void Render(Renderer* renderer) override;
+    virtual void Update(DWORD framesCount) override;
+    virtual void Render(Renderer* renderer) override;
 
-	PlayerKeyState& SetState() { return m_KeyState; }
+    PlayerKeyState& SetState() { return m_KeyState; }
 
 private:
-	Sprite* m_Sprite;
-	PlayerKeyState m_KeyState{};
+    Sprite* m_Sprite;
+    PlayerKeyState m_KeyState{};
 };
 

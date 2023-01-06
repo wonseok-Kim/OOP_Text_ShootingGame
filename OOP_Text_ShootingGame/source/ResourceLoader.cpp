@@ -173,7 +173,11 @@ bool ResourceLoader::LoadStage()
 
         StageParser parser;
         parser.Init(filename);
-        parser.Run();
+
+        Stage* newStage = new Stage;
+        parser.Run(newStage);
+
+        ResourceManager::Instance().AddStage(newStage);
     }
 
     return true;

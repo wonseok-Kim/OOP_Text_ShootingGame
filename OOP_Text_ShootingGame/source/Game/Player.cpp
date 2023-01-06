@@ -5,7 +5,7 @@
 
 #include "GameDefine.h"
 
-void Player::Update()
+void Player::Update(DWORD framesCount)
 {
 	if (m_KeyState.up)
 		m_Y--;
@@ -16,10 +16,10 @@ void Player::Update()
 	if (m_KeyState.left)
 		m_X--;
 
-	memset(&m_KeyState, 0, sizeof(m_KeyState));
-
 	m_Y = min(GAME_HEIGHT - 1, max(0, m_Y));
 	m_X = min(GAME_WIDTH - m_Sprite->Width(), max(0, m_X));
+
+	memset(&m_KeyState, 0, sizeof(m_KeyState));
 }
 
 void Player::Render(Renderer* renderer)

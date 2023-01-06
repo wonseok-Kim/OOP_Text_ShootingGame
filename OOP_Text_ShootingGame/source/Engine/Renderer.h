@@ -9,7 +9,8 @@ public:
         : m_Width{ width }
         , m_Height{ height }
     {
-        m_ScreenBuffer = new WCHAR[width * height];
+        size_t size = (size_t)(width * height);
+        m_ScreenBuffer = new WCHAR[size];
         wmemset(m_ScreenBuffer, L' ', width * height);
 
         m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

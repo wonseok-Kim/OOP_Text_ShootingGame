@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PatternList.h"
+
 class Sprite;
 
 struct ShotInfo
@@ -36,8 +38,7 @@ struct EnemyInfo
     Sprite* sprite;
     COORD startCoord;
     BOOL bLoopPatterns;
-    Pattern* patterns;
-    int patternsCount;
+    PatternList* pPatternList;    
 };
 
 struct Stage
@@ -45,4 +46,9 @@ struct Stage
     PlayerInfo player;
     EnemyInfo* enemies;
     int enemiesCount;
+
+    ~Stage()
+    {
+        delete enemies;
+    }
 };

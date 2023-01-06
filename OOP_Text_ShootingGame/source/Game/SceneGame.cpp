@@ -4,23 +4,27 @@
 #include "Engine/Input.h"
 
 #include "Player.h"
+#include "Enemy.h"
 
-SceneGame::SceneGame()    
+SceneGame::SceneGame(int curStage)    
 {
-	m_Player = new Player(0, 0);
+	m_CurrentStageInfo = ResourceManager::Instance().GetStage(curStage);
+	
+	m_Player = new Player(&m_CurrentStageInfo->player);
 	m_ObjectList.push_back(m_Player);
+
+	for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
+	{
+		m_ObjectList.push_back(new Enemy(&m_CurrentStageInfo->enemies[i]));
+	}
 }
 
 SceneGame::~SceneGame()
 {
-	for (ObjectBase* obj : m_ObjectList)
-	{
-		delete obj;
-	}
 }
 
 void SceneGame::Update()
-{
+{	
 	auto& input = Input::Instance();
 	PlayerKeyState& playerKeyState = m_Player->SetState();
 
@@ -43,8 +47,10 @@ void SceneGame::Update()
 
 	for (ObjectBase* obj : m_ObjectList)
 	{
-		obj->Update();
+		obj->Update(m_FramesCount);
 	}
+
+	m_FramesCount++;
 }
 
 void SceneGame::Render(Renderer * renderer)

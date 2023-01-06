@@ -5,9 +5,8 @@
 #include "Engine/Sprite.h"
 
 #include "Stage.h"
+#include "PatternList.h"
 #include "PatternParser.h"
-
-using PatternList = wtl::list<Pattern*>;
 
 #pragma warning(push)
 #pragma warning(disable: 26495) // 멤버 변수 초기화 왜 안하냐 경고
@@ -44,6 +43,11 @@ public:
             }
 
             delete[] m_PatternFilenames[i];
+        }
+
+        for (int i = 0; i < m_StagesCount; ++i)
+        {
+            delete m_Stages[i];
         }
     }
 
@@ -141,6 +145,23 @@ public:
         return &m_PatternLists[i];
     }
 
+    bool AddStage(Stage* stage)
+    {
+        if (m_StagesCount >= MAX_STAGES)
+        {
+            return false;
+        }
+
+        m_Stages[m_StagesCount++] = stage;
+
+        return true;
+    }
+
+    Stage* GetStage(int stage)
+    {
+        return m_Stages[stage];
+    }
+
 private:
     ResourceManager() = default;
 
@@ -148,6 +169,7 @@ private:
     static constexpr int MAX_SPRITES = 10;
     static constexpr int MAX_BULLETS = 10;
     static constexpr int MAX_PATTERN_LISTS = 10;
+    static constexpr int MAX_STAGES = 10;
 
     Sprite* m_Sprites[MAX_SPRITES];
     WCHAR* m_SpriteFilenames[MAX_SPRITES];
@@ -160,6 +182,9 @@ private:
     PatternList m_PatternLists[MAX_PATTERN_LISTS];
     WCHAR* m_PatternFilenames[MAX_PATTERN_LISTS];
     int m_PatternListsCount = 0;
+
+    Stage* m_Stages[MAX_STAGES];
+    int m_StagesCount = 0;
 };
 
 #pragma warning(pop)

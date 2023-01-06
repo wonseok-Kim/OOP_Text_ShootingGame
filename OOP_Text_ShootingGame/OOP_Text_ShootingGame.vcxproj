@@ -138,7 +138,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Game\Enemy.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Parser.cpp" />
     <ClCompile Include="source\Stage.cpp" />
     <ClCompile Include="source\Engine\GameBase.cpp" />
     <ClCompile Include="source\Engine\GlobalObjectManager.cpp" />
@@ -148,7 +150,6 @@
     <ClCompile Include="source\Engine\SceneBase.cpp" />
     <ClCompile Include="source\Engine\SceneManager.cpp" />
     <ClCompile Include="source\Engine\Sprite.cpp" />
-    <ClCompile Include="source\Game\ObjectTitle.cpp" />
     <ClCompile Include="source\Game\Player.cpp" />
     <ClCompile Include="source\Game\SceneGame.cpp" />
     <ClCompile Include="source\Game\SceneTitle.cpp" />
@@ -162,8 +163,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Game\Enemy.h" />
+    <ClInclude Include="source\PatternList.h" />
     <ClInclude Include="source\Stage.h" />
-    <ClInclude Include="source\Container\list.h" />
     <ClInclude Include="source\Engine\GameBase.h" />
     <ClInclude Include="source\Engine\GlobalObjectManager.h" />
     <ClInclude Include="source\Engine\Input.h" />
@@ -174,7 +176,6 @@
     <ClInclude Include="source\Engine\SceneManager.h" />
     <ClInclude Include="source\Engine\Sprite.h" />
     <ClInclude Include="source\Game\GameDefine.h" />
-    <ClInclude Include="source\Game\ObjectTitle.h" />
     <ClInclude Include="source\Game\ObjectType.h" />
     <ClInclude Include="source\Game\Player.h" />
     <ClInclude Include="source\Game\SceneGame.h" />
@@ -186,7 +187,6 @@
     <ClInclude Include="source\ResourceManager.h" />
     <ClInclude Include="source\StageParser.h" />
     <ClInclude Include="source\stdafx.h" />
-    <ClInclude Include="Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

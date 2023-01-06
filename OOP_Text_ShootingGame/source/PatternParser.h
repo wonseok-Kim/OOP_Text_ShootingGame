@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Parser.h"
-#include "Stage.h"
 
 struct Pattern;
 
@@ -16,7 +15,7 @@ public:
         return Parser::InitByFilename(filename);
     }
 
-    virtual bool Run() override;
+    bool Run();
 
 private:
     bool ParsePattern(SubString texts, Pattern* p);

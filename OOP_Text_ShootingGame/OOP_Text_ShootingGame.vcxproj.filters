@@ -21,6 +21,9 @@
     <Filter Include="2. Resource">
       <UniqueIdentifier>{be70288a-fb13-4570-ad5a-2db2b41ef6d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2. Resource\Parser">
+      <UniqueIdentifier>{42ab8f91-372d-40b5-9db4-5659e80b111a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\Engine\GameBase.cpp">
@@ -47,9 +50,6 @@
     <ClCompile Include="source\Engine\Sprite.cpp">
       <Filter>1.Engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\Game\ObjectTitle.cpp">
-      <Filter>3. ShootingGame</Filter>
-    </ClCompile>
     <ClCompile Include="source\Game\Player.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
@@ -65,16 +65,10 @@
     <ClCompile Include="source\Stage.cpp">
       <Filter>2. Resource</Filter>
     </ClCompile>
-    <ClCompile Include="source\PatternParser.cpp">
-      <Filter>2. Resource</Filter>
-    </ClCompile>
     <ClCompile Include="source\ResourceLoader.cpp">
       <Filter>2. Resource</Filter>
     </ClCompile>
     <ClCompile Include="source\ResourceManager.cpp">
-      <Filter>2. Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="source\StageParser.cpp">
       <Filter>2. Resource</Filter>
     </ClCompile>
     <ClCompile Include="source\main.cpp">
@@ -82,6 +76,18 @@
     </ClCompile>
     <ClCompile Include="source\stdafx.cpp">
       <Filter>5. Main</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PatternParser.cpp">
+      <Filter>2. Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StageParser.cpp">
+      <Filter>2. Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Parser.cpp">
+      <Filter>2. Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\Enemy.cpp">
+      <Filter>3. ShootingGame</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,13 +118,7 @@
     <ClInclude Include="source\Engine\Sprite.h">
       <Filter>1.Engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\Container\list.h">
-      <Filter>0. Container</Filter>
-    </ClInclude>
     <ClInclude Include="source\Game\GameDefine.h">
-      <Filter>3. ShootingGame</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Game\ObjectTitle.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
     <ClInclude Include="source\Game\ObjectType.h">
@@ -139,26 +139,29 @@
     <ClInclude Include="source\Stage.h">
       <Filter>2. Resource</Filter>
     </ClInclude>
-    <ClInclude Include="source\Parser.h">
-      <Filter>2. Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="source\PatternParser.h">
-      <Filter>2. Resource</Filter>
-    </ClInclude>
     <ClInclude Include="source\ResourceLoader.h">
       <Filter>2. Resource</Filter>
     </ClInclude>
     <ClInclude Include="source\ResourceManager.h">
       <Filter>2. Resource</Filter>
     </ClInclude>
-    <ClInclude Include="source\StageParser.h">
-      <Filter>2. Resource</Filter>
-    </ClInclude>
     <ClInclude Include="source\stdafx.h">
       <Filter>5. Main</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
+    <ClInclude Include="source\PatternList.h">
       <Filter>2. Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Parser.h">
+      <Filter>2. Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="source\PatternParser.h">
+      <Filter>2. Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="source\StageParser.h">
+      <Filter>2. Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\Enemy.h">
+      <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

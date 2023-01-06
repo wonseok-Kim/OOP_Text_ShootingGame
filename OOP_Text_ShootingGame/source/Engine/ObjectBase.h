@@ -8,7 +8,7 @@ public:
 	ObjectBase(int objectType, int x, int y);
 	virtual ~ObjectBase();
 
-	virtual void Update() = 0;
+	virtual void Update(DWORD framesCount) = 0;
 	virtual void Render(Renderer* renderer) = 0;
 
 	int GetObjectType() { return m_ObjectType; }

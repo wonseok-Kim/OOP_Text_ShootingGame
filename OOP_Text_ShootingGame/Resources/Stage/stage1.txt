@@ -13,97 +13,25 @@ Enemy 5
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
-	coord: (5, 5)
+	coord: (15, 5)
 	loopPattern: 1
-	pattern: 2
-	{
-		duration: 25
-		moveTo: (1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100		
-	}
-	{
-		duration: 25
-		moveTo: (-1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100	
-	}
+	pattern: "Resources/Pattern/stage1_enemy.txt"
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
-	coord: (5, 5)
+	coord: (25, 5)
 	loopPattern: 1
-	pattern: 2
-	{
-		duration: 25
-		moveTo: (1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100		
-	}
-	{
-		duration: 25
-		moveTo: (-1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100	
-	}
+	pattern: "Resources/Pattern/stage1_enemy.txt"
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
-	coord: (5, 5)
+	coord: (35, 5)
 	loopPattern: 1
-	pattern: 2
-	{
-		duration: 25
-		moveTo: (1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100		
-	}
-	{
-		duration: 25
-		moveTo: (-1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100	
-	}
+	pattern: "Resources/Pattern/stage1_enemy.txt"
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
-	coord: (5, 5)
+	coord: (45, 5)
 	loopPattern: 1
-	pattern: 2
-	{
-		duration: 25
-		moveTo: (1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100		
-	}
-	{
-		duration: 25
-		moveTo: (-1, 0)
-		moveInterval: 5
-
-		shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
-		shotInterval: 50
-		shotChance: 100	
-	}
+	pattern: "Resources/Pattern/stage1_enemy.txt"
 }
