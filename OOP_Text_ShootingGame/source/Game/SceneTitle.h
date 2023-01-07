@@ -8,7 +8,7 @@ class SceneTitle : public SceneBase
 {
 	enum
 	{
-		GAME_START,
+		GAME_START = 0,
 		GAME_EXIT,
 		MAX_MENU,
 	};

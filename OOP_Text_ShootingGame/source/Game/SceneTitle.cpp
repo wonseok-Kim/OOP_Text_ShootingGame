@@ -18,27 +18,27 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::Update()
 {	
-	Input& input = Input::Instance();
+	Input* input = Input::Instance();
 
-	if (input.GetKey(VK_RIGHT).pressed ||
-		input.GetKey(VK_UP).pressed)
+	if (input->GetKey(VK_RIGHT).pressed ||
+		input->GetKey(VK_UP).pressed)
 	{
 		m_CurrentMenu++;
 		if (m_CurrentMenu >= MAX_MENU)
 			m_CurrentMenu = 0;
 	}
-	if (input.GetKey(VK_LEFT).pressed ||
-		input.GetKey(VK_DOWN).pressed)
+	if (input->GetKey(VK_LEFT).pressed ||
+		input->GetKey(VK_DOWN).pressed)
 	{
 		m_CurrentMenu--;
 		if (m_CurrentMenu < 0)
 			m_CurrentMenu = MAX_MENU - 1;
 	}
-	if (input.GetKey(VK_SPACE).pressed)
+	if (input->GetKey(VK_SPACE).pressed)
 	{
-		auto& sceneMgr = SceneManager::Instance();
+		SceneManager* sceneMgr = SceneManager::Instance();
 		if (m_CurrentMenu == GAME_START)
-			sceneMgr.LoadScene(new SceneGame);
+			sceneMgr->LoadScene(new SceneGame);
 		else if (m_CurrentMenu == GAME_EXIT)
 			; // TODO: 종료 처리하기
 		else

@@ -2,16 +2,18 @@
 
 #include "Engine/ObjectBase.h"
 #include "Engine/Renderer.h"
+#include "Engine/SceneBase.h"
 #include "Engine/Sprite.h"
 
+#include "Bullet.h"
 #include "ObjectType.h"
 #include "Stage.h"
 
 class Enemy : public ObjectBase
 {
 public:
-    Enemy(EnemyInfo* pInfo)
-        : ObjectBase(ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
+    Enemy(SceneBase* scene, EnemyInfo* pInfo)
+        : ObjectBase(scene, ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
     {
         m_Sprite = pInfo->sprite;        
         m_bLoopPatern = pInfo->bLoopPatterns;
@@ -24,9 +26,6 @@ public:
 
     virtual void Update(DWORD framesCount) override
     {
-        if (framesCount == 0)
-            return;
-
         m_Duration++;
 
         if (m_Duration % m_CurPattern->moveInterval == 0)
@@ -37,7 +36,11 @@ public:
 
         if (m_Duration % m_CurPattern->shotInterval == 0)
         {
-            Shot();
+            ShotInfo* shotInfo = m_CurPattern->shotInfo;
+            for (int i = 0; i < shotInfo->shotCount; ++i)
+            {
+                m_Scene->AddObject(new Bullet(m_Scene, m_X, m_Y, shotInfo->sprite, shotInfo->dir[i]));
+            }
         }
 
         if (m_Duration % m_CurPattern->duration == 0)
@@ -53,12 +56,6 @@ public:
     virtual void Render(Renderer* renderer)
     {
         renderer->DrawSprite(m_X, m_Y, m_Sprite);
-    }
-
-private:
-    void Shot()
-    {
-
     }
 
 private:

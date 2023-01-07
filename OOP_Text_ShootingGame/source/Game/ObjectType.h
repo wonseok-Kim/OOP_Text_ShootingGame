@@ -4,6 +4,6 @@ enum ObjectType
 {
 	ObjectType_Player,
 	ObjectType_Enemy,
-	ObjectType_Title,
+	ObjectType_Bullet,
 	ObjectType_MaxTypes,
 };

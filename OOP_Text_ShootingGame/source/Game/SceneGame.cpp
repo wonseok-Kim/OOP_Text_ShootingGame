@@ -3,19 +3,20 @@
 
 #include "Engine/Input.h"
 
-#include "Player.h"
 #include "Enemy.h"
+#include "Player.h"
+#include "ResourceManager.h"
 
 SceneGame::SceneGame(int curStage)    
 {
-	m_CurrentStageInfo = ResourceManager::Instance().GetStage(curStage);
+	m_CurrentStageInfo = ResourceManager::Instance()->GetStage(curStage);
 	
-	m_Player = new Player(&m_CurrentStageInfo->player);
+	m_Player = new Player(this, &m_CurrentStageInfo->player);
 	m_ObjectList.push_back(m_Player);
 
 	for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
 	{
-		m_ObjectList.push_back(new Enemy(&m_CurrentStageInfo->enemies[i]));
+		m_ObjectList.push_back(new Enemy(this, &m_CurrentStageInfo->enemies[i]));
 	}
 }
 
@@ -25,29 +26,41 @@ SceneGame::~SceneGame()
 
 void SceneGame::Update()
 {	
-	auto& input = Input::Instance();
-	PlayerKeyState& playerKeyState = m_Player->SetState();
+	Input* input = Input::Instance();
 
-	if (input.GetKey(VK_LEFT).held)
+	if (input->GetKey(VK_LEFT).held)
 	{
-		playerKeyState.left = true;
+		m_Player->SetState(PlayerState::MOVE_LEFT);
 	}
-	if (input.GetKey(VK_RIGHT).held)
+	if (input->GetKey(VK_RIGHT).held)
 	{
-		playerKeyState.right = true;
+		m_Player->SetState(PlayerState::MOVE_RIGHT);
 	}
-	if (input.GetKey(VK_UP).held)
+	if (input->GetKey(VK_UP).held)
 	{
-		playerKeyState.up = true;
+		m_Player->SetState(PlayerState::MOVE_UP);
 	}
-	if (input.GetKey(VK_DOWN).held)
+	if (input->GetKey(VK_DOWN).held)
 	{
-		playerKeyState.down = true;
+		m_Player->SetState(PlayerState::MOVE_DOWN);
+	}
+	if (input->GetKey(VK_SPACE).held)
+	{
+		m_Player->SetState(PlayerState::ATTACK);
 	}
 
 	for (ObjectBase* obj : m_ObjectList)
 	{
 		obj->Update(m_FramesCount);
+	}
+
+	ObjectList::iterator iter;
+	for (iter = m_ObjectList.begin(); iter != m_ObjectList.end(); )
+	{
+		if (iter->IsRelease())
+			iter = m_ObjectList.erase(iter);
+		else
+			++iter;
 	}
 
 	m_FramesCount++;

@@ -89,6 +89,9 @@
     <ClCompile Include="source\Game\Enemy.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
+    <ClCompile Include="source\Game\Bullet.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Engine\GameBase.h">
@@ -161,6 +164,9 @@
       <Filter>2. Resource\Parser</Filter>
     </ClInclude>
     <ClInclude Include="source\Game\Enemy.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\Bullet.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>

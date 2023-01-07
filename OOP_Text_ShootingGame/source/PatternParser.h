@@ -15,7 +15,7 @@ public:
         return Parser::InitByFilename(filename);
     }
 
-    bool Run();
+    bool ParsePatternsAndAddPatternsToResMgr();
 
 private:
     bool ParsePattern(SubString texts, Pattern* p);

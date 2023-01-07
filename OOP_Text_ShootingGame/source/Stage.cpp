@@ -46,7 +46,7 @@ bool ShotInfo::Load(const WCHAR* filename)
         return false;
     }
 
-    sprite = ResourceManager::Instance().GetSprite(wchfilename);
+    sprite = ResourceManager::Instance()->GetSprite(wchfilename);
     if (sprite == nullptr)
     {
         PrintError(L"sprite init err in ShotInfo ");

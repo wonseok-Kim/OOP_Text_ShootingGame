@@ -9,17 +9,17 @@
 #include "PatternParser.h"
 
 #pragma warning(push)
-#pragma warning(disable: 26495) // 멤버 변수 초기화 왜 안하냐 경고
+#pragma warning(disable: 26495) // 멤버 변수 초기화 경고
 
 class ResourceManager
 {
-    friend bool PatternParser::Run();
+    friend bool PatternParser::ParsePatternsAndAddPatternsToResMgr();
 
 public:
-    static ResourceManager& Instance()
+    static ResourceManager* Instance()
     {
         static ResourceManager inst;
-        return inst;
+        return &inst;
     }
 
     ~ResourceManager()
@@ -153,7 +153,6 @@ public:
         }
 
         m_Stages[m_StagesCount++] = stage;
-
         return true;
     }
 

@@ -8,10 +8,10 @@
 class SceneManager
 {
 public:
-	static SceneManager& Instance()
+	static SceneManager* Instance()
 	{
 		static SceneManager inst;
-		return inst;
+		return &inst;
 	}
 
 	~SceneManager()
@@ -31,17 +31,17 @@ public:
 
 		Assert(m_CurrentScene, L"GameBase 생성자에서 시작 씬 받고 LoadScene()으로 넣어줌");
 
-		auto& globalObjectManager = GlobalObjectManager::Instance();
+		GlobalObjectManager* globalObjectManager = GlobalObjectManager::Instance();
 
-		Input::Instance().Handle();
+		Input::Instance()->Handle();
 
 		m_CurrentScene->Update();
-		globalObjectManager.Update();
+		globalObjectManager->Update();
 
 		if (rendererOrNull)
 		{
 			m_CurrentScene->Render(rendererOrNull);
-			globalObjectManager.Render(rendererOrNull);
+			globalObjectManager->Render(rendererOrNull);
 
 			rendererOrNull->Output();
 			rendererOrNull->ClearBuffer();

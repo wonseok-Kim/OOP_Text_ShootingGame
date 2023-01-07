@@ -3,13 +3,14 @@
 
 #include "ResourceManager.h"
 
-bool PatternParser::Run()
+bool PatternParser::ParsePatternsAndAddPatternsToResMgr()
 {
-    ResourceManager& resMgr = ResourceManager::Instance();
+    ResourceManager* resMgr = ResourceManager::Instance();
 
-    int& listsCount = resMgr.m_PatternListsCount;
-    PatternList& patternList = resMgr.m_PatternLists[listsCount];
-    WCHAR*& filename = resMgr.m_PatternFilenames[listsCount];
+    // This method is a friend with ResourceManager.
+    int& listsCount = resMgr->m_PatternListsCount;
+    PatternList& patternList = resMgr->m_PatternLists[listsCount];
+    WCHAR*& filename = resMgr->m_PatternFilenames[listsCount];
     listsCount++;
 
     int patternsCount;
@@ -89,7 +90,7 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
             if (!GetStringLiteral(path, MAX_PATH))
                 return false;
 
-            pShotInfo = ResourceManager::Instance().GetShotInfo(path);
+            pShotInfo = ResourceManager::Instance()->GetShotInfo(path);
             if (!pShotInfo)
                 return false;
 

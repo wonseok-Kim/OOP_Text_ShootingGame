@@ -107,7 +107,7 @@ bool StageParser::ParsePlayerInfo(const SubString& texts, PlayerInfo* out_pPlaye
             WCHAR path[MAX_PATH];
             GetStringLiteral(path, MAX_PATH);
 
-            Sprite* sprite = ResourceManager::Instance().GetSprite(path);
+            Sprite* sprite = ResourceManager::Instance()->GetSprite(path);
             if (!sprite)
                 return false;
             out_pPlayerInfo->sprite = sprite;
@@ -174,7 +174,7 @@ bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyIn
 
             GetStringLiteral(path, MAX_PATH);
 
-            Sprite* sprite = ResourceManager::Instance().GetSprite(path);
+            Sprite* sprite = ResourceManager::Instance()->GetSprite(path);
             if (!sprite)
                 return false;
             out_pEnemyInfo->sprite = sprite;
@@ -206,7 +206,7 @@ bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyIn
                 return false;
 
             GetStringLiteral(path, MAX_PATH);
-            PatternList* pPatternList = ResourceManager::Instance().GetPatternList(path);
+            PatternList* pPatternList = ResourceManager::Instance()->GetPatternList(path);
             out_pEnemyInfo->pPatternList = pPatternList;
             break;
         }

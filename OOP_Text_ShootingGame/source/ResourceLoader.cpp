@@ -53,7 +53,7 @@ bool ResourceLoader::LoadSprite()
             return false;
         }
 
-        if (!ResourceManager::Instance().AddSprite(filename))
+        if (!ResourceManager::Instance()->AddSprite(filename))
         {
             PrintError(L"sprite load err");
             return false;
@@ -93,7 +93,7 @@ bool ResourceLoader::LoadShotInfo()
             return false;
         }
 
-        if (!ResourceManager::Instance().AddShotInfo(filename))
+        if (!ResourceManager::Instance()->AddShotInfo(filename))
         {
             PrintError(L"shotInfo load err");
             return false;
@@ -135,7 +135,7 @@ bool ResourceLoader::LoadPattern()
 
         PatternParser parser;
         parser.InitByFilename(filename);
-        parser.Run();
+        parser.ParsePatternsAndAddPatternsToResMgr();
     }
 
     return true;
@@ -174,10 +174,10 @@ bool ResourceLoader::LoadStage()
         StageParser parser;
         parser.Init(filename);
 
-        Stage* newStage = new Stage;
+        Stage* newStage = new Stage; // ResourceManager°¡ ÇØÁ¦
         parser.Run(newStage);
 
-        ResourceManager::Instance().AddStage(newStage);
+        ResourceManager::Instance()->AddStage(newStage);
     }
 
     return true;

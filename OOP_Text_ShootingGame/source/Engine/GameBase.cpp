@@ -12,7 +12,7 @@ GameBase::GameBase(SceneBase* firstScene, int width, int height)
         abort();
     }
 
-    SceneManager::Instance().LoadScene(firstScene);
+    SceneManager::Instance()->LoadScene(firstScene);
 
     m_Renderer = new Renderer(width, height);
 }
@@ -24,7 +24,7 @@ GameBase::~GameBase()
 
 void GameBase::Run()
 {
-    auto& sceneManager = SceneManager::Instance();
+    SceneManager* sceneManager = SceneManager::Instance();
 
     constexpr DWORD framesPerSecond = 50;
     constexpr DWORD ticksPerFrame = 1000 / framesPerSecond;
@@ -54,13 +54,13 @@ void GameBase::Run()
 
         if (errorTick >= ticksPerFrame)
         {
-            sceneManager.Run(nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
+            sceneManager->Run(nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
 
             errorTick -= ticksPerFrame;
         }
         else
         {
-            sceneManager.Run(m_Renderer);
+            sceneManager->Run(m_Renderer);
 
             // Sleep(rand() % 50); // ·º À¯¹ß
         }

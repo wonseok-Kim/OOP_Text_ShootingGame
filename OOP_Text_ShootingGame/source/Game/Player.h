@@ -3,28 +3,25 @@
 #include "Engine/ObjectBase.h"
 
 #include "ObjectType.h"
-#include "ResourceManager.h"
+#include "Stage.h"
 
 class Sprite;
+class SceneBase;
 
-typedef union
+enum PlayerState
 {
-    struct
-    {
-        bool up;
-        bool down;
-        bool left;
-        bool right;
-        bool attack;
-    };
-    bool keys[5];
-} PlayerKeyState;
+    MOVE_UP = 0x1,
+    MOVE_DOWN = 0x2,
+    MOVE_RIGHT = 0x4,
+    MOVE_LEFT = 0x8,
+    ATTACK = 0x10,
+};
 
 class Player : public ObjectBase
 {
 public:
-    Player(PlayerInfo* pInfo)
-        :ObjectBase(ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
+    Player(SceneBase* scene, PlayerInfo* pInfo)
+        :ObjectBase(scene, ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
         , m_Sprite{ pInfo->sprite }
     {
     }
@@ -34,10 +31,10 @@ public:
     virtual void Update(DWORD framesCount) override;
     virtual void Render(Renderer* renderer) override;
 
-    PlayerKeyState& SetState() { return m_KeyState; }
+    void SetState(PlayerState state) { m_State |= state; }
 
 private:
     Sprite* m_Sprite;
-    PlayerKeyState m_KeyState{};
+    UINT m_State = 0;
 };
 

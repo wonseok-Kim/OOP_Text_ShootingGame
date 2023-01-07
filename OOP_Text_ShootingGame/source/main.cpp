@@ -43,7 +43,7 @@ static void MakeSprite()
 	//enemy1.Save(L"Resources/Sprite/enemy1.sp");
 
 	//Sprite playerBullet{ 1, 1 };
-	//playerBullet.SetGlyph(0, 0, L'.');
-	//playerBullet.Save(L"Resources/Sprite/player_bullet.sp");
+	//playerBullet.SetGlyph(0, 0, L'*');
+	//playerBullet.Save(L"Resources/Sprite/default_bullet.sp");
 }
 

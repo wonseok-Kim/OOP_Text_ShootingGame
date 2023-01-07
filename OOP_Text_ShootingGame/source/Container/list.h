@@ -219,9 +219,9 @@ namespace wtl
 			return m_Node->data;
 		}
 
-		T* operator->()
+		T& operator->()
 		{
-			return &m_Node->data;
+			return m_Node->data;
 		}
 
 		bool operator==(const iterator& other) const

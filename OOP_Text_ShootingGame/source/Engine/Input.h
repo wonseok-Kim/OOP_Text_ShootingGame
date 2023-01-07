@@ -10,10 +10,10 @@ struct KeyState
 class Input
 {
 public:
-	static Input& Instance()
+	static Input* Instance()
 	{
 		static Input inst;
-		return inst;
+		return &inst;
 	}
 
 	~Input() = default;

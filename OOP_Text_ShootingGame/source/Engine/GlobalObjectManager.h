@@ -7,10 +7,10 @@ class Renderer;
 class GlobalObjectManager
 {
 public:
-	static GlobalObjectManager& Instance()
+	static GlobalObjectManager* Instance()
 	{
 		static GlobalObjectManager inst;
-		return inst;
+		return &inst;
 	}
 
 	~GlobalObjectManager();

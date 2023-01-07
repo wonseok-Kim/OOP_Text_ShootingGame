@@ -1,11 +1,12 @@
 #pragma once
 
 class Renderer;
+class SceneBase;
 
 class ObjectBase
 {
 public:
-	ObjectBase(int objectType, int x, int y);
+	ObjectBase(SceneBase* sceneOrNull, int objectType, int x, int y);
 	virtual ~ObjectBase();
 
 	virtual void Update(DWORD framesCount) = 0;
@@ -13,10 +14,14 @@ public:
 
 	int GetObjectType() { return m_ObjectType; }
 
+	bool IsRelease() { return m_bRelease; }
+
 protected:
+	SceneBase* m_Scene;
 	int m_ObjectType;
 	int m_X;
 	int m_Y;
+	bool m_bRelease = false;
 
 private:
 };
