@@ -169,5 +169,8 @@
     <ClInclude Include="source\Game\Bullet.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
+    <ClInclude Include="source\Container\list.h">
+      <Filter>0. Container</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -164,6 +164,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Container\list.h" />
     <ClInclude Include="source\Game\Bullet.h" />
     <ClInclude Include="source\Game\Enemy.h" />
     <ClInclude Include="source\PatternList.h" />
