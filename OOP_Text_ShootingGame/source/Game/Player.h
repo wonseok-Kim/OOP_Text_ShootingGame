@@ -7,6 +7,7 @@
 
 class Sprite;
 class SceneBase;
+class GameInfo;
 
 enum PlayerState
 {
@@ -20,10 +21,7 @@ enum PlayerState
 class Player : public ObjectBase
 {
 public:
-    Player(SceneBase* scene, PlayerInfo* pInfo)
-        :ObjectBase(scene, pInfo->sprite,  ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
-    {
-    }
+    Player(SceneBase* scene, PlayerInfo* pInfo);
 
     virtual ~Player() override = default;
 
@@ -34,7 +32,15 @@ public:
 
     void SetState(PlayerState state) { m_State |= state; }
 
+    void AttachGameInfo(GameInfo* gameInfo) { m_GameInfo = gameInfo; }
+
 private:
     UINT m_State = 0;
+
+    int m_HP = 3;
+    int m_Life = 3;
+
+    ShotInfo* m_ShotInfo = nullptr;
+    GameInfo* m_GameInfo = nullptr;
 };
 

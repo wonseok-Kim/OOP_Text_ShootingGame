@@ -9,7 +9,7 @@ class ShootingGame : public GameBase
 {
 public:
 	ShootingGame(SceneBase* firstScene)
-		: GameBase(firstScene, GAME_WIDTH, GAME_HEIGHT)
+		: GameBase(firstScene, GAME_WIDTH, GAME_HEIGHT + 1)
 	{
 	}
 

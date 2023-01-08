@@ -22,8 +22,8 @@ bool ShotInfo::Load(const WCHAR* filename)
 
     for (int i = 0; i < shotCount; ++i)
     {
-        result = fscanf_s(file, "%hd, %hd", &dir[i].X, &dir[i].Y);
-        if (result != 2)
+        result = fscanf_s(file, "%hd, %hd %hd, %hd", &startCoord[i].X, &startCoord[i].Y, &dir[i].X, &dir[i].Y);
+        if (result != 4)
         {
             PrintError(L"'%s' file scan err", filename);
             return false;

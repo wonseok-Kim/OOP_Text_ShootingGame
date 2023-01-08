@@ -8,6 +8,7 @@ struct ShotInfo
 {
     int shotCount;
     Sprite* sprite;
+    COORD startCoord[8];
     COORD dir[8];
 
     bool Load(const WCHAR* filename);
@@ -17,6 +18,7 @@ struct PlayerInfo
 {
     Sprite* sprite;
     COORD startCoord;
+    ShotInfo* shotInfo;
 };
 
 struct Pattern
@@ -39,6 +41,7 @@ struct EnemyInfo
     COORD startCoord;
     BOOL bLoopPatterns;
     PatternList* pPatternList;    
+    int hp;
 };
 
 struct Stage

@@ -14,9 +14,14 @@ public:
     virtual void Update() override;
     virtual void Render(Renderer* renderer) override;
 
+    void OnEnemyDie();
+
+    int GetCurrentStageIdx() { return m_CurStageIdx; }
+
 private:
+    int m_CurStageIdx;
     Stage* m_CurrentStageInfo;
     Player* m_Player;
-
+    int m_EnemiesCount;
 };
 

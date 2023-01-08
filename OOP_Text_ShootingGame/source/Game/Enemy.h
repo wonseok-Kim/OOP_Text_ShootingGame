@@ -7,21 +7,27 @@
 
 #include "Bullet.h"
 #include "ObjectType.h"
+#include "SceneGame.h"
 #include "Stage.h"
 
 class Enemy : public ObjectBase
 {
 public:
-    Enemy(SceneBase* scene, EnemyInfo* pInfo)
-        : ObjectBase(scene, pInfo->sprite,  ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
+    Enemy(SceneGame* scene, EnemyInfo* pInfo)
+        : ObjectBase(scene, pInfo->sprite, ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
     {
         m_bLoopPatern = pInfo->bLoopPatterns;
         m_PatternList = pInfo->pPatternList;
         m_CurPatternIter = m_PatternList->begin();
         m_CurPattern = *m_CurPatternIter;
+        m_HP = pInfo->hp;
     }
 
-    virtual ~Enemy() override = default;
+    virtual ~Enemy() override
+    {
+        SceneGame* sceneGame = (SceneGame*)m_Scene;
+        sceneGame->OnEnemyDie();
+    }
 
     virtual void Update(DWORD framesCount) override
     {
@@ -38,7 +44,11 @@ public:
             ShotInfo* shotInfo = m_CurPattern->shotInfo;
             for (int i = 0; i < shotInfo->shotCount; ++i)
             {
-                m_Scene->AddObject(new Bullet(m_Scene, m_X, m_Y, shotInfo->sprite, shotInfo->dir[i]));
+                if (rand() % 101 > m_CurPattern->shotChance)
+                {
+                    m_Scene->AddObject(new Bullet(m_Scene, m_X + shotInfo->startCoord[i].X, m_Y + shotInfo->startCoord[i].Y,
+                        shotInfo->sprite, shotInfo->dir[i], ObjectType_Enemy));
+                }
             }
         }
 
@@ -46,7 +56,12 @@ public:
         {
             ++m_CurPatternIter;
             if (m_CurPatternIter == m_PatternList->end())
-                m_CurPatternIter = m_PatternList->begin();
+            {
+                if (m_bLoopPatern)
+                    m_CurPatternIter = m_PatternList->begin();
+                else
+                    SetRelease();
+            }
             m_CurPattern = *m_CurPatternIter;
             m_Duration = 0;
         }
@@ -57,16 +72,14 @@ public:
         renderer->DrawSprite(m_X, m_Y, m_Sprite);
     }
 
-    virtual void OnCollision(ObjectBase* other) override
-    {
-
-    }
+    virtual void OnCollision(ObjectBase* other) override;
 
 private:
     PatternList::iterator m_CurPatternIter;
     Pattern* m_CurPattern;
     PatternList* m_PatternList;
     int m_Duration = 0;
+    int m_HP;
     bool m_bLoopPatern;
 };
 

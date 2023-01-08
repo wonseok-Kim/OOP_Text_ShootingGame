@@ -36,7 +36,9 @@ void GameBase::Run()
     DWORD frameCount = 0;
     DWORD incrementsOf1000ms = 1000;
 
-    while (true)
+    bool bGameLoop = true;
+
+    while (bGameLoop)
     {
         DWORD nowTick = timeGetTime();
         elapsedTick += nowTick - previousTick;
@@ -53,15 +55,15 @@ void GameBase::Run()
             incrementsOf1000ms += 1000;
         }
 
-        if (errorTick >= ticksPerFrame)
-        {
-            sceneManager->Run(frameCount, nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
+        //if (errorTick >= ticksPerFrame)
+        //{
+        //    bGameLoop = sceneManager->Run(frameCount, nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
 
-            errorTick -= ticksPerFrame;
-        }
-        else
+        //    errorTick -= ticksPerFrame;
+        //}
+        //else
         {
-            sceneManager->Run(frameCount, m_Renderer);
+            bGameLoop = sceneManager->Run(frameCount, m_Renderer);
 
             // Sleep(rand() % 50); // ·º À¯¹ß
         }

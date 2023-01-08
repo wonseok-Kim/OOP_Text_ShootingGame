@@ -40,9 +40,9 @@ void SceneTitle::Update()
 		if (m_CurrentMenu == GAME_START)
 			sceneMgr->LoadScene(new SceneGame);
 		else if (m_CurrentMenu == GAME_EXIT)
-			; // TODO: 종료 처리하기
+			sceneMgr->SetExit();
 		else
-			abort();
+			Assert(0, L"Invalid menu");
 	}
 }
 
@@ -67,7 +67,6 @@ void SceneTitle::Render(Renderer* renderer)
 	}
 	else
 	{
-		// TODO 예외 처리하기
-		abort();
+		Assert(0, L"Invalid menu");
 	}
 }

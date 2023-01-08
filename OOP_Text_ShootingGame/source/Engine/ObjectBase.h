@@ -15,10 +15,11 @@ public:
 
 	int GetObjectType() { return m_ObjectType; }
 
+	void SetRelease() { m_bRelease = true; }
 	bool IsRelease() { return m_bRelease; }
 	bool IsCollision(ObjectBase* other);
 
-	virtual void OnCollision(ObjectBase* other) = 0;
+	virtual void OnCollision(ObjectBase* other) {}
 
 protected:
 	SceneBase* m_Scene;

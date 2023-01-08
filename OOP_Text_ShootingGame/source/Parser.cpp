@@ -86,7 +86,10 @@ long Parser::GetFileSize(FILE* file)
 bool Parser::GetIdentifier(SubString* sub)
 {
     if (GetCharType(*m_Current) != CharType::Identifier)
+    {
+        abort();
         return false;
+    }
 
     sub->begin = m_Current;
 

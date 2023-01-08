@@ -163,7 +163,7 @@ bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyIn
 {
     Assert(out_pEnemyInfo, L"out parameter must not be null");
 
-    const char* identifiers[] = { "sprite", "coord", "loopPattern", "pattern" };
+    const char* identifiers[] = { "sprite", "coord", "loopPattern", "pattern", "HP"};
     constexpr int identifiersLength = sizeof(identifiers) / sizeof(char*);
 
     m_Current = texts.begin + 1;
@@ -257,6 +257,14 @@ bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyIn
             }
 
             out_pEnemyInfo->pPatternList = pPatternList;
+            break;
+
+        case 4:
+            if (!GetNumberLiteral(&out_pEnemyInfo->hp))
+            {
+                PrintError(L"HP의 값은 NumberLiteral이 와야됨.");
+                return false;
+            }
             break;
         
         default:

@@ -1,20 +1,20 @@
 2
 {
-	duration  : 		50
+	duration  : 		100
 	moveTo  :   (	1  , 0			)
 	moveInterval  : 		5
 
 	shotInfo:   "Resources/ShotInfo/default_enemy_shot.txt"
 	shotInterval:   	 50
-	shotChance   :100		
+	shotChance   :30		
 }
 {
-	duration: 50
+	duration: 100
 
 	moveTo: (-1, 0)
 	moveInterval: 5
 
 	shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
 	shotInterval: 50
-	shotChance: 100	
+	shotChance: 30
 }

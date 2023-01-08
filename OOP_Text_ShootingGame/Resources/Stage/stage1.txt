@@ -4,34 +4,135 @@ Player
 	coord: (40, 40)
 }
 
-Enemy 5
+Enemy 18
 {
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (5, 5)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (15, 5)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (25, 5)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (35, 5)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
 }
 {
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (45, 5)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (55, 5)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+
+
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (5, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (15, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (25, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (35, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (45, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (55, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+
+
+
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (5, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (15, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (25, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (35, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (45, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
+}
+{
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (55, 15)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage1_enemy.txt"
+	HP: 1
 }

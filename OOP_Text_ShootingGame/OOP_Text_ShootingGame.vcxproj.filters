@@ -95,6 +95,9 @@
     <ClCompile Include="source\Engine\ObjectManager.cpp">
       <Filter>1.Engine</Filter>
     </ClCompile>
+    <ClCompile Include="source\Game\GameInfo.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Engine\GameBase.h">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="source\Engine\ObjectManager.h">
       <Filter>1.Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\GameInfo.h">
+      <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

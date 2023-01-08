@@ -39,7 +39,10 @@ void ObjectManager::Update(DWORD framesCount)
 	for (iter1 = m_ObjectList.begin(); iter1 != m_ObjectList.end(); )
 	{
 		if (iter1->IsRelease())
-			iter1 = m_ObjectList.erase(iter1);
+		{
+			delete (*iter1);
+ 			iter1 = m_ObjectList.erase(iter1);
+		}
 		else
 			++iter1;
 	}

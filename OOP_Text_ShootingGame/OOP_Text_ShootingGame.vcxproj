@@ -156,6 +156,7 @@
     <ClCompile Include="source\Engine\ObjectManager.cpp" />
     <ClCompile Include="source\Game\Bullet.cpp" />
     <ClCompile Include="source\Game\Enemy.cpp" />
+    <ClCompile Include="source\Game\GameInfo.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Parser.cpp" />
     <ClCompile Include="source\Stage.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="source\Engine\ObjectManager.h" />
     <ClInclude Include="source\Game\Bullet.h" />
     <ClInclude Include="source\Game\Enemy.h" />
+    <ClInclude Include="source\Game\GameInfo.h" />
     <ClInclude Include="source\PatternList.h" />
     <ClInclude Include="source\Stage.h" />
     <ClInclude Include="source\Engine\GameBase.h" />
