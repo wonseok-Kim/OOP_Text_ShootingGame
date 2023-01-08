@@ -12,11 +12,11 @@ SceneGame::SceneGame(int curStage)
 	m_CurrentStageInfo = ResourceManager::Instance()->GetStage(curStage);
 	
 	m_Player = new Player(this, &m_CurrentStageInfo->player);
-	m_ObjectList.push_back(m_Player);
+	m_ObjectManager.AddObject(m_Player);
 
 	for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
 	{
-		m_ObjectList.push_back(new Enemy(this, &m_CurrentStageInfo->enemies[i]));
+		m_ObjectManager.AddObject(new Enemy(this, &m_CurrentStageInfo->enemies[i]));
 	}
 }
 
@@ -49,27 +49,12 @@ void SceneGame::Update()
 		m_Player->SetState(PlayerState::ATTACK);
 	}
 
-	for (ObjectBase* obj : m_ObjectList)
-	{
-		obj->Update(m_FramesCount);
-	}
-
-	ObjectList::iterator iter;
-	for (iter = m_ObjectList.begin(); iter != m_ObjectList.end(); )
-	{
-		if (iter->IsRelease())
-			iter = m_ObjectList.erase(iter);
-		else
-			++iter;
-	}
+	m_ObjectManager.Update(m_FramesCount);
 
 	m_FramesCount++;
 }
 
 void SceneGame::Render(Renderer * renderer)
 {
-	for (ObjectBase* obj : m_ObjectList)
-	{
-		obj->Render(renderer);
-	}
+	m_ObjectManager.Render(renderer);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ObjectList.h"
+#include "ObjectManager.h"
 
 class Renderer;
 
@@ -8,18 +8,15 @@ class SceneBase
 {
 public:
 	SceneBase() = default;
-	virtual ~SceneBase();
+	virtual ~SceneBase() = default;
 
 	virtual void Update() = 0;
 	virtual void Render(Renderer* renderer) = 0;
 
-	void AddObject(ObjectBase* obj)
-	{
-		m_ObjectList.push_back(obj);
-	}
+	void AddObject(ObjectBase* obj) { m_ObjectManager.AddObject(obj); }
 
 protected:
-	ObjectList m_ObjectList;
+	ObjectManager m_ObjectManager;
 	DWORD m_FramesCount = 0;
 };
 

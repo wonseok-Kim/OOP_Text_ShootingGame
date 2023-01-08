@@ -24,19 +24,19 @@ protected:
         char* begin;
         char* end;  // 포함 안함.
 
-        bool empty() { return begin == end; }
+        bool empty() const { return begin == end; }
 
-        bool equal(const char* str)
+        bool equal(const char* str) const
         {
-            size_t len = end - begin;
+            size_t len = strlen(str);
             return strncmp(begin, str, len) == 0;
         }
     };
 
 public:
-    ~Parser() { delete m_Texts; }
+    ~Parser() { delete[] m_Texts; }
 
-    bool InitByFilename(const WCHAR* filename);
+    bool Init(const WCHAR* filename);
 
 protected:
     Parser() = default;
@@ -47,11 +47,11 @@ protected:
     void SkipWhiteSpace();
 
     bool GetBlock(SubString* out_Block);
-    void GetIdentifier(SubString* sub);
+    bool GetIdentifier(SubString* sub);
     bool GetStringLiteral(WCHAR* wcs, int cchwcs);
     bool GetCoord(COORD* coord);
     bool GetNumberLiteral(int* out_int);
-    bool GetLine(const char* current, int* out_Line);
+    //bool GetLine(const char* current, int* out_Line);
 
 protected:
     WCHAR m_Filename[MAX_PATH];

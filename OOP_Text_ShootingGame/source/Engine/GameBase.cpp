@@ -44,23 +44,24 @@ void GameBase::Run()
 
         if (elapsedTick >= incrementsOf1000ms)
         {
-            wchar_t s[50];
-            swprintf_s(s, 50, L"FPS: %3.2f, frameCount: %u\n", frameCount / (elapsedTick / 1000.f), frameCount);
-            //OutputDebugStringW(s);
-             SetConsoleTitleW(s);
+            wchar_t s[100];
+            swprintf_s(s, 100, L"FPS: %3.2f, frameCount: %u errorTick: %u nowTick: %u\n",
+                frameCount / (elapsedTick / 1000.f), frameCount, errorTick, elapsedTick);
+            OutputDebugStringW(s);
+            // SetConsoleTitleW(s);
 
             incrementsOf1000ms += 1000;
         }
 
         if (errorTick >= ticksPerFrame)
         {
-            sceneManager->Run(nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
+            sceneManager->Run(frameCount, nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
 
             errorTick -= ticksPerFrame;
         }
         else
         {
-            sceneManager->Run(m_Renderer);
+            sceneManager->Run(frameCount, m_Renderer);
 
             // Sleep(rand() % 50); // ·º À¯¹ß
         }

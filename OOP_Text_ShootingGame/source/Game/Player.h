@@ -21,8 +21,7 @@ class Player : public ObjectBase
 {
 public:
     Player(SceneBase* scene, PlayerInfo* pInfo)
-        :ObjectBase(scene, ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
-        , m_Sprite{ pInfo->sprite }
+        :ObjectBase(scene, pInfo->sprite,  ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
     {
     }
 
@@ -31,10 +30,11 @@ public:
     virtual void Update(DWORD framesCount) override;
     virtual void Render(Renderer* renderer) override;
 
+    virtual void OnCollision(ObjectBase* other) override;
+
     void SetState(PlayerState state) { m_State |= state; }
 
 private:
-    Sprite* m_Sprite;
     UINT m_State = 0;
 };
 

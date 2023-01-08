@@ -12,12 +12,7 @@ public:
     StageParser() = default;
     ~StageParser() = default;
 
-    bool Init(const WCHAR* filename)
-    {
-        return Parser::InitByFilename(filename);
-    }
-
-    bool Run(Stage* out_Stage);
+    bool ParseStage(Stage* out_Stage);
 
 private:
     bool ParsePlayerInfo(const SubString& texts, PlayerInfo* out_pPlayerInfo);

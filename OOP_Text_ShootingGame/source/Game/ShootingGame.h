@@ -11,7 +11,11 @@ public:
 	ShootingGame(SceneBase* firstScene)
 		: GameBase(firstScene, GAME_WIDTH, GAME_HEIGHT)
 	{
-		ResourceLoader::Load();
+	}
+
+	bool Init()
+	{
+		return ResourceLoader::Load();
 	}
 
 	virtual ~ShootingGame() override

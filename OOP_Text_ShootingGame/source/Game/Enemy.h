@@ -13,9 +13,8 @@ class Enemy : public ObjectBase
 {
 public:
     Enemy(SceneBase* scene, EnemyInfo* pInfo)
-        : ObjectBase(scene, ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
+        : ObjectBase(scene, pInfo->sprite,  ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
     {
-        m_Sprite = pInfo->sprite;        
         m_bLoopPatern = pInfo->bLoopPatterns;
         m_PatternList = pInfo->pPatternList;
         m_CurPatternIter = m_PatternList->begin();
@@ -58,8 +57,12 @@ public:
         renderer->DrawSprite(m_X, m_Y, m_Sprite);
     }
 
+    virtual void OnCollision(ObjectBase* other) override
+    {
+
+    }
+
 private:
-    Sprite* m_Sprite;
     PatternList::iterator m_CurPatternIter;
     Pattern* m_CurPattern;
     PatternList* m_PatternList;

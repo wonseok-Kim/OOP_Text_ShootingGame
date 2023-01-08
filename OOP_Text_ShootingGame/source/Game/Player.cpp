@@ -38,3 +38,14 @@ void Player::Render(Renderer* renderer)
 {
     renderer->DrawSprite(m_X, m_Y, m_Sprite);
 }
+
+void Player::OnCollision(ObjectBase* other)
+{
+    if (other->GetObjectType() == ObjectType_Bullet)
+    {
+        Bullet* b = (Bullet*)other;
+        if (b->GetWhoShot() != ObjectType_Enemy)
+            return;
+    }
+
+}

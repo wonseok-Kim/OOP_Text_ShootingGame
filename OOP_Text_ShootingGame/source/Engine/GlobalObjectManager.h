@@ -1,27 +1,39 @@
 #pragma once
 
-#include "ObjectList.h"
+//class GlobalObjectManager
+//{
+//public:
+//	static GlobalObjectManager* Instance()
+//	{
+//		static GlobalObjectManager inst;
+//		return &inst;
+//	}
+//
+//	~GlobalObjectManager();
+//
+//	void Update();
+//	void Render(Renderer* renderer);
+//
+//private:
+//	GlobalObjectManager() = default;
+//
+//private:
+//	ObjectList m_ObjectList;
+//};
 
-class Renderer;
+#include "ObjectManager.h"
 
-class GlobalObjectManager
+class GlobalObjectManager : public ObjectManager
 {
 public:
-	static GlobalObjectManager* Instance()
-	{
-		static GlobalObjectManager inst;
-		return &inst;
-	}
+    static GlobalObjectManager* Instance()
+    {
+        static GlobalObjectManager inst;
+        return &inst;
+    }
 
-	~GlobalObjectManager();
-
-	void Update();
-	void Render(Renderer* renderer);
+    ~GlobalObjectManager() = default;
 
 private:
-	GlobalObjectManager() = default;
-
-private:
-	ObjectList m_ObjectList;
+    GlobalObjectManager() = default;
 };
-

@@ -4,7 +4,7 @@
 #include "ResourceManager.h"
 #include "Stage.h"
 
-bool StageParser::Run(Stage* out_Stage)
+bool StageParser::ParseStage(Stage* out_Stage)
 {
     Assert(out_Stage, L"out parameter must not be null");
 
@@ -20,31 +20,42 @@ bool StageParser::Run(Stage* out_Stage)
             if (strncmp(m_Current, "Player", 6) == 0)
             {
                 m_Current += 6;
-                SkipWhiteSpace();
 
+                SkipWhiteSpace();
                 SubString block;
                 if (!GetBlock(&block))
                     return false;
 
-                ParsePlayerInfo(block, &out_Stage->player);
+                if (!ParsePlayerInfo(block, &out_Stage->player))
+                {
+                    return false;
+                }
             }
             else if (strncmp(m_Current, "Enemy", 5) == 0)
             {
                 m_Current += 5;
-                SkipWhiteSpace();
 
+                SkipWhiteSpace();
                 GetNumberLiteral(&out_Stage->enemiesCount);
-                SkipWhiteSpace();
-
+                
+                // delete[] in ResourceManager::~ResourceManager().
                 out_Stage->enemies = new EnemyInfo[out_Stage->enemiesCount];
 
                 for (int i = 0; i < out_Stage->enemiesCount; ++i)
                 {
+                    SkipWhiteSpace();
                     SubString block;
                     if (!GetBlock(&block))
+                    {
+                        delete[] out_Stage->enemies;
                         return false;
+                    }
 
-                    ParseEnemyInfo(block, &out_Stage->enemies[i]);
+                    if (!ParseEnemyInfo(block, &out_Stage->enemies[i]))
+                    {
+                        delete[] out_Stage->enemies;
+                        return false;
+                    }
                 }
             }
             else
@@ -65,63 +76,81 @@ bool StageParser::Run(Stage* out_Stage)
 
 bool StageParser::ParsePlayerInfo(const SubString& texts, PlayerInfo* out_pPlayerInfo)
 {
-    const char* keys[] = { "sprite", "coord" };
-    const CharType types[] = { CharType::StringLiteral, CharType::OpenParenthesis };
+    Assert(out_pPlayerInfo, L"out parameter must not be null");
 
-    m_Current = texts.begin;
+    const char* identifiers[] = { "sprite", "coord" };
+    constexpr int identifiersLength = sizeof(identifiers) / sizeof(char*);
+
+    m_Current = texts.begin + 1;
     while (true)
     {
-        SubString key;
         SkipWhiteSpace();
-
         if (GetCharType(*m_Current) == CharType::CloseBrace)
             break;
 
         if (GetCharType(*m_Current) != CharType::Identifier)
             return false;
 
-        GetIdentifier(&key);
         SkipWhiteSpace();
+        SubString identifier;
+        if (!GetIdentifier(&identifier))
+        {
+            PrintError(L"식별자 : 값 이런 형식으로 적으세요.");
+            return false;
+        }
 
         int i;
         for (i = 0; i < 2; ++i)
         {
-            if (key.equal(keys[i]))
+            if (identifier.equal(identifiers[i]))
                 break;
         }
 
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::Colon)
+        {
+            *identifier.end = '\0';
+            PrintError(L"'%hs'에 콜론 빼먹음", identifier.begin);
             return false;
+        }
 
         m_Current++;
         SkipWhiteSpace();
 
+        WCHAR path[MAX_PATH];
+        Sprite* sprite;
+        COORD coord;
         switch (i)
         {
         case 0:
-        {
-            if (GetCharType(*m_Current) != types[0])
+            if (!GetStringLiteral(path, MAX_PATH))
+            {
+                PrintError(L"sprite: \"<파일 경로 명>\" 이렇게 들어가야됨. ");
                 return false;
+            }
 
-            WCHAR path[MAX_PATH];
-            GetStringLiteral(path, MAX_PATH);
-
-            Sprite* sprite = ResourceManager::Instance()->GetSprite(path);
+            sprite = ResourceManager::Instance()->GetSprite(path);
             if (!sprite)
+            {
+                PrintError(L"'%s' sprite file 명이 ResourceManager에 등록되어 있지 않습니다.", path);
                 return false;
+            }
+
             out_pPlayerInfo->sprite = sprite;
             break;
-        }
+
         case 1:
-        {
-            COORD coord;
-            GetCoord(&coord);
+            if (!GetCoord(&coord))
+            {
+                PrintError(L"coord: (x, y) 이런 식으로 좌표가 들어가야 됨");
+                return false;
+            }
             out_pPlayerInfo->startCoord = coord;
             break;
-        }
+
         default:
-            PrintError(L"잘못된 문법");
+            *identifier.end = '\0';
+            PrintError(L"'%hs' 라는 식별자는 존재하지 않습니다.", identifier.begin);
             return false;
         }
     }
@@ -132,15 +161,15 @@ bool StageParser::ParsePlayerInfo(const SubString& texts, PlayerInfo* out_pPlaye
 
 bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyInfo)
 {
-    const char* identifiers[] = { "sprite", "coord", "loopPattern", "patterns" };
+    Assert(out_pEnemyInfo, L"out parameter must not be null");
+
+    const char* identifiers[] = { "sprite", "coord", "loopPattern", "pattern" };
     constexpr int identifiersLength = sizeof(identifiers) / sizeof(char*);
 
-    m_Current = texts.begin;
+    m_Current = texts.begin + 1;
 
     while (true)
     {
-        SubString key;
-
         SkipWhiteSpace();
         if (GetCharType(*m_Current) == CharType::CloseBrace)
             break;
@@ -148,70 +177,91 @@ bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyIn
         if (GetCharType(*m_Current) != CharType::Identifier)
             return false;
 
-        GetIdentifier(&key);
         SkipWhiteSpace();
+        SubString identifier;
+        if (!GetIdentifier(&identifier))
+        {
+            PrintError(L"식별자 : 값 이런 형식으로 적으세요.");
+            return false;
+        }
 
         int i;
         for (i = 0; i < identifiersLength; ++i)
         {
-            if (key.equal(identifiers[i]))
+            if (identifier.equal(identifiers[i]))
                 break;
         }
 
+        SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::Colon)
+        {
+            *identifier.end = '\0';
+            PrintError(L"'%hs'에 콜론 빼먹음", identifier.begin);
             return false;
-
+        }
         m_Current++;
+
         SkipWhiteSpace();
 
         WCHAR path[MAX_PATH];
+        Sprite* sprite;
+        int temp;
+        PatternList* pPatternList;
         switch (i)
         {
         case 0:
-        {
-            if (GetCharType(*m_Current) != CharType::StringLiteral)
+            if (!GetStringLiteral(path, MAX_PATH))
+            {
+                PrintError(L"sprite: \"<파일 경로 명>\" 이렇게 들어가야됨. ");
                 return false;
+            }
 
-            GetStringLiteral(path, MAX_PATH);
-
-            Sprite* sprite = ResourceManager::Instance()->GetSprite(path);
+            sprite = ResourceManager::Instance()->GetSprite(path);
             if (!sprite)
+            {
+                PrintError(L"'%s' sprite file 명이 ResourceManager에 등록되어 있지 않습니다.", path);
                 return false;
+            }
             out_pEnemyInfo->sprite = sprite;
             break;
-        }
+
         case 1:
-        {
-            if (GetCharType(*m_Current) != CharType::OpenParenthesis)
+            if (!GetCoord(&out_pEnemyInfo->startCoord))
+            {
+                PrintError(L"coord의 값을 (x, y) 형식의 좌표여야 합니다.");
                 return false;
-
-            COORD coord{};
-            GetCoord(&coord);
-            out_pEnemyInfo->startCoord = coord;
+            }
             break;
-        }
+        
         case 2:
-        {
-            if (GetCharType(*m_Current) != CharType::NumberLiteral)
+            if (!GetNumberLiteral(&temp))
+            {
+                PrintError(L"bLoopPatterns의 값은 숫자여야 합니다.");
                 return false;
-
-            int temp;
-            GetNumberLiteral(&temp);
-            out_pEnemyInfo->bLoopPatterns = temp;
+            }
+            out_pEnemyInfo->bLoopPatterns = (BOOL)temp;
             break;
-        }
+        
         case 3:
-        {
-            if (GetCharType(*m_Current) != CharType::StringLiteral)
+            if (!GetStringLiteral(path, MAX_PATH))
+            {
+                PrintError(L"patterns의 값은 \"<pattern 파일 경로>\"로 입력해야 됨.");
                 return false;
+            }
 
-            GetStringLiteral(path, MAX_PATH);
-            PatternList* pPatternList = ResourceManager::Instance()->GetPatternList(path);
+            pPatternList = ResourceManager::Instance()->GetPatternList(path);
+            if (!pPatternList)
+            {
+                PrintError(L"'%s'다음과 같은 파일은 ResourceManager에 등록 안됨", path);
+                return false;
+            }
+
             out_pEnemyInfo->pPatternList = pPatternList;
             break;
-        }
+        
         default:
-            PrintError(L"잘못된 문법");
+            *identifier.end = '\0';
+            PrintError(L"'%hs'라는 식별자는 없습니다.", identifier.begin);
             return false;
         }
     }

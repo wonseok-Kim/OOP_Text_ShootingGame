@@ -30,26 +30,26 @@ bool ShotInfo::Load(const WCHAR* filename)
         }
     }
 
-    char chfilename[MAX_PATH];
-    result = fscanf_s(file, "%s", chfilename, (unsigned)MAX_PATH);
+    char chSpriteFilename[MAX_PATH];
+    result = fscanf_s(file, "%s", chSpriteFilename, (unsigned)MAX_PATH);
     if (result != 1)
     {
         PrintError(L"'%s' file scan err", filename);
         return false;
     }
 
-    WCHAR wchfilename[MAX_PATH];
-    result = MultiByteToWideChar(CP_ACP, 0, chfilename, MAX_PATH, wchfilename, MAX_PATH);
+    WCHAR wchSpriteFilename[MAX_PATH];
+    result = MultiByteToWideChar(CP_ACP, 0, chSpriteFilename, -1, wchSpriteFilename, MAX_PATH);
     if (result == 0)
     {
         PrintError(L"MultiByteToWideChar err : %d", GetLastError());
         return false;
     }
 
-    sprite = ResourceManager::Instance()->GetSprite(wchfilename);
+    sprite = ResourceManager::Instance()->GetSprite(wchSpriteFilename);
     if (sprite == nullptr)
     {
-        PrintError(L"sprite init err in ShotInfo ");
+        PrintError(L"failed to file sprite '%s' filename in resourceManager", wchSpriteFilename);
         return false;
     }
 

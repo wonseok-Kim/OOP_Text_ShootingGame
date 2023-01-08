@@ -32,7 +32,7 @@ public:
 
         for (int i = 0; i < m_BulletInfosCount; ++i)
         {
-            delete m_ShotInfoFilenames[i];
+            delete[] m_ShotInfoFilenames[i];
         }
 
         for (int i = 0; i < m_PatternListsCount; ++i)
@@ -47,6 +47,7 @@ public:
 
         for (int i = 0; i < m_StagesCount; ++i)
         {
+            delete[] m_Stages[i]->enemies;
             delete m_Stages[i];
         }
     }
@@ -149,6 +150,7 @@ public:
     {
         if (m_StagesCount >= MAX_STAGES)
         {
+            PrintError(L"Stage 최대 저장 개수를 넘어갔다.");
             return false;
         }
 
@@ -170,19 +172,19 @@ private:
     static constexpr int MAX_PATTERN_LISTS = 10;
     static constexpr int MAX_STAGES = 10;
 
-    Sprite* m_Sprites[MAX_SPRITES];
-    WCHAR* m_SpriteFilenames[MAX_SPRITES];
+    Sprite* m_Sprites[MAX_SPRITES]{};
+    WCHAR* m_SpriteFilenames[MAX_SPRITES]{};
     int m_SpritesCount = 0;
 
     ShotInfo m_ShotInfos[MAX_BULLETS];
-    WCHAR* m_ShotInfoFilenames[MAX_BULLETS];
+    WCHAR* m_ShotInfoFilenames[MAX_BULLETS]{};
     int m_BulletInfosCount = 0;
 
     PatternList m_PatternLists[MAX_PATTERN_LISTS];
-    WCHAR* m_PatternFilenames[MAX_PATTERN_LISTS];
+    WCHAR* m_PatternFilenames[MAX_PATTERN_LISTS]{};
     int m_PatternListsCount = 0;
 
-    Stage* m_Stages[MAX_STAGES];
+    Stage* m_Stages[MAX_STAGES]{};
     int m_StagesCount = 0;
 };
 

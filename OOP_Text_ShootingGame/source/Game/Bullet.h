@@ -12,9 +12,8 @@ class Bullet : public ObjectBase
 {
 public:
     Bullet(SceneBase* scene, int x, int y, Sprite* sprite, COORD dir)
-        : ObjectBase(scene, ObjectType_Bullet, x, y)
+        : ObjectBase(scene, sprite, ObjectType_Bullet, x, y)
     {
-        m_Sprite = sprite;
         m_Dir = dir;
     }
 
@@ -34,8 +33,12 @@ public:
         renderer->DrawSprite(m_X, m_Y, m_Sprite);
     }
 
-private:
-    Sprite* m_Sprite;
+    virtual void OnCollision(ObjectBase* other) override;
+
+    int GetWhoShot() { return m_WhoShot; }
+
+private:    
     COORD m_Dir;
+    int m_WhoShot;
 };
 

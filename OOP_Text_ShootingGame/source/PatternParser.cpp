@@ -13,16 +13,25 @@ bool PatternParser::ParsePatternsAndAddPatternsToResMgr()
     WCHAR*& filename = resMgr->m_PatternFilenames[listsCount];
     listsCount++;
 
+    SkipWhiteSpace();
     int patternsCount;
-    GetNumberLiteral(&patternsCount);
+    if (!GetNumberLiteral(&patternsCount))
+    {
+        PrintError(L"Pattern 파일의 제일 첫번째는 패턴의 개수가 들어가야됩니다.");
+        return false;
+    }
 
     for (int i = 0; i < patternsCount; ++i)
     {
+        SkipWhiteSpace();
         SubString block;
         if (!GetBlock(&block))
+        {
+            PrintError(L"Pattern을 {}로 감싸야합니다.");
             return false;
+        }
 
-        Pattern* p = new Pattern;
+        Pattern* p = new Pattern; // delete in ReousrceManager::~ResourceManager()
         if (!ParsePattern(block, p))
         {
             delete p;
@@ -38,12 +47,12 @@ bool PatternParser::ParsePatternsAndAddPatternsToResMgr()
     return true;
 }
 
-bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
+bool PatternParser::ParsePattern(const SubString& block, Pattern* out_Pattern)
 {
     const char* identifiers[6] = { "duration", "moveTo", "moveInterval", "shotInfo", "shotInterval", "shotChance" };
-    size_t identifiersLength = sizeof(identifiers) / sizeof(char*);
+    int identifiersLength = sizeof(identifiers) / sizeof(char*);
 
-    m_Current = texts.begin;
+    m_Current = block.begin + 1;
 
     while (true)
     {
@@ -51,12 +60,21 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
         if (GetCharType(*m_Current) == CharType::CloseBrace)
             break;
 
+        SkipWhiteSpace();
         SubString Identifier;
-        GetIdentifier(&Identifier);
+        if (!GetIdentifier(&Identifier))
+        {
+            PrintError(L"식별자 : 값 이런 형식으로 적으세요.");
+            return false;
+        }
 
         SkipWhiteSpace();
         if (GetCharType(*m_Current) != CharType::Colon)
+        {
+            *Identifier.end = '\0';
+            PrintError(L"'%hs'여기에 콜론 빼먹음.", Identifier.begin);
             return false;
+        }
         ++m_Current;
 
         int i;
@@ -70,43 +88,70 @@ bool PatternParser::ParsePattern(SubString texts, Pattern* out_Pattern)
         switch (i)
         {
         case 0:
+            SkipWhiteSpace();
             if (!GetNumberLiteral(&out_Pattern->duration))
+            {
+                PrintError(L"duration의 값을 숫자여야 합니다.");
                 return false;
+            }
             break;
 
         case 1:
+            SkipWhiteSpace();
             if (!GetCoord(&out_Pattern->moveTo))
+            {
+                PrintError(L"MoveTo의 값을 (x, y) 형식의 좌표여야 합니다.");
                 return false;
+            }
             break;
 
         case 2:
+            SkipWhiteSpace();
             if (!GetNumberLiteral(&temp))
+            {
+                PrintError(L"moveInterval의 값은 숫자여야 합니다.");
                 return false;
+            }
 
             out_Pattern->moveInterval = (DWORD)temp;
             break;
 
         case 3:
+            SkipWhiteSpace();
             if (!GetStringLiteral(path, MAX_PATH))
+            {
+                PrintError(L"shotInfo의 값은 \"ShotInfo의 파일 경로\"로 입력해야 됨.");
                 return false;
+            }
 
             pShotInfo = ResourceManager::Instance()->GetShotInfo(path);
             if (!pShotInfo)
+            {
+                PrintError(L"'%s'다음과 같은 파일은 ResourceManager에 등록 안됨", path);
                 return false;
+            }
 
             out_Pattern->shotInfo = pShotInfo;
             break;
 
         case 4:
+            SkipWhiteSpace();
             if (!GetNumberLiteral(&temp))
+            {
+                PrintError(L"shotInterval의 값을 숫자여야 합니다.");
                 return false;
+            }
 
             out_Pattern->shotInterval = (DWORD)temp;
             break;
 
         case 5:
+            SkipWhiteSpace();
             if (!GetNumberLiteral(&out_Pattern->shotChance))
+            {
+                PrintError(L"shotChance의 값을 숫자여야 합니다.");
                 return false;
+            }
             break;
 
         default:

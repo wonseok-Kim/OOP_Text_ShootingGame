@@ -15,16 +15,33 @@ public:
 
         m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
+        BOOL bResult;
+
         // 콘솔 화면 크기를 m_Width * m_Height로 딱 맞추기
         {
             SMALL_RECT rectWindow = { 0, 0, 1, 1 };
-            SetConsoleWindowInfo(m_hConsole, TRUE, &rectWindow);
+            bResult = SetConsoleWindowInfo(m_hConsole, TRUE, &rectWindow);
+            if (!bResult)
+            {
+                PrintError(L"init failed");
+                abort();
+            }
 
             COORD coord = { (short)width, (short)height };
-            SetConsoleScreenBufferSize(m_hConsole, coord);
+            bResult = SetConsoleScreenBufferSize(m_hConsole, coord);
+            if (!bResult)
+            {
+                PrintError(L"init failed");
+                abort();
+            }
 
             m_RectWindow = { 0, 0, (short)(width - 1), (short)(height - 1) };
-            SetConsoleWindowInfo(m_hConsole, TRUE, &m_RectWindow);
+            bResult = SetConsoleWindowInfo(m_hConsole, TRUE, &m_RectWindow);
+            if (!bResult)
+            {
+                PrintError(L"init failed");
+                abort();
+            }
         }
 
         // 폰트 크기 조정하기
@@ -38,7 +55,12 @@ public:
             cfi.FontWeight = FW_NORMAL;
 
             wcscpy_s(cfi.FaceName, L"Consolas");
-            SetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+            bResult = SetCurrentConsoleFontEx(m_hConsole, false, &cfi);
+            if (!bResult)
+            {
+                PrintError(L"init failed");
+                abort();
+            }
         }
 
         // 커서 숨기기
@@ -47,7 +69,12 @@ public:
             stConsoleCursor.bVisible = FALSE;
             stConsoleCursor.dwSize = 1;
 
-            SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stConsoleCursor);
+            bResult = SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &stConsoleCursor);
+            if (!bResult)
+            {
+                PrintError(L"init failed");
+                abort();
+            }
         }
     }
 

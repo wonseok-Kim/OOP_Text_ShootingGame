@@ -56,10 +56,12 @@ bool ResourceLoader::LoadSprite()
         if (!ResourceManager::Instance()->AddSprite(filename))
         {
             PrintError(L"sprite load err");
+            fclose(file);
             return false;
         }
     }
 
+    fclose(file);
     return true;
 }
 
@@ -96,10 +98,12 @@ bool ResourceLoader::LoadShotInfo()
         if (!ResourceManager::Instance()->AddShotInfo(filename))
         {
             PrintError(L"shotInfo load err");
+            fclose(file);
             return false;
         }
     }
 
+    fclose(file);
     return true;
 }
 
@@ -118,8 +122,7 @@ bool ResourceLoader::LoadPattern()
     if (result != 1)
     {
         PrintError(L"fscanf err");
-        fclose(file);
-        return false;
+        goto close_file_and_out_LoadPattern;
     }
 
     WCHAR filename[MAX_PATH];
@@ -128,17 +131,28 @@ bool ResourceLoader::LoadPattern()
         result = fwscanf_s(file, L"%s", filename, (unsigned)_countof(filename));
         if (result != 1)
         {
-            PrintError(L"fscanf err");
-            fclose(file);
-            return false;
+            PrintError(L"fscanf err"); 
+            goto close_file_and_out_LoadPattern;
         }
 
         PatternParser parser;
-        parser.InitByFilename(filename);
-        parser.ParsePatternsAndAddPatternsToResMgr();
+
+        if (!parser.Init(filename))
+            goto close_file_and_out_LoadPattern;
+
+        if (!parser.ParsePatternsAndAddPatternsToResMgr())
+        {
+            PrintError(L"'%s' 파싱하다 오류", filename);
+            goto close_file_and_out_LoadPattern;
+        }
     }
 
+    fclose(file);
     return true;
+
+close_file_and_out_LoadPattern:
+    fclose(file);
+    return false;
 }
 
 bool ResourceLoader::LoadStage()
@@ -156,8 +170,7 @@ bool ResourceLoader::LoadStage()
     if (result != 1)
     {
         PrintError(L"fscanf err");
-        fclose(file);
-        return false;
+        goto close_file_and_out_LoadStage;
     }
 
     WCHAR filename[MAX_PATH];
@@ -167,18 +180,34 @@ bool ResourceLoader::LoadStage()
         if (result != 1)
         {
             PrintError(L"fscanf err");
-            fclose(file);
-            return false;
+            goto close_file_and_out_LoadStage;
         }
 
         StageParser parser;
-        parser.Init(filename);
+        
+        if (!parser.Init(filename))
+            goto close_file_and_out_LoadStage;
 
-        Stage* newStage = new Stage; // ResourceManager가 해제
-        parser.Run(newStage);
+        Stage* newStage = new Stage; // delete in ResourceManager::~ResourceManager()
+        if (!parser.ParseStage(newStage))
+        {
+            delete newStage;
+            PrintError(L"'%s' 파싱하다 오류", filename);
+            goto close_file_and_out_LoadStage;
+        }
 
-        ResourceManager::Instance()->AddStage(newStage);
+        if (!ResourceManager::Instance()->AddStage(newStage))
+        {
+            delete newStage;
+            PrintError(L"'%s' 파싱하다 오류", filename);
+            goto close_file_and_out_LoadStage;
+        }
     }
 
+    fclose(file);
     return true;
+
+close_file_and_out_LoadStage:
+    fclose(file);
+    return false;
 }

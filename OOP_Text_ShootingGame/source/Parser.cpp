@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Parser.h"
 
-bool Parser::InitByFilename(const WCHAR* filename)
+bool Parser::Init(const WCHAR* filename)
 {
     FILE* file = nullptr;
     _wfopen_s(&file, filename, L"r");
@@ -25,8 +25,8 @@ bool Parser::InitByFilename(const WCHAR* filename)
 
     wcscpy_s(m_Filename, MAX_PATH, filename);
 
-    Assert(result < size, L"버퍼 오버런 컴파일러 경고 막기용");
-    m_Texts[result] = '\0';
+    if (result < size) // Buffer Overrun warning 막기용
+        m_Texts[result] = '\0';
     m_Current = m_Texts;
     return true;
 }
@@ -41,38 +41,28 @@ void Parser::SkipWhiteSpace()
 
 bool Parser::GetBlock(SubString* out_Block)
 {
-    SkipWhiteSpace();
     if (GetCharType(*m_Current) != CharType::OpenBrace)
     {
         PrintError(L"Block의 시작점 아님");
         return false;
     }
 
-    int braceCount = 0;
-    out_Block->begin = ++m_Current;
+    out_Block->begin = m_Current++;
     while (true)
     {
         if (*m_Current == '\0')
             goto out_and_print_err;
 
         if (GetCharType(*m_Current) == CharType::OpenBrace)
-            braceCount++;
+            goto out_and_print_err;
 
         if (GetCharType(*m_Current) == CharType::CloseBrace)
-        {
-            if (braceCount == 0)
-                break;
-            else if (braceCount > 0)
-                braceCount--;
-            else
-                goto out_and_print_err;
-        }
+            break;
 
         ++m_Current;
     }
     out_Block->end = ++m_Current;
 
-    m_Current = out_Block->begin;
     return true;
 
 out_and_print_err:
@@ -93,9 +83,11 @@ long Parser::GetFileSize(FILE* file)
     return size;
 }
 
-void Parser::GetIdentifier(SubString* sub)
+bool Parser::GetIdentifier(SubString* sub)
 {
-    SkipWhiteSpace();
+    if (GetCharType(*m_Current) != CharType::Identifier)
+        return false;
+
     sub->begin = m_Current;
 
     while (GetCharType(*m_Current) == CharType::Identifier)
@@ -106,14 +98,9 @@ void Parser::GetIdentifier(SubString* sub)
 
 bool Parser::GetStringLiteral(WCHAR* wcs, int cchwcs)
 {
-    SkipWhiteSpace();
     if (GetCharType(*m_Current) != CharType::StringLiteral)
-    {
-        int temp;
-        GetLine(m_Current, &temp);
-        PrintError(L"%d in file '%s'\n 이 부분에 \"String Literal\"이 와야된다.", temp, m_Filename);
         return false;
-    }
+
     char* begin = ++m_Current;
 
     while (GetCharType(*m_Current) != CharType::StringLiteral)
@@ -146,12 +133,11 @@ bool Parser::GetCoord(COORD* coord)
     SkipWhiteSpace();
     if (GetCharType(*m_Current) != CharType::OpenParenthesis)
     {
-        GetLine(m_Current, &temp);
-        PrintError(L"%d line in '%s' file\n 이 부분에 (이 빠졌습니다.", temp, m_Filename);
         return false;
     }
     m_Current++;
 
+    SkipWhiteSpace();
     if (!GetNumberLiteral(&temp))
         return false;
     coord->X = (short)temp;
@@ -159,12 +145,11 @@ bool Parser::GetCoord(COORD* coord)
     SkipWhiteSpace();
     if (GetCharType(*m_Current) != CharType::Comma)
     {
-        GetLine(m_Current, &temp);
-        PrintError(L"%d line in '%s' file\n 이 부분에 :이 빠졌습니다.", temp, m_Filename);
         return false;
     }
     ++m_Current;
 
+    SkipWhiteSpace();
     if (!GetNumberLiteral(&temp))
         return false;
     coord->Y = (short)temp;
@@ -172,8 +157,6 @@ bool Parser::GetCoord(COORD* coord)
     SkipWhiteSpace();
     if (GetCharType(*m_Current) != CharType::CloseParenthesis)
     {
-        GetLine(m_Current, &temp);
-        PrintError(L"%d line in '%s' file\n 이 부분에 )이 빠졌습니다.", temp, m_Filename);
         return false;
     }
     ++m_Current;
@@ -182,7 +165,6 @@ bool Parser::GetCoord(COORD* coord)
 
 bool Parser::GetNumberLiteral(int* out_int)
 {
-    SkipWhiteSpace();
     bool bMinus = false;
     CharType type = GetCharType(*m_Current);
 
@@ -194,10 +176,7 @@ bool Parser::GetNumberLiteral(int* out_int)
 
     if (GetCharType(*m_Current) != CharType::NumberLiteral)
     {
-        int errorLine;
-        GetLine(m_Current, &errorLine);
-        PrintError(L"%d line in '%s' file\n 이 부분의 숫자를 파싱하다 오류났습니다.", errorLine, m_Filename);
-
+        PrintError(L"숫자를 파싱하다 오류났습니다.");
         return false;
     }
 
@@ -254,19 +233,22 @@ Parser::CharType Parser::GetCharType(char ch)
     return CharType::Error;
 }
 
-inline bool Parser::GetLine(const char* current, int* out_Line)
-{
-    const char* search = m_Texts;
-    int line = 1;
-
-    while (*search != L'\0')
-    {
-        if (*search == '\n')
-            line++;
-
-        search++;
-    }
-    *out_Line = line;
-
-    return true;
-}
+//inline bool Parser::GetLine(const char* current, int* out_Line)
+//{
+//    const char* search = m_Texts;
+//    int line = 1;
+//
+//    while (*search != L'\0')
+//    {
+//        if (search == current)
+//            break;
+//
+//        if (*search == '\n')
+//            line++;
+//
+//        search++;
+//    }
+//    *out_Line = line;
+//
+//    return true;
+//}

@@ -234,6 +234,17 @@ namespace wtl
 			return m_Node != other.m_Node;
 		}
 
+		/*iterator operator+(int val) const
+		{
+			iterator iter = this;
+			for (int i = 0; i < val; ++i)
+			{
+				++iter;
+				if (iter->m_Node->next == nullptr)
+					return iter;
+			}
+		}*/
+
 	private:
 		Node* m_Node;
 	};

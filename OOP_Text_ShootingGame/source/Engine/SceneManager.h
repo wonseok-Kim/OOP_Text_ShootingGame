@@ -20,7 +20,7 @@ public:
 		delete m_NextScene;
 	}
 
-	void Run(Renderer* rendererOrNull)
+	void Run(DWORD gameFrames, Renderer* rendererOrNull)
 	{
 		if (m_NextScene)
 		{
@@ -32,11 +32,11 @@ public:
 		Assert(m_CurrentScene, L"GameBase 생성자에서 시작 씬 받고 LoadScene()으로 넣어줌");
 
 		GlobalObjectManager* globalObjectManager = GlobalObjectManager::Instance();
-
+		
 		Input::Instance()->Handle();
 
 		m_CurrentScene->Update();
-		globalObjectManager->Update();
+		globalObjectManager->Update(gameFrames);
 
 		if (rendererOrNull)
 		{

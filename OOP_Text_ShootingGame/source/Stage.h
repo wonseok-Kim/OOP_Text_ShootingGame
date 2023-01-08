@@ -46,9 +46,4 @@ struct Stage
     PlayerInfo player;
     EnemyInfo* enemies;
     int enemiesCount;
-
-    ~Stage()
-    {
-        delete enemies;
-    }
 };

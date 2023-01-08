@@ -13,7 +13,7 @@
 
 #define PrintError(msg, ...) do \
 { \
-    fprintf(stderr, "\nFILE: %s\nFUNC: %s\nLINE: %d\nMSG: ", __FILE__, __FUNCTION__, __LINE__); \
+    fprintf(stderr, "\n\nFILE: %s\nFUNC: %s\nLINE: %d\nMSG: ", __FILE__, __FUNCTION__, __LINE__); \
     fwprintf(stderr, msg, __VA_ARGS__); \
 } while (false)
 
