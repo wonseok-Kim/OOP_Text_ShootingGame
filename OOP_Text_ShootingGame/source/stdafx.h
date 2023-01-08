@@ -2,6 +2,12 @@
 
 #pragma comment(lib, "Winmm.lib")
 
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#endif
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>

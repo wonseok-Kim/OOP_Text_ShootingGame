@@ -158,6 +158,10 @@ void SceneGame::Update()
     {
         m_Player->SetState(PlayerState::ATTACK);
     }
+    if (input->GetKey(VK_ESCAPE).pressed)
+    {
+        SceneManager::Instance()->SetExit();
+    }
 
     m_ObjectManager.Update(m_FramesCount);
 

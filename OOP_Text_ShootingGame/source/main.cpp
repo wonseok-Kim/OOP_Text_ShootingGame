@@ -17,6 +17,10 @@ static void MakeSprite();
 
 int wmain()
 {
+#ifdef _DEBUG
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
+
     MakeSprite();
 
     timeBeginPeriod(1);
@@ -35,6 +39,7 @@ int wmain()
     GlobalObjectManager::Instance()->~GlobalObjectManager();
     SceneManager::Instance()->~SceneManager();
     ResourceManager::Instance()->~ResourceManager();
+    _CrtDumpMemoryLeaks();
 #endif
 
     return 0;

@@ -97,6 +97,7 @@ bool Parser::GetIdentifier(SubString* sub)
         m_Current++;
 
     sub->end = m_Current;
+    return true;
 }
 
 bool Parser::GetStringLiteral(WCHAR* wcs, int cchwcs)
