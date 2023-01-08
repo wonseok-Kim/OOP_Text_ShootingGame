@@ -7,6 +7,12 @@
 #include "Game/ShootingGame.h"
 #include "Game/SceneTitle.h"
 
+#ifdef _DEBUG
+#include "Engine/GlobalObjectManager.h"
+#include "Engine/SceneManager.h"
+#include "ResourceManager.h"
+#endif
+
 static void MakeSprite();
 
 int wmain()
@@ -24,6 +30,13 @@ int wmain()
 
     delete game;
     timeEndPeriod(1);
+
+#ifdef _DEBUG
+    GlobalObjectManager::Instance()->~GlobalObjectManager();
+    SceneManager::Instance()->~SceneManager();
+    ResourceManager::Instance()->~ResourceManager();
+#endif
+
     return 0;
 }
 
