@@ -44,7 +44,7 @@ public:
             ShotInfo* shotInfo = m_CurPattern->shotInfo;
             for (int i = 0; i < shotInfo->shotCount; ++i)
             {
-                if (rand() % 101 > m_CurPattern->shotChance)
+                if (rand() % 101 < m_CurPattern->shotChance)
                 {
                     m_Scene->AddObject(new Bullet(m_Scene, m_X + shotInfo->startCoord[i].X, m_Y + shotInfo->startCoord[i].Y,
                         shotInfo->sprite, shotInfo->dir[i], ObjectType_Enemy));
