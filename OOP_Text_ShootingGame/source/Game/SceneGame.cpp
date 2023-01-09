@@ -12,20 +12,24 @@
 class PrintStageInfo : public ObjectBase
 {
 public:
-    PrintStageInfo(SceneGame* scene, int curStageIdx)
-        : ObjectBase(scene, nullptr, ObjectType_StageInfo, 4, GAME_HEIGHT / 2)
+    PrintStageInfo(int curStageIdx)
+        : ObjectBase(ObjectType_StageInfo)
     {
+        m_X = 4;
+        m_Y = GAME_HEIGHT / 2;
+
         m_Length = swprintf_s(m_szStageInfo, _countof(m_szStageInfo), m_Format, curStageIdx + 1);
     }
 
-    virtual void Update(DWORD framesCount) override
+    virtual void Update() override
     {        
+        DWORD framesCount = m_Scene->GetFrames();
+
         if (m_StartTick == 0)
         {
             m_StartTick = framesCount;
             return;
         }
-
 
         m_PrintIdx = (framesCount - m_StartTick) / 15;
         if (m_PrintIdx > m_Length)
@@ -60,9 +64,12 @@ private:
 class PrintStageClear : public ObjectBase
 {
 public: 
-    PrintStageClear(SceneGame* scene)
-        : ObjectBase(scene, nullptr, ObjectType_StageInfo, 4, GAME_HEIGHT / 2)
-    { }
+    PrintStageClear()
+        : ObjectBase(ObjectType_StageInfo)
+    {
+        m_X = 4;
+        m_Y = GAME_HEIGHT / 2;
+    }
 
     ~PrintStageClear()
     {
@@ -73,8 +80,10 @@ public:
         SceneManager::Instance()->LoadScene(new SceneGame(curIdx + 1));
     }
 
-    virtual void Update(DWORD framesCount) override
+    virtual void Update() override
     {
+        DWORD framesCount = m_Scene->GetFrames();
+
         if (m_StartTick == 0)
         {
             m_StartTick = framesCount;
@@ -114,21 +123,21 @@ SceneGame::SceneGame(int curStage)
 {
     m_CurrentStageInfo = ResourceManager::Instance()->GetStage(curStage);
 
-    m_Player = new Player(this, &m_CurrentStageInfo->player);
-    m_ObjectManager.AddObject(m_Player);
+    m_Player = new Player(&m_CurrentStageInfo->player);
+    AddObject(m_Player);
 
     for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
     {
-        m_ObjectManager.AddObject(new Enemy(this, &m_CurrentStageInfo->enemies[i]));
+        AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
     }
     m_EnemiesCount = m_CurrentStageInfo->enemiesCount;
 
-    GameInfo* pGameInfo = new GameInfo(this);
+    GameInfo* pGameInfo = new GameInfo;
     pGameInfo->Init(3, 3); // TODO: Scene에 OnInit 메서드를 만들어 줘야 할까?
-    m_ObjectManager.AddObject(pGameInfo);
+    AddObject(pGameInfo);
     m_Player->AttachGameInfo(pGameInfo);
 
-    m_ObjectManager.AddObject(new PrintStageInfo(this, curStage));
+    AddObject(new PrintStageInfo(curStage));
 }
 
 SceneGame::~SceneGame()
@@ -162,15 +171,10 @@ void SceneGame::Update()
     {
         SceneManager::Instance()->SetExit();
     }
-
-    m_ObjectManager.Update(m_FramesCount);
-
-    m_FramesCount++;
 }
 
 void SceneGame::Render(Renderer* renderer)
 {
-    m_ObjectManager.Render(renderer);
 }
 
 void SceneGame::OnEnemyDie()
@@ -178,6 +182,7 @@ void SceneGame::OnEnemyDie()
     m_EnemiesCount--;
     if (m_EnemiesCount == 0)
     {
-        m_ObjectManager.AddObject(new PrintStageClear(this));
+        //m_ObjectManager.AddObject(new PrintStageClear(this));
+        AddObject(new PrintStageClear());
     }
 }

@@ -3,15 +3,9 @@
 
 #include "Engine/Sprite.h"
 
-ObjectBase::ObjectBase(SceneBase* sceneOrNull, Sprite* spriteOrNull, int objectType, int x, int y)
-    : m_Scene{ sceneOrNull }
-    , m_Sprite{ spriteOrNull }
-    , m_ObjectType{ objectType }
-    , m_X{ x }
-    , m_Y{ y }
-{
-
-}
+ObjectBase::ObjectBase(int objectType)
+    : m_ObjectType{ objectType }
+{ }
 
 ObjectBase::~ObjectBase()
 {}
@@ -44,20 +38,6 @@ bool ObjectBase::IsCollision(ObjectBase* other)
             }
         }
     }
-
-    //if (m_Y <= other->m_Y + (other->m_Sprite->Height() - 1))
-    //{
-    //    if (m_Y + (m_Sprite->Height() - 1) >= other->m_Y)
-    //    {
-    //        if (m_X <= other->m_X + (other->m_Sprite->Width() - 1))
-    //        {
-    //            if (m_X + (m_Sprite->Width() - 1) >= other->m_X)
-    //            {
-    //                return true;
-    //            }
-    //        }
-    //    }
-    //}
 
     return false;
 }

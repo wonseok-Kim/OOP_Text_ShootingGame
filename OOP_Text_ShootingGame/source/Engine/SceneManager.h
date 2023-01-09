@@ -1,9 +1,7 @@
 #pragma once
 
-#include "GlobalObjectManager.h"
-#include "Input.h"
-#include "Renderer.h"
-#include "SceneBase.h"
+class Renderer;
+class SceneBase;
 
 class SceneManager
 {
@@ -14,42 +12,9 @@ public:
 		return &inst;
 	}
 
-	~SceneManager()
-	{
-		delete m_CurrentScene;
-		delete m_NextScene;
-	}
+	~SceneManager();
 
-	bool Run(DWORD gameFrames, Renderer* rendererOrNull)
-	{
-		if (m_IsExit)
-			return false;
-		
-		if (m_NextScene)
-		{
-			delete m_CurrentScene;
-			m_CurrentScene = m_NextScene;
-			m_NextScene = nullptr;
-		}
-
-		GlobalObjectManager* globalObjectManager = GlobalObjectManager::Instance();
-		
-		Input::Instance()->Handle();
-
-		m_CurrentScene->Update();
-		globalObjectManager->Update(gameFrames);
-
-		if (rendererOrNull)
-		{
-			m_CurrentScene->Render(rendererOrNull);
-			globalObjectManager->Render(rendererOrNull);
-
-			rendererOrNull->Output();
-			rendererOrNull->ClearBuffer();
-		}
-
-		return true;
-	}
+	bool Run(DWORD gameFrames, Renderer* rendererOrNull);
 
 	void LoadScene(SceneBase* nextScene)
 	{

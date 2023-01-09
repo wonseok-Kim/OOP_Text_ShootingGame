@@ -9,3 +9,12 @@ enum ObjectType
 	ObjectType_StageInfo,
 	ObjectType_MaxTypes,
 };
+
+//enum class ObjectType
+//{
+//    Player,
+//    Enemy,
+//    Bullet,
+//    GameInfo,
+//    StageInfo,
+//};

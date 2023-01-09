@@ -9,15 +9,27 @@
 #include "GameInfo.h"
 #include "ResourceManager.h"
 
-Player::Player(SceneBase* scene, PlayerInfo* pInfo)
-    :ObjectBase(scene, pInfo->sprite, ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
+//Player::Player(SceneBase* scene, PlayerInfo* pInfo)
+//    :ObjectBase(scene, pInfo->sprite, ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
+//{
+//    m_ShotInfo = ResourceManager::Instance()->GetShotInfo(L"Resources/ShotInfo/player_shot.txt");
+//    assert(m_ShotInfo);
+//}
+
+Player::Player(PlayerInfo* pInfo)
+    :ObjectBase(ObjectType_Player)
 {
+    m_Sprite = pInfo->sprite;
+    m_X = pInfo->startCoord.X;
+    m_Y = pInfo->startCoord.Y;
     m_ShotInfo = ResourceManager::Instance()->GetShotInfo(L"Resources/ShotInfo/player_shot.txt");
     assert(m_ShotInfo);
 }
 
-void Player::Update(DWORD framesCount)
+void Player::Update()
 {
+    DWORD framesCount = m_Scene->GetFrames();
+
     if (framesCount % 2 == 0)
     {
         if (m_State & PlayerState::MOVE_UP)
@@ -36,7 +48,12 @@ void Player::Update(DWORD framesCount)
         {
             for (int i = 0; i < m_ShotInfo->shotCount; ++i)
             {
-                m_Scene->AddObject(new Bullet(m_Scene,
+                //m_Scene->AddObject(new Bullet(m_Scene,
+                //    m_X + m_ShotInfo->startCoord[i].X,
+                //    m_Y + m_ShotInfo->startCoord[i].Y,
+                //    m_ShotInfo->sprite, m_ShotInfo->dir[i], ObjectType_Player));
+
+                m_Scene->AddObject(new Bullet(
                     m_X + m_ShotInfo->startCoord[i].X,
                     m_Y + m_ShotInfo->startCoord[i].Y,
                     m_ShotInfo->sprite, m_ShotInfo->dir[i], ObjectType_Player));

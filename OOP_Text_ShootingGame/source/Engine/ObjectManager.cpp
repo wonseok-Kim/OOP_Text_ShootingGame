@@ -11,11 +11,11 @@ ObjectManager::~ObjectManager()
     }
 }
 
-void ObjectManager::Update(DWORD framesCount)
+void ObjectManager::Update()
 {
     for (ObjectBase* obj : m_ObjectList)
     {
-        obj->Update(framesCount);
+        obj->Update();
     }
 
 	ObjectList::iterator iter1;
@@ -39,7 +39,7 @@ void ObjectManager::Update(DWORD framesCount)
 	for (iter1 = m_ObjectList.begin(); iter1 != m_ObjectList.end(); )
 	{
 		if (iter1->IsRelease())
-		{
+		{			
 			delete (*iter1);
  			iter1 = m_ObjectList.erase(iter1);
 		}

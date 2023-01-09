@@ -13,12 +13,15 @@
 class Enemy : public ObjectBase
 {
 public:
-    Enemy(SceneGame* scene, EnemyInfo* pInfo)
-        : ObjectBase(scene, pInfo->sprite, ObjectType_Enemy, pInfo->startCoord.X, pInfo->startCoord.Y)
+    Enemy(EnemyInfo* pInfo)
+        :ObjectBase(ObjectType_Enemy)
     {
-        m_bLoopPatern = pInfo->bLoopPatterns;
-        m_PatternList = pInfo->pPatternList;
-        m_CurPatternIter = m_PatternList->begin();
+        m_Sprite = pInfo->sprite;
+        m_X = pInfo->startCoord.X;
+        m_Y = pInfo->startCoord.Y;
+
+        m_EnemyInfo = pInfo;
+        m_CurPatternIter = pInfo->pPatternList->begin();
         m_CurPattern = *m_CurPatternIter;
         m_HP = pInfo->hp;
     }
@@ -29,7 +32,7 @@ public:
         sceneGame->OnEnemyDie();
     }
 
-    virtual void Update(DWORD framesCount) override
+    virtual void Update() override
     {
         m_Duration++;
 
@@ -46,7 +49,14 @@ public:
             {
                 if (rand() % 101 < m_CurPattern->shotChance)
                 {
-                    m_Scene->AddObject(new Bullet(m_Scene, m_X + shotInfo->startCoord[i].X, m_Y + shotInfo->startCoord[i].Y,
+                    /*m_Scene->AddObject(new Bullet(m_Scene, m_X + shotInfo->startCoord[i].X, m_Y + shotInfo->startCoord[i].Y,
+                        shotInfo->sprite, shotInfo->dir[i], ObjectType_Enemy));*/
+
+                    // Bullet(int x, int y, Sprite * sprite, COORD dir, int whoShot)
+                    
+                    m_Scene->AddObject(new Bullet(
+                        m_X + shotInfo->startCoord[i].X,
+                        m_Y + shotInfo->startCoord[i].Y,
                         shotInfo->sprite, shotInfo->dir[i], ObjectType_Enemy));
                 }
             }
@@ -55,10 +65,10 @@ public:
         if (m_Duration % m_CurPattern->duration == 0)
         {
             ++m_CurPatternIter;
-            if (m_CurPatternIter == m_PatternList->end())
+            if (m_CurPatternIter == m_EnemyInfo->pPatternList->end())
             {
-                if (m_bLoopPatern)
-                    m_CurPatternIter = m_PatternList->begin();
+                if (m_EnemyInfo->bLoopPatterns)
+                    m_CurPatternIter = m_EnemyInfo->pPatternList->begin();
                 else
                     SetRelease();
             }
@@ -75,11 +85,10 @@ public:
     virtual void OnCollision(ObjectBase* other) override;
 
 private:
+    EnemyInfo* m_EnemyInfo;
     PatternList::iterator m_CurPatternIter;
     Pattern* m_CurPattern;
-    PatternList* m_PatternList;
     int m_Duration = 0;
     int m_HP;
-    bool m_bLoopPatern;
 };
 

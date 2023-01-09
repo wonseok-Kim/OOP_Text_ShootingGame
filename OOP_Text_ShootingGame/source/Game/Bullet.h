@@ -11,15 +11,21 @@
 class Bullet : public ObjectBase
 {
 public:
-    Bullet(SceneBase* scene, int x, int y, Sprite* sprite, COORD dir, int whoShot)
-        : ObjectBase(scene, sprite, ObjectType_Bullet, x, y)
+    Bullet(int x, int y, Sprite* sprite, COORD dir, int whoShot)
+        : ObjectBase(ObjectType_Bullet)
     {
+        m_Sprite = sprite;
+        m_X = x;
+        m_Y = y;
+
         m_Dir = dir;
         m_WhoShot = whoShot;
     }
 
-    virtual void Update(DWORD framesCount)
+    virtual void Update() override
     {
+        DWORD framesCount = m_Scene->GetFrames();
+
         if (framesCount % 3 == 0)
         {
             m_X += m_Dir.X;
@@ -32,7 +38,7 @@ public:
         }
     }
 
-    virtual void Render(Renderer* renderer)
+    virtual void Render(Renderer* renderer) override
     {
         renderer->DrawSprite(m_X, m_Y, m_Sprite);
     }

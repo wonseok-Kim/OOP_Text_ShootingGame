@@ -8,9 +8,12 @@
 class GameInfo : public ObjectBase
 {
 public:
-    GameInfo(SceneBase* scene, int x = 0, int y = GAME_INFO_ROW)
-        :ObjectBase(scene, nullptr, ObjectType_GameInfo, x, y)
-    { }
+    GameInfo(int x = 0, int y = GAME_INFO_ROW)
+        :ObjectBase(ObjectType_GameInfo)
+    {
+        m_X = x;
+        m_Y = y;
+    }
 
     bool Init(int life, int hp)
     {
@@ -29,10 +32,11 @@ public:
             return false;
 
         swprintf_s(m_szInfo, _countof(m_szInfo), s_Format, m_szLife, m_szHP);
+        return true;
     }
 
-    virtual void Update(DWORD framesCount);
-    virtual void Render(Renderer* renderer);
+    virtual void Update() override {}
+    virtual void Render(Renderer* renderer) override;
 
     void OnUpdate(int life, int hp)
     {
@@ -50,7 +54,7 @@ private:
 
     WCHAR m_szInfo[GAME_WIDTH];
 
-    int m_PlayerLife;
-    int m_PlayerHP;
+    int m_PlayerLife = 0;
+    int m_PlayerHP = 0;
 };
 

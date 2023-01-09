@@ -127,14 +127,11 @@ public:
         }
     }
 
-    void Output()
+    void Flip()
     {
         DWORD bytesWritten;
         WriteConsoleOutputCharacterW(m_hConsole, m_ScreenBuffer, m_Width * m_Height, { 0, 0 }, &bytesWritten);
-    }
 
-    void ClearBuffer()
-    {
         wmemset(m_ScreenBuffer, L' ', m_Width * m_Height);
     }
 

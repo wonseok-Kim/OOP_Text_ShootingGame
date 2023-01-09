@@ -1,11 +1,15 @@
 #pragma once
 
 #include "ObjectManager.h"
+#include "SceneManager.h"
 
+class ObjectBase;
 class Renderer;
 
 class SceneBase
 {
+	friend class SceneManager;
+
 public:
 	SceneBase() = default;
 	virtual ~SceneBase() = default;
@@ -13,10 +17,13 @@ public:
 	virtual void Update() = 0;
 	virtual void Render(Renderer* renderer) = 0;
 
-	void AddObject(ObjectBase* obj) { m_ObjectManager.AddObject(obj); }
+	DWORD GetFrames() { return m_FramesCount; }
+
+	void AddObject(ObjectBase* obj);
 
 protected:
-	ObjectManager m_ObjectManager;
+private:
 	DWORD m_FramesCount = 0;
+	ObjectManager m_ObjectManager;
 };
 

@@ -3,6 +3,7 @@
 
 #include "Engine/Input.h"
 #include "Engine/ObjectBase.h"
+#include "Engine/Renderer.h"
 #include "Engine/SceneManager.h"
 
 #include "SceneGame.h"

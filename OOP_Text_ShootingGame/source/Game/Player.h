@@ -21,11 +21,11 @@ enum PlayerState
 class Player : public ObjectBase
 {
 public:
-    Player(SceneBase* scene, PlayerInfo* pInfo);
+    Player(PlayerInfo* pInfo);
 
     virtual ~Player() override = default;
 
-    virtual void Update(DWORD framesCount) override;
+    virtual void Update() override;
     virtual void Render(Renderer* renderer) override;
 
     virtual void OnCollision(ObjectBase* other) override;
