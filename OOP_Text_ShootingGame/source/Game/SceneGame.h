@@ -14,6 +14,7 @@ public:
     virtual void Update() override;
     virtual void Render(Renderer* renderer) override;
 
+    virtual bool OnInit() override;
     void OnEnemyDie();
 
     int GetCurrentStageIdx() { return m_CurStageIdx; }

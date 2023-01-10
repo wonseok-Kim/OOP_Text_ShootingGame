@@ -163,6 +163,8 @@ public:
         return m_Stages[stage];
     }
 
+    int GetStagesCount() { return m_StagesCount; }
+
 private:
     ResourceManager() = default;
 

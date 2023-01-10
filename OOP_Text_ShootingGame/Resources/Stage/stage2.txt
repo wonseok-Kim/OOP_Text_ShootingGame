@@ -1,0 +1,127 @@
+Player
+{
+	sprite: "Resources/Sprite/player.sp"
+	coord: (40, 40)
+}
+
+Enemy 14
+{
+	spawn: 0
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+{
+	spawn: 60
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+{
+	spawn: 120
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+{
+	spawn: 180
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+{
+	spawn: 240
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+{
+	spawn: 300
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (-1, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy1.txt"
+	HP: 1
+}
+
+
+
+
+
+{
+	spawn: 0
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+{
+	spawn: 60
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+{
+	spawn: 120
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+{
+	spawn: 180
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+{
+	spawn: 240
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+{
+	spawn: 300
+	sprite: "Resources/Sprite/enemy1.sp"
+	coord: (75, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/stage2_enemy2.txt"
+	HP: 1
+}
+
+{
+	spawn: 0
+	sprite: "Resources/Sprite/enemy2.sp"
+	coord: (20, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/[WvvW].txt"
+	HP: 3
+}
+{
+	spawn: 0
+	sprite: "Resources/Sprite/enemy2.sp"
+	coord: (57, -1)
+	loopPattern: 1
+	pattern: "Resources/Pattern/[WvvW].txt"
+	HP: 3
+}
+
+

@@ -1,7 +1,15 @@
 #include "stdafx.h"
 #include "ObjectBase.h"
 
-#include "Engine/Sprite.h"
+#include "SceneBase.h"
+#include "Sprite.h"
+
+void ObjectBase::Destroy(ObjectBase* obj, DWORD destroyDelayFrame)
+{
+    obj->m_bRelease = true;
+    obj->m_DestroyFrame = obj->m_Scene->GetFrames();
+    obj->m_DestroyDelayFrame = destroyDelayFrame;
+}
 
 ObjectBase::ObjectBase(int objectType)
     : m_ObjectType{ objectType }

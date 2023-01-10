@@ -71,3 +71,18 @@ void SceneTitle::Render(Renderer* renderer)
 		Assert(0, L"Invalid menu");
 	}
 }
+
+/*
+ (-1, -1)
+ (20, 20)
+ (40, 0)
+ (-60, 20)
+ -1, 39
+
+ (75, -1)
+ (-20, 20)
+ (-40,  0)
+ (60, 20)
+ (75, 39)
+ (0, -40)
+*/

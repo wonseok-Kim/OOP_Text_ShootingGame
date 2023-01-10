@@ -1,4 +1,6 @@
-3
+5
 Resources/Sprite/player.sp
 Resources/Sprite/enemy1.sp
+Resources/Sprite/enemy2.sp
 Resources/Sprite/default_bullet.sp
+Resources/Sprite/enemy2_bullet.sp

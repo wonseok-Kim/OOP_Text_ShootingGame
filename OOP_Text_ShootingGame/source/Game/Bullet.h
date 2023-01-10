@@ -32,9 +32,9 @@ public:
             m_Y += m_Dir.Y;
 
             if (m_X < 0 || m_X > GAME_WIDTH - 1)
-                SetRelease();
+                Destroy(this);
             if (m_Y < 0 || m_Y > GAME_HEIGHT - 1)
-                SetRelease();
+                Destroy(this);
         }
     }
 

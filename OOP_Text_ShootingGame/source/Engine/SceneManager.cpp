@@ -21,6 +21,8 @@ bool SceneManager::Run(DWORD gameFrames, Renderer* rendererOrNull)
 	{
 		delete m_CurrentScene;
 		m_CurrentScene = m_NextScene;
+		if (!m_CurrentScene->OnInit())
+			return false;
 		m_NextScene = nullptr;
 	}
 
@@ -29,10 +31,10 @@ bool SceneManager::Run(DWORD gameFrames, Renderer* rendererOrNull)
 	Input::Instance()->Handle();
 
 	m_CurrentScene->Update();
-	m_CurrentScene->m_ObjectManager.Update();
+	m_CurrentScene->m_ObjectManager.Update(m_CurrentScene->m_FramesCount);
 	m_CurrentScene->m_FramesCount++;
 
-	globalObjectManager->Update();
+	globalObjectManager->Update(m_CurrentScene->m_FramesCount);
 	// TODO: 글로벌에 대해서도 처리해주기
 
 	if (rendererOrNull)

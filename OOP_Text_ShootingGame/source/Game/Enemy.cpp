@@ -11,8 +11,14 @@ void Enemy::OnCollision(ObjectBase* other)
 
         m_HP--;
         if (m_HP == 0)
-            SetRelease();
+            Destroy(this, 5);
 
-        b->SetRelease();
+        Destroy(b);
     }
+}
+
+void Enemy::OnDestroy()
+{    
+    SceneGame* sceneGame = (SceneGame*)m_Scene;
+    sceneGame->OnEnemyDie();
 }

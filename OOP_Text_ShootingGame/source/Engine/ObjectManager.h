@@ -10,7 +10,7 @@ public:
     ObjectManager() = default;
     ~ObjectManager();
 
-    void Update();
+    void Update(DWORD frames);
     void Render(Renderer* renderer);
 
     void AddObject(ObjectBase* obj) { m_ObjectList.push_back(obj); }

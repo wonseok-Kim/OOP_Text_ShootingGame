@@ -1,2 +1,5 @@
-1
+4
 Resources/Pattern/stage1_enemy.txt
+Resources/Pattern/stage2_enemy1.txt
+Resources/Pattern/stage2_enemy2.txt
+Resources/Pattern/[WvvW].txt

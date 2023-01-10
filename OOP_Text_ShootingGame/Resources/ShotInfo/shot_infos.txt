@@ -1,6 +1,7 @@
-2
+3
 Resources/ShotInfo/player_shot.txt
 Resources/ShotInfo/default_enemy_shot.txt
+Resources/ShotInfo/enemy2_shot.txt
 
 
 

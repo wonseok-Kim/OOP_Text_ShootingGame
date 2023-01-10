@@ -62,6 +62,23 @@ void Player::Update()
 
         m_State = 0u;
     }
+
+    if (m_bInvicible)
+    {
+        DWORD elapsedFrame = framesCount - m_HittedFrame;
+        if (elapsedFrame >= m_InvicibleFrames)
+        {
+            m_bInvicible = false;
+            m_bVisible = true;
+        }
+        else
+        {
+            if (elapsedFrame % 15 == 0)
+            {
+                m_bVisible = !m_bVisible;
+            }
+        }
+    }
 }
 
 void Player::Render(Renderer* renderer)
@@ -73,11 +90,17 @@ void Player::OnCollision(ObjectBase* other)
 {
     if (other->GetObjectType() == ObjectType_Bullet)
     {
+        if (m_bInvicible)
+            return;
+
         Bullet* b = (Bullet*)other;
         if (b->GetWhoShot() != ObjectType_Enemy)
             return;
 
         m_HP--;
+        m_bInvicible = true;
+        m_bVisible = false;
+        m_HittedFrame = m_Scene->GetFrames();
         if (m_HP == 0)
         {
             if (m_Life > 0)
@@ -91,10 +114,9 @@ void Player::OnCollision(ObjectBase* other)
             }
         }
 
-        other->SetRelease();
+        Destroy(b);
 
         if (m_GameInfo)
             m_GameInfo->OnUpdate(m_Life, m_HP);
     }
-
 }

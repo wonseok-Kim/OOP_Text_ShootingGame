@@ -17,6 +17,8 @@ public:
 	virtual void Update() = 0;
 	virtual void Render(Renderer* renderer) = 0;
 
+	virtual bool OnInit() { return true; }
+
 	DWORD GetFrames() { return m_FramesCount; }
 
 	void AddObject(ObjectBase* obj);

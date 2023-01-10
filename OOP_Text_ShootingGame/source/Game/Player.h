@@ -35,10 +35,15 @@ public:
     void AttachGameInfo(GameInfo* gameInfo) { m_GameInfo = gameInfo; }
 
 private:
+    static constexpr DWORD m_InvicibleFrames = 60;
+
     UINT m_State = 0;
 
     int m_HP = 3;
     int m_Life = 3;
+
+    DWORD m_HittedFrame = 0;
+    bool m_bInvicible = false;
 
     ShotInfo* m_ShotInfo = nullptr;
     GameInfo* m_GameInfo = nullptr;

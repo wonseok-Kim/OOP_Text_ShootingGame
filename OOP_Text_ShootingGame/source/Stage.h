@@ -37,6 +37,7 @@ struct Pattern
 
 struct EnemyInfo
 {
+    DWORD spawnFrame;
     Sprite* sprite;
     COORD startCoord;
     BOOL bLoopPatterns;

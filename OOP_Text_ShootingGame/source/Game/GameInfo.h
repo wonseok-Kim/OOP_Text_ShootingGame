@@ -29,7 +29,10 @@ public:
             err += wcscat_s(m_szHP, _countof(m_szHP), L"бс");
 
         if (err != 0)
+        {
+            PrintError(L"err life: %d, hp: %d", life, hp);
             return false;
+        }
 
         swprintf_s(m_szInfo, _countof(m_szInfo), s_Format, m_szLife, m_szHP);
         return true;

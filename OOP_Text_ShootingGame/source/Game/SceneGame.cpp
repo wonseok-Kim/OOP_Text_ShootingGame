@@ -22,7 +22,7 @@ public:
     }
 
     virtual void Update() override
-    {        
+    {
         DWORD framesCount = m_Scene->GetFrames();
 
         if (m_StartTick == 0)
@@ -34,7 +34,7 @@ public:
         m_PrintIdx = (framesCount - m_StartTick) / 15;
         if (m_PrintIdx > m_Length)
         {
-            SetRelease();
+            Destroy(this);
         }
     }
 
@@ -63,7 +63,7 @@ private:
 
 class PrintStageClear : public ObjectBase
 {
-public: 
+public:
     PrintStageClear()
         : ObjectBase(ObjectType_StageInfo)
     {
@@ -71,14 +71,7 @@ public:
         m_Y = GAME_HEIGHT / 2;
     }
 
-    ~PrintStageClear()
-    {
-        SceneGame* scene = (SceneGame*)m_Scene;
-
-        int curIdx = scene->GetCurrentStageIdx();
-
-        SceneManager::Instance()->LoadScene(new SceneGame(curIdx + 1));
-    }
+    ~PrintStageClear() = default;
 
     virtual void Update() override
     {
@@ -93,7 +86,7 @@ public:
         m_PrintIdx = (framesCount - m_StartTick) / 15;
         if (m_PrintIdx > m_Length)
         {
-            SetRelease();
+            Destroy(this);
         }
     }
 
@@ -110,6 +103,22 @@ public:
         renderer->Draw(m_X + i, m_Y, L'_');
     }
 
+    virtual void OnDestroy() override
+    {
+        SceneGame* scene = (SceneGame*)m_Scene;
+
+        int curIdx = scene->GetCurrentStageIdx();
+        int stagesCount = ResourceManager::Instance()->GetStagesCount();
+        if (curIdx >= stagesCount)
+        {
+            SceneManager::Instance()->SetExit();
+        }
+        else
+        {
+            SceneManager::Instance()->LoadScene(new SceneGame(curIdx + 1));
+        }
+    }
+
 private:
     const WCHAR* m_Format = L"Stage Cleared!";
     int m_Length = wcslen(m_Format);
@@ -121,23 +130,7 @@ private:
 SceneGame::SceneGame(int curStage)
     : m_CurStageIdx{ curStage }
 {
-    m_CurrentStageInfo = ResourceManager::Instance()->GetStage(curStage);
 
-    m_Player = new Player(&m_CurrentStageInfo->player);
-    AddObject(m_Player);
-
-    for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
-    {
-        AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
-    }
-    m_EnemiesCount = m_CurrentStageInfo->enemiesCount;
-
-    GameInfo* pGameInfo = new GameInfo;
-    pGameInfo->Init(3, 3); // TODO: Scene에 OnInit 메서드를 만들어 줘야 할까?
-    AddObject(pGameInfo);
-    m_Player->AttachGameInfo(pGameInfo);
-
-    AddObject(new PrintStageInfo(curStage));
 }
 
 SceneGame::~SceneGame()
@@ -171,10 +164,47 @@ void SceneGame::Update()
     {
         SceneManager::Instance()->SetExit();
     }
+
+    for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
+    {
+        if (GetFrames() == m_CurrentStageInfo->enemies[i].spawnFrame)
+        {
+            AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
+        }
+    }
 }
 
 void SceneGame::Render(Renderer* renderer)
+{}
+
+bool SceneGame::OnInit()
 {
+    m_CurrentStageInfo = ResourceManager::Instance()->GetStage(m_CurStageIdx);
+    if (!m_CurrentStageInfo)
+    {
+        PrintError(L"잘못된 Stage 인덱스가 들어왔습니다.");
+        return false;
+    }
+
+    m_Player = new Player(&m_CurrentStageInfo->player);
+    AddObject(m_Player);
+
+    /*for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
+    {
+        AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
+    }*/
+    m_EnemiesCount = m_CurrentStageInfo->enemiesCount;
+
+    GameInfo* pGameInfo = new GameInfo;
+    if (!pGameInfo->Init(3, 3))
+        return false;
+
+    AddObject(pGameInfo);
+    m_Player->AttachGameInfo(pGameInfo);
+
+    AddObject(new PrintStageInfo(m_CurStageIdx));
+
+    return true;
 }
 
 void SceneGame::OnEnemyDie()

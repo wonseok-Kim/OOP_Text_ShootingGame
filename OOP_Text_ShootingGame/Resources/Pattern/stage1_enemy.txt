@@ -6,7 +6,7 @@
 
 	shotInfo:   "Resources/ShotInfo/default_enemy_shot.txt"
 	shotInterval  : 	 50
-	shotChance   :100		
+	shotChance   :30		
 }
 {
 	duration: 50
@@ -16,5 +16,5 @@
 
 	shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
 	shotInterval: 50
-	shotChance: 100	
+	shotChance: 30	
 }
