@@ -2,7 +2,7 @@
 #include "StageParser.h"
 
 #include "ResourceManager.h"
-#include "Stage.h"
+#include "Infos.h"
 
 bool StageParser::ParseStage(Stage* out_Stage)
 {
@@ -36,7 +36,8 @@ bool StageParser::ParseStage(Stage* out_Stage)
                 m_Current += 5;
 
                 SkipWhiteSpace();
-                GetNumberLiteral(&out_Stage->enemiesCount);
+                if (!GetNumberLiteral(&out_Stage->enemiesCount))
+                    return false;
                 
                 // delete[] in ResourceManager::~ResourceManager().
                 out_Stage->enemies = new EnemyInfo[out_Stage->enemiesCount];
@@ -58,6 +59,29 @@ bool StageParser::ParseStage(Stage* out_Stage)
                     }
                 }
             }
+           /* else if (strncmp(m_Current, "Item", 4) == 0)
+            {
+                m_Current += 4;
+
+                SkipWhiteSpace();
+                if (!GetNumberLiteral(&out_Stage->itemsCount))
+                    return false;
+
+                for (int i = 0; i < out_Stage->itemsCount; ++i)
+                {
+                    SkipWhiteSpace();
+                    SubString block;
+                    if (!GetBlock(&block))
+                    {
+                        return false;
+                    }
+
+                    if (!ParseEnemyInfo(block, &out_Stage->enemies[i]))
+                    {
+                        return false;
+                    }
+                }
+            }*/
             else
             {
                 PrintError(L"잘못된 문법");

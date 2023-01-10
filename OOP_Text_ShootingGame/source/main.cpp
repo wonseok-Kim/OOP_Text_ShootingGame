@@ -6,6 +6,7 @@
 
 #include "Game/ShootingGame.h"
 #include "Game/SceneTitle.h"
+#include "Game/SceneGame.h"
 
 #ifdef _DEBUG
 #include "Engine/GlobalObjectManager.h"
@@ -81,5 +82,66 @@ static void MakeSprite()
     //Sprite playerBullet{ 1, 1 };
     //playerBullet.SetGlyph(0, 0, L'*');
     //playerBullet.Save(L"Resources/Sprite/default_bullet.sp");
+
+    Sprite hpUP{ 3,1 };
+    hpUP.SetGlyph(0, 0, L'<');
+    hpUP.SetGlyph(1, 0, L'H');
+    hpUP.SetGlyph(2, 0, L'>');
+    hpUP.Save(L"Resources/Item/hp_up.sp");
+
+    Sprite doubleShot{ 3, 1 };
+    doubleShot.SetGlyph(0, 0, L'<');
+    doubleShot.SetGlyph(1, 0, L'D');
+    doubleShot.SetGlyph(2, 0, L'>');
+    doubleShot.Save(L"Resources/Item/double_shot.sp");
+
+    //const WCHAR* leftHand[] = {
+    //    L"         ",
+    //    L"         ",
+    //    L"=========",
+    //    L"||       ",
+    //    L"||       ",
+    //    L"||       ",
+    //    L"||-------"
+    //};
+
+    //Sprite bossLeft{ 9, 7 };
+    //for (int y = 0; y < 7; ++y)
+    //    for (int x = 0; x < 9; ++x)
+    //        bossLeft.SetGlyph(x, y, leftHand[y][x]);
+    //bossLeft.Save(L"Resources/Sprite/boss_left.sp");
+
+    //const WCHAR* body[] = {
+    //    L"     XXX     ",
+    //    L"    /---\\    ",
+    //    L"---/     \\---",
+    //    L"  /       \\  ",
+    //    L" /         \\ ",
+    //    L"/-----------\\",
+    //    L"=  ||  ||   ="
+    //};
+
+    //Sprite boss{ 13, 7 };
+    //for (int y = 0; y < 7; ++y)
+    //    for (int x = 0; x < 13; ++x)
+    //        boss.SetGlyph(x, y, body[y][x]);
+    //boss.Save(L"Resources/Sprite/boss.sp");
+
+
+    //const WCHAR* rigthHand[] = {
+    //    L"         ",
+    //    L"         ",
+    //    L"=========",
+    //    L"       ||",
+    //    L"       ||",
+    //    L"       ||",
+    //    L"-------||"
+    //};
+
+    //Sprite bossRight{ 9, 7 };
+    //for (int y = 0; y < 7; ++y)
+    //    for (int x = 0; x < 9; ++x)
+    //        bossRight.SetGlyph(x, y, rigthHand[y][x]);
+    //bossRight.Save(L"Resources/Sprite/boss_right.sp");
 }
 

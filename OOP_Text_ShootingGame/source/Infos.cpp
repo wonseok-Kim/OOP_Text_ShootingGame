@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Stage.h"
+#include "Infos.h"
 
 #include "ResourceManager.h"
 

@@ -1,3 +1,4 @@
-2
+3
 Resources/Stage/stage1.txt
 Resources/Stage/stage2.txt
+Resources/Stage/stage3.txt

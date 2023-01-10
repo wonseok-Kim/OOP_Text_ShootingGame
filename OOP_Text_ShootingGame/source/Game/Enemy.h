@@ -8,7 +8,7 @@
 #include "Bullet.h"
 #include "ObjectType.h"
 #include "SceneGame.h"
-#include "Stage.h"
+#include "Infos.h"
 
 class Enemy : public ObjectBase
 {

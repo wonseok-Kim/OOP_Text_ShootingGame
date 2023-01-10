@@ -26,12 +26,12 @@ bool ObjectBase::IsCollision(ObjectBase* other)
     int myLeft = m_X;
     int myRight = m_X + m_Sprite->Width() - 1;
     int myTop = m_Y;
-    int myBottom = m_Y - m_Sprite->Height() + 1;
+    int myBottom = m_Y + m_Sprite->Height() - 1;
 
     int youLeft = other->m_X;
     int youRight = other->m_X + other->m_Sprite->Width() - 1;
     int youTop = other->m_Y;
-    int youBottom = other->m_Y - other->m_Sprite->Height() + 1;
+    int youBottom = other->m_Y + other->m_Sprite->Height() - 1;
 
     if (myLeft <= youRight)
     {

@@ -17,6 +17,9 @@ bool ResourceLoader::Load()
     if (!LoadPattern())
         return false;
 
+    if (!LoadItem())
+        return false;
+
     if (!LoadStage())
         return false;
 
@@ -131,7 +134,7 @@ bool ResourceLoader::LoadPattern()
         result = fwscanf_s(file, L"%s", filename, (unsigned)_countof(filename));
         if (result != 1)
         {
-            PrintError(L"fscanf err"); 
+            PrintError(L"fscanf err");
             goto close_file_and_out_LoadPattern;
         }
 
@@ -151,6 +154,45 @@ bool ResourceLoader::LoadPattern()
     return true;
 
 close_file_and_out_LoadPattern:
+    fclose(file);
+    return false;
+}
+
+bool ResourceLoader::LoadItem()
+{
+    FILE* file = nullptr;
+    _wfopen_s(&file, L"Resources/Item/items.txt", L"r");
+    if (file == nullptr)
+    {
+        PrintError(L"fopen err");
+        return false;
+    }
+
+    int itemsCount;
+    int result = fwscanf_s(file, L"%d", &itemsCount);
+    if (result != 1)
+    {
+        PrintError(L"fscanf err");
+        goto close_file_and_out_LoadItem;
+    }
+
+    WCHAR filename[MAX_PATH];
+    for (int i = 0; i < itemsCount; ++i)
+    {
+        result = fwscanf_s(file, L"%s", filename, (unsigned)_countof(filename));
+        if (result != 1)
+        {
+            PrintError(L"fscanf err");
+            goto close_file_and_out_LoadItem;
+        }
+
+        ResourceManager::Instance()->AddItem(filename);
+    }
+
+    fclose(file);
+    return true;
+
+close_file_and_out_LoadItem:
     fclose(file);
     return false;
 }
@@ -184,7 +226,7 @@ bool ResourceLoader::LoadStage()
         }
 
         StageParser parser;
-        
+
         if (!parser.Init(filename))
             goto close_file_and_out_LoadStage;
 

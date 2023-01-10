@@ -5,7 +5,7 @@ void Enemy::OnCollision(ObjectBase* other)
 {
     if (other->GetObjectType() == ObjectType_Bullet)
     {
-        Bullet* b = (Bullet*)other;
+          Bullet* b = (Bullet*)other;
         if (b->GetWhoShot() != ObjectType_Player)
             return;
 

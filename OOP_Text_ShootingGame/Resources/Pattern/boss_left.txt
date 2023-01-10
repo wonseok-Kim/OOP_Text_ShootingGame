@@ -1,0 +1,181 @@
+20
+{
+	duration: 23
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo:"Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 201
+	shotChance: 0	
+}
+{
+	duration: 230
+	moveTo: (0, -1)
+	moveInterval: 10
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 20
+	shotChance: 100	
+}
+{
+	duration: 23
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 201
+	shotChance: 0	
+}
+{
+	duration: 230
+	moveTo: (0, -1)
+	moveInterval: 10
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 20
+	shotChance: 100	
+}
+{
+	duration: 140
+	moveTo: (1, 0)
+	moveInterval: 7
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 23
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo:"Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 201
+	shotChance: 0	
+}
+{
+	duration: 230
+	moveTo: (0, -1)
+	moveInterval: 10
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 20
+	shotChance: 100	
+}
+{
+	duration: 140
+	moveTo: (-1, 0)
+	moveInterval: 7
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 105
+	moveTo: (-1, 0)
+	moveInterval: 7
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 23
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 201
+	shotChance: 0	
+}
+{
+	duration: 230
+	moveTo: (0, -1)
+	moveInterval: 10
+
+	shotInfo: "Resources/ShotInfo/boss1_left.txt"
+	shotInterval: 20
+	shotChance: 100	
+}
+{
+	duration: 105
+	moveTo: (1, 0)
+	moveInterval: 7
+
+	shotInfo: "Resources/ShotInfo/boss1.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 300
+	moveTo: (0, 0)
+	moveInterval: 7
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 25
+	shotChance: 100	
+}
+{
+	duration: 1
+	moveTo: (-21, -10)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 25
+	shotChance: 100	
+}
+{
+	duration: 60
+	moveTo: (1, 0)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 10
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 60
+	moveTo: (-1, 0)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 10
+	moveTo: (0, 1)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 60
+	moveTo: (1, 0)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 30
+	shotChance: 100	
+}
+{
+	duration: 1
+	moveTo: (-39, -10)
+	moveInterval: 1
+
+	shotInfo: "Resources/ShotInfo/boss2.txt"
+	shotInterval: 100
+	shotChance: 100	
+}

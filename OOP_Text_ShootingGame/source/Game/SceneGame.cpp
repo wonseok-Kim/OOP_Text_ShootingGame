@@ -8,6 +8,7 @@
 #include "GameInfo.h"
 #include "Player.h"
 #include "ResourceManager.h"
+#include "SceneTitle.h"
 
 class PrintStageInfo : public ObjectBase
 {
@@ -109,9 +110,9 @@ public:
 
         int curIdx = scene->GetCurrentStageIdx();
         int stagesCount = ResourceManager::Instance()->GetStagesCount();
-        if (curIdx >= stagesCount)
+        if (curIdx  + 1>= stagesCount)
         {
-            SceneManager::Instance()->SetExit();
+            SceneManager::Instance()->LoadScene(new SceneVictory);
         }
         else
         {
@@ -127,10 +128,14 @@ private:
     int m_PrintIdx = 0;
 };
 
-SceneGame::SceneGame(int curStage)
+SceneGame::SceneGame(int curStage, const Player* passPlayerToNextStageOrNull)
     : m_CurStageIdx{ curStage }
 {
-
+    if (passPlayerToNextStageOrNull)
+    {
+        m_Player = new Player(&m_CurrentStageInfo->player, passPlayerToNextStageOrNull);
+        AddObject(m_Player);
+    }
 }
 
 SceneGame::~SceneGame()
@@ -170,6 +175,7 @@ void SceneGame::Update()
         if (GetFrames() == m_CurrentStageInfo->enemies[i].spawnFrame)
         {
             AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
+            m_CurrentEnemiesCount++;
         }
     }
 }
@@ -186,17 +192,10 @@ bool SceneGame::OnInit()
         return false;
     }
 
-    m_Player = new Player(&m_CurrentStageInfo->player);
-    AddObject(m_Player);
-
-    /*for (int i = 0; i < m_CurrentStageInfo->enemiesCount; ++i)
-    {
-        AddObject(new Enemy(&m_CurrentStageInfo->enemies[i]));
-    }*/
-    m_EnemiesCount = m_CurrentStageInfo->enemiesCount;
+    m_TotalEnemiesCount = m_CurrentStageInfo->enemiesCount;
 
     GameInfo* pGameInfo = new GameInfo;
-    if (!pGameInfo->Init(3, 3))
+    if (!pGameInfo->Init(3))
         return false;
 
     AddObject(pGameInfo);
@@ -209,8 +208,8 @@ bool SceneGame::OnInit()
 
 void SceneGame::OnEnemyDie()
 {
-    m_EnemiesCount--;
-    if (m_EnemiesCount == 0)
+    m_TotalEnemiesCount--;
+    if (m_TotalEnemiesCount == 0)
     {
         //m_ObjectManager.AddObject(new PrintStageClear(this));
         AddObject(new PrintStageClear());

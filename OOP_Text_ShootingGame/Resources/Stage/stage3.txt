@@ -1,0 +1,56 @@
+Player
+{
+	sprite: "Resources/Sprite/player.sp"
+	coord: (40, 40)
+}
+
+Enemy 6
+{
+	spawn: 0
+	sprite: "Resources/Sprite/boss_left.sp"
+	coord: (0, 10)
+	loopPattern: 0
+	pattern: "Resources/Pattern/init_boss_left.txt"
+	HP: 1000
+}
+{
+	spawn: 0
+	sprite: "Resources/Sprite/boss.sp"
+	coord: (30, 10)
+	loopPattern: 0
+	pattern: "Resources/Pattern/init_boss.txt"
+	HP: 100
+}
+{
+	spawn: 0
+	sprite: "Resources/Sprite/boss_right.sp"
+	coord: (70, 10)
+	loopPattern: 0
+	pattern: "Resources/Pattern/init_boss_right.txt"
+	HP: 100
+}
+
+{
+	spawn: 97
+	sprite: "Resources/Sprite/boss_left.sp"
+	coord: (21, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/boss_left.txt"
+	HP: 30
+}
+{
+	spawn: 97
+	sprite: "Resources/Sprite/boss.sp"
+	coord: (30, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/boss.txt"
+	HP: 30
+}
+{
+	spawn: 97
+	sprite: "Resources/Sprite/boss_right.sp"
+	coord: (43, 10)
+	loopPattern: 1
+	pattern: "Resources/Pattern/boss_right.txt"
+	HP: 30
+}

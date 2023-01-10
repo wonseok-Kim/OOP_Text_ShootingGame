@@ -62,7 +62,7 @@
     <ClCompile Include="source\Game\ShootingGame.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
-    <ClCompile Include="source\Stage.cpp">
+    <ClCompile Include="source\Infos.cpp">
       <Filter>2. Resource</Filter>
     </ClCompile>
     <ClCompile Include="source\ResourceLoader.cpp">
@@ -96,6 +96,12 @@
       <Filter>1.Engine</Filter>
     </ClCompile>
     <ClCompile Include="source\Game\GameInfo.cpp">
+      <Filter>3. ShootingGame</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ItemParser.cpp">
+      <Filter>2. Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\Item.cpp">
       <Filter>3. ShootingGame</Filter>
     </ClCompile>
   </ItemGroup>
@@ -145,7 +151,7 @@
     <ClInclude Include="source\Game\ShootingGame.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
-    <ClInclude Include="source\Stage.h">
+    <ClInclude Include="source\Infos.h">
       <Filter>2. Resource</Filter>
     </ClInclude>
     <ClInclude Include="source\ResourceLoader.h">
@@ -182,6 +188,12 @@
       <Filter>1.Engine</Filter>
     </ClInclude>
     <ClInclude Include="source\Game\GameInfo.h">
+      <Filter>3. ShootingGame</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ItemParser.h">
+      <Filter>2. Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\Item.h">
       <Filter>3. ShootingGame</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,14 +4,14 @@ Player
 	coord: (40, 40)
 }
 
-Enemy 14
+Enemy 15
 {
 	spawn: 0
 	sprite: "Resources/Sprite/enemy1.sp"
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 60
@@ -19,7 +19,7 @@ Enemy 14
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+		HP: 2
 }
 {
 	spawn: 120
@@ -27,7 +27,7 @@ Enemy 14
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 180
@@ -35,7 +35,7 @@ Enemy 14
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 240
@@ -43,7 +43,7 @@ Enemy 14
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 300
@@ -51,7 +51,7 @@ Enemy 14
 	coord: (-1, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy1.txt"
-	HP: 1
+	HP: 2
 }
 
 
@@ -64,7 +64,7 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 60
@@ -72,7 +72,7 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 120
@@ -80,7 +80,7 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 180
@@ -88,7 +88,7 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 240
@@ -96,7 +96,7 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 {
 	spawn: 300
@@ -104,24 +104,32 @@ Enemy 14
 	coord: (75, -1)
 	loopPattern: 1
 	pattern: "Resources/Pattern/stage2_enemy2.txt"
-	HP: 1
+	HP: 2
 }
 
 {
 	spawn: 0
 	sprite: "Resources/Sprite/enemy2.sp"
-	coord: (20, -1)
+	coord: (17, -3)
 	loopPattern: 1
 	pattern: "Resources/Pattern/[WvvW].txt"
-	HP: 3
+	HP: 5
 }
 {
 	spawn: 0
 	sprite: "Resources/Sprite/enemy2.sp"
-	coord: (57, -1)
+	coord: (37, -3)
 	loopPattern: 1
 	pattern: "Resources/Pattern/[WvvW].txt"
-	HP: 3
+	HP: 5
+}
+{
+	spawn: 0
+	sprite: "Resources/Sprite/enemy2.sp"
+	coord: (57, -3)
+	loopPattern: 1
+	pattern: "Resources/Pattern/[WvvW].txt"
+	HP: 5
 }
 
 

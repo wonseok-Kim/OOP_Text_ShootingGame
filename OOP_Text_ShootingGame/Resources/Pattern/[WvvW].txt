@@ -9,7 +9,7 @@
 	shotChance: 0	
 }
 {
-	duration: 60
+	duration: 80
 	moveTo: (0, 1)
 	moveInterval: 10
 
@@ -27,7 +27,7 @@
 	shotChance: 100
 }
 {
-	duration: 60
+	duration: 80
 	moveTo: (0, -1)
 	moveInterval: 10
 

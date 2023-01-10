@@ -4,9 +4,10 @@
 
 #include "Engine/Sprite.h"
 
-#include "Stage.h"
+#include "ItemParser.h"
 #include "PatternList.h"
 #include "PatternParser.h"
+#include "Infos.h"
 
 #pragma warning(push)
 #pragma warning(disable: 26495) // 멤버 변수 초기화 경고
@@ -146,6 +147,50 @@ public:
         return &m_PatternLists[i];
     }
 
+    bool AddItem(const WCHAR* filename)
+    {
+        if (m_ItemsCount >= MAX_ITEMS)
+        {
+            PrintError(L"Stage 최대 저장 개수를 넘어갔다.");
+            return false;
+        }
+                
+        int newIdx = m_ItemsCount++;
+
+        size_t len = wcslen(filename);
+        m_ItemFilenames[newIdx] = new WCHAR[len + 1];
+        wcscpy_s(m_ItemFilenames[newIdx], len + 1, filename);
+
+        ItemParser parser;
+        if (!parser.Init(filename))
+        {
+            PrintError(L"'%s' 파서 초기화하다 오류", filename);
+            return false;
+        }
+        if (!parser.ParseItem(&m_Items[newIdx]))
+        {
+            PrintError(L"'%s' 파싱하다 오류", filename);
+            return false;
+        }
+
+        return true;
+    }
+
+    ItemInfo* GetItem(const WCHAR* filename)
+    {
+        int i;
+        for (i = 0; i < m_ItemsCount; ++i)
+        {
+            if (wcscmp(m_ItemFilenames[i], filename) == 0)
+                break;
+        }
+
+        if (i == m_ItemsCount)
+            return nullptr;
+
+        return &m_Items[i];
+    }
+
     bool AddStage(Stage* stage)
     {
         if (m_StagesCount >= MAX_STAGES)
@@ -172,6 +217,7 @@ private:
     static constexpr int MAX_SPRITES = 10;
     static constexpr int MAX_BULLETS = 10;
     static constexpr int MAX_PATTERN_LISTS = 10;
+    static constexpr int MAX_ITEMS = 10;
     static constexpr int MAX_STAGES = 10;
 
     Sprite* m_Sprites[MAX_SPRITES]{};
@@ -185,6 +231,10 @@ private:
     PatternList m_PatternLists[MAX_PATTERN_LISTS];
     WCHAR* m_PatternFilenames[MAX_PATTERN_LISTS]{};
     int m_PatternListsCount = 0;
+
+    ItemInfo m_Items[MAX_ITEMS];
+    WCHAR* m_ItemFilenames[MAX_ITEMS]{};
+    int m_ItemsCount = 0;
 
     Stage* m_Stages[MAX_STAGES]{};
     int m_StagesCount = 0;

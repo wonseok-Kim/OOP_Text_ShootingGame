@@ -1,8 +1,12 @@
-3
+8
 Resources/ShotInfo/player_shot.txt
 Resources/ShotInfo/default_enemy_shot.txt
 Resources/ShotInfo/enemy2_shot.txt
-
+Resources/ShotInfo/boss1.txt
+Resources/ShotInfo/boss1_left.txt
+Resources/ShotInfo/boss1_right.txt
+Resources/ShotInfo/boss2.txt
+Resources/ShotInfo/player2_shot.txt
 
 
 bullet 파일적는 법

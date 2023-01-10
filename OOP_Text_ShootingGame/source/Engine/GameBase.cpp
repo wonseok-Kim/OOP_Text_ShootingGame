@@ -73,7 +73,7 @@ void GameBase::Run()
         if (nowTick < standardTick)
         {
             Sleep(standardTick - nowTick);
-        }
+         }
         else
         {
             errorTick += nowTick - standardTick;

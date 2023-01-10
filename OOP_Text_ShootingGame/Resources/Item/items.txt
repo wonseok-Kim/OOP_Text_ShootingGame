@@ -1,0 +1,3 @@
+2
+Resources/Item/hp_up.txt
+Resources/Item/double_shot.txt

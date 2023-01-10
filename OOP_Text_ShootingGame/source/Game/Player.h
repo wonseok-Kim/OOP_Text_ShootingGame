@@ -3,7 +3,7 @@
 #include "Engine/ObjectBase.h"
 
 #include "ObjectType.h"
-#include "Stage.h"
+#include "Infos.h"
 
 class Sprite;
 class SceneBase;
@@ -21,7 +21,7 @@ enum PlayerState
 class Player : public ObjectBase
 {
 public:
-    Player(PlayerInfo* pInfo);
+    Player(PlayerInfo* pInfo, const Player* prevStagePlayerOrNull = nullptr);
 
     virtual ~Player() override = default;
 
@@ -40,7 +40,6 @@ private:
     UINT m_State = 0;
 
     int m_HP = 3;
-    int m_Life = 3;
 
     DWORD m_HittedFrame = 0;
     bool m_bInvicible = false;

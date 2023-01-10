@@ -1,0 +1,19 @@
+2
+{
+	duration: 42
+	moveTo: (1, 0)
+	moveInterval: 2
+
+	shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
+	shotInterval: 201
+	shotChance: 0	
+}
+{
+	duration: 54
+	moveTo: (0, 0)
+	moveInterval: 2
+
+	shotInfo: "Resources/ShotInfo/default_enemy_shot.txt"
+	shotInterval: 201
+	shotChance: 0	
+}

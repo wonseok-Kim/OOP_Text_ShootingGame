@@ -1,6 +1,11 @@
-5
+10
 Resources/Sprite/player.sp
 Resources/Sprite/enemy1.sp
 Resources/Sprite/enemy2.sp
 Resources/Sprite/default_bullet.sp
 Resources/Sprite/enemy2_bullet.sp
+Resources/Sprite/boss.sp
+Resources/Sprite/boss_right.sp
+Resources/Sprite/boss_left.sp
+Resources/Sprite/hp_up.sp
+Resources/Sprite/double_shot.sp

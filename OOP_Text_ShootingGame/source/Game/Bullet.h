@@ -6,7 +6,7 @@
 
 #include "GameDefine.h"
 #include "ObjectType.h"
-#include "Stage.h"
+#include "Infos.h"
 
 class Bullet : public ObjectBase
 {

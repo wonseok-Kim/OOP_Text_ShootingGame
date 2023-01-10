@@ -7,6 +7,7 @@ enum ObjectType
 	ObjectType_Bullet,
 	ObjectType_GameInfo,
 	ObjectType_StageInfo,
+	ObjectType_Item,
 	ObjectType_MaxTypes,
 };
 

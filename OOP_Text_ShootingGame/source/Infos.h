@@ -50,4 +50,13 @@ struct Stage
     PlayerInfo player;
     EnemyInfo* enemies;
     int enemiesCount;
+    ItemInfo* items;
+    int itemsCount;
+};
+
+struct ItemInfo
+{
+    int hp;
+    ShotInfo* shotInfo;
+    Sprite* sprite;
 };

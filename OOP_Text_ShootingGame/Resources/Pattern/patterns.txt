@@ -1,5 +1,11 @@
-4
+10
 Resources/Pattern/stage1_enemy.txt
 Resources/Pattern/stage2_enemy1.txt
 Resources/Pattern/stage2_enemy2.txt
 Resources/Pattern/[WvvW].txt
+Resources/Pattern/init_boss.txt
+Resources/Pattern/init_boss_right.txt
+Resources/Pattern/init_boss_left.txt
+Resources/Pattern/boss.txt
+Resources/Pattern/boss_right.txt
+Resources/Pattern/boss_left.txt
