@@ -11,7 +11,7 @@ bool Parser::Init(const WCHAR* filename)
         return false;
     }
 
-    size_t size = (size_t)GetFileSize(file);
+    size_t size = (size_t)GetFileSize(file) + 1;
     m_Texts = new char[size];
 
     size_t result = fread(m_Texts, 1, size, file);
