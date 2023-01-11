@@ -8,8 +8,7 @@ bool StageParser::ParseStage(Stage* out_Stage)
 {
     Assert(out_Stage, L"out parameter must not be null");
 
-    out_Stage->enemies = nullptr;
-    out_Stage->items = nullptr;
+    ZeroMemory(out_Stage, sizeof(Stage));
 
     while (*m_Current != '\0')
     {
@@ -31,6 +30,7 @@ bool StageParser::ParseStage(Stage* out_Stage)
 
                 if (!ParsePlayerInfo(block, &out_Stage->player))
                 {
+                    PrintError(L"Player 파싱하다 에러");
                     return false;
                 }
             }
@@ -40,7 +40,10 @@ bool StageParser::ParseStage(Stage* out_Stage)
 
                 SkipWhiteSpace();
                 if (!GetNumberLiteral(&out_Stage->enemiesCount))
+                {
+                    PrintError(L"Enemy 다음에 Enemy의 숫자가 와야 됩니다.");
                     return false;
+                }
                 
                 // delete[] in ResourceManager::~ResourceManager().
                 out_Stage->enemies = new EnemyInfo[out_Stage->enemiesCount];
@@ -56,6 +59,7 @@ bool StageParser::ParseStage(Stage* out_Stage)
 
                     if (!ParseEnemyInfo(block, &out_Stage->enemies[i]))
                     {
+                        PrintError(L"enemy 파싱하다 에러");
                         goto delete_and_out_ParseStage;
                     }
                 }
@@ -66,7 +70,10 @@ bool StageParser::ParseStage(Stage* out_Stage)
 
                 SkipWhiteSpace();
                 if (!GetNumberLiteral(&out_Stage->itemsCount))
+                {
+                    PrintError(L"Item 다음에 Item의 숫자가 와야 됩니다.");
                     return false;
+                }
 
                 // delete[] in ResourceManager::~ResourceManager().
                 out_Stage->items = new ItemInfo[out_Stage->itemsCount];
@@ -77,11 +84,13 @@ bool StageParser::ParseStage(Stage* out_Stage)
                     SubString block;
                     if (!GetBlock(&block))
                     {
+                        PrintError(L"Item 파싱하다 에러");
                         goto delete_and_out_ParseStage;
                     }
 
                     if (!ParseItemInfo(block, &out_Stage->items[i]))
                     {
+                        PrintError(L"Item 파싱하다 에러");
                         goto delete_and_out_ParseStage;
                     }
                 }
@@ -195,6 +204,8 @@ bool StageParser::ParsePlayerInfo(const SubString& texts, PlayerInfo* out_pPlaye
 bool StageParser::ParseEnemyInfo(const SubString& texts, EnemyInfo* out_pEnemyInfo)
 {
     Assert(out_pEnemyInfo, L"out parameter must not be null");
+
+    ZeroMemory(out_pEnemyInfo, sizeof(EnemyInfo));
 
     const char* identifiers[] = { "sprite", "coord", "loopPattern", "pattern", "HP", "spawn"};
     constexpr int identifiersLength = sizeof(identifiers) / sizeof(char*);

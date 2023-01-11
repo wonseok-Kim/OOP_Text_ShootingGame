@@ -14,9 +14,8 @@
 #include "Player.h"
 #include "SceneTitle.h"
 
-SceneGame::SceneGame(int curStage, const Player* prevPlayerInfo)
+SceneGame::SceneGame(int curStage)
 	: m_CurStageIdx{ curStage }
-	, m_prevPlayerInfo{ prevPlayerInfo }
 {
 }
 
@@ -84,7 +83,7 @@ bool SceneGame::OnInit()
 		return false;
 	}
 
-	m_Player = new Player(&m_CurrentStageInfo->player, m_prevPlayerInfo);
+	m_Player = new Player(&m_CurrentStageInfo->player);
 	AddObject(m_Player);
 
 	m_TotalEnemiesCount = m_CurrentStageInfo->enemiesCount;
@@ -106,7 +105,6 @@ void SceneGame::OnEnemyDie()
 	m_TotalEnemiesCount--;
 	if (m_TotalEnemiesCount == 0)
 	{
-		//m_ObjectManager.AddObject(new PrintStageClear(this));
 		AddObject(new CurStageDisplayer(m_CurStageIdx, true));
 	}
 }

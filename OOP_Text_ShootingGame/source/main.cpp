@@ -4,30 +4,19 @@
 
 #include "Engine/Sprite.h"
 
-#ifdef _DEBUG
-#include "Engine/SceneManager.h"
-#include "Resource/ResourceManager.h"
-#endif
-
 #include "Game/ShootingGame.h"
 #include "Game/SceneTitle.h"
-#include "Game/SceneGame.h"
 
 static void MakeSprite();
 
 int wmain()
 {
-#ifdef _DEBUG
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
-
     MakeSprite();
 
     timeBeginPeriod(1);
     _wsetlocale(LC_ALL, L"");
 
-    //auto game = new ShootingGame(new SceneTitle);
-     auto game = new ShootingGame(new SceneGame(2));
+    auto game = new ShootingGame(new SceneTitle);     
     if (game->Init())
     {
         game->Run();
@@ -35,15 +24,6 @@ int wmain()
 
     delete game;
     timeEndPeriod(1);
-
-#ifdef _DEBUG
-    SceneManager::Instance()->~SceneManager();
-    ResourceManager::Instance()->~ResourceManager();
-    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
-    _CrtDumpMemoryLeaks();
-    ExitProcess(0);
-#endif
-
     return 0;
 }
 

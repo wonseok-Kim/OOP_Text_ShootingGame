@@ -1,7 +1,5 @@
 #pragma once
 
-#include "PatternParser.h"
-
 #include "PatternList.h"
 #include "Infos.h"
 
@@ -12,8 +10,6 @@ class Sprite;
 
 class ResourceManager
 {
-    friend bool PatternParser::ParsePatternsAndAddPatternsToResMgr();
-
 public:
     static ResourceManager* Instance()
     {
@@ -29,10 +25,17 @@ public:
     bool AddShotInfo(const WCHAR* filename);
     ShotInfo* GetShotInfo(const WCHAR* filename);
 
+    bool AddPatternList(const WCHAR* filename);
     PatternList* GetPatternList(const WCHAR* filename);
 
-    bool AddStage(Stage* stage);
-    Stage* GetStage(int stage) { return m_Stages[stage]; }
+    bool AddStage(const WCHAR* filename);
+    Stage* GetStage(int stage) 
+    { 
+        if (stage < 0 || stage >= m_StagesCount)
+            return nullptr;
+
+        return m_Stages[stage]; 
+    }
     int GetStagesCount() { return m_StagesCount; }
 
 private:

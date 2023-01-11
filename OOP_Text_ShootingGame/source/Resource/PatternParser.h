@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Parser.h"
+#include "PatternList.h"
 
 struct Pattern;
 
@@ -10,7 +11,7 @@ public:
     PatternParser() = default;
     ~PatternParser() = default;
 
-    bool ParsePatternsAndAddPatternsToResMgr();
+    bool ParsePatterns(PatternList* out_pPatternList);
 
 private:
     bool ParsePattern(const SubString& block, Pattern* p);

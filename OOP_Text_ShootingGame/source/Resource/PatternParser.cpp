@@ -3,16 +3,8 @@
 
 #include "ResourceManager.h"
 
-bool PatternParser::ParsePatternsAndAddPatternsToResMgr()
+bool PatternParser::ParsePatterns(PatternList* out_pPatternList)
 {
-    ResourceManager* resMgr = ResourceManager::Instance();
-
-    // This method is a friend with ResourceManager.
-    int& listsCount = resMgr->m_PatternListsCount;
-    PatternList& patternList = resMgr->m_PatternLists[listsCount];
-    WCHAR*& filename = resMgr->m_PatternFilenames[listsCount];
-    listsCount++;
-
     SkipWhiteSpace();
     int patternsCount;
     if (!GetNumberLiteral(&patternsCount))
@@ -37,12 +29,8 @@ bool PatternParser::ParsePatternsAndAddPatternsToResMgr()
             delete p;
             return false;
         }
-        patternList.push_back(p);
+        out_pPatternList->push_back(p);
     }
-
-    size_t size = wcslen(m_Filename) + 1;
-    filename = new WCHAR[size];
-    wcscpy_s(filename, size, m_Filename);
 
     return true;
 }

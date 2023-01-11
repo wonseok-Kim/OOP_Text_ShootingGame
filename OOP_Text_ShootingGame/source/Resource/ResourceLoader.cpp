@@ -135,14 +135,8 @@ bool ResourceLoader::LoadPattern()
             goto close_file_and_out_LoadPattern;
         }
 
-        PatternParser parser;
-
-        if (!parser.Init(filename))
-            goto close_file_and_out_LoadPattern;
-
-        if (!parser.ParsePatternsAndAddPatternsToResMgr())
+        if (!ResourceManager::Instance()->AddPatternList(filename))
         {
-            PrintError(L"'%s' 파싱하다 오류", filename);
             goto close_file_and_out_LoadPattern;
         }
     }
@@ -183,23 +177,8 @@ bool ResourceLoader::LoadStage()
             goto close_file_and_out_LoadStage;
         }
 
-        StageParser parser;
-
-        if (!parser.Init(filename))
-            goto close_file_and_out_LoadStage;
-
-        Stage* newStage = new Stage; // delete in ResourceManager::~ResourceManager()
-        if (!parser.ParseStage(newStage))
+        if (!ResourceManager::Instance()->AddStage(filename))
         {
-            delete newStage;
-            PrintError(L"'%s' 파싱하다 오류", filename);
-            goto close_file_and_out_LoadStage;
-        }
-
-        if (!ResourceManager::Instance()->AddStage(newStage))
-        {
-            delete newStage;
-            PrintError(L"'%s' 파싱하다 오류", filename);
             goto close_file_and_out_LoadStage;
         }
     }

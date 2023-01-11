@@ -23,7 +23,6 @@ public:
 private:
 	int m_CurrentMenu = GAME_START;
 
-	// TODO: 변수 이름 바꾸기
 	const COORD m_SelectCrd[4] = {
 		{16, 8}, { 30, 8}, {16, 10}, {30, 10}
 	};
@@ -73,7 +72,6 @@ private:
 	int m_CurrentMenu = GAME_RETRY;
 	int m_CurStageIdx;
 
-	// TODO: 변수 이름 바꾸기
 	const COORD m_SelectCrd[4] = {
 		{16, 8}, { 30, 8}, {16, 10}, {30, 10}
 	};
@@ -120,7 +118,6 @@ public:
 private:
 	int m_CurrentMenu = GAME_TITLE;
 
-	// TODO: 변수 이름 바꾸기
 	const COORD m_SelectCrd[4] = {
 		{16, 8}, { 30, 8}, {16, 10}, {30, 10}
 	};

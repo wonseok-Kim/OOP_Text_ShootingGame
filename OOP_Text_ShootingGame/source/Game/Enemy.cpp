@@ -28,11 +28,6 @@ void Enemy::Update()
         {
             if (rand() % 101 < m_CurPattern->shotChance)
             {
-                /*m_Scene->AddObject(new Bullet(m_Scene, m_X + shotInfo->startCoord[i].X, m_Y + shotInfo->startCoord[i].Y,
-                shotInfo->sprite, shotInfo->dir[i], ObjectType_Enemy));*/
-
-                // Bullet(int x, int y, Sprite * sprite, COORD dir, int whoShot)
-
                 m_Scene->AddObject(new Bullet(
                     m_X + shotInfo->startCoord[i].X,
                     m_Y + shotInfo->startCoord[i].Y,

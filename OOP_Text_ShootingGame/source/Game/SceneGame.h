@@ -8,7 +8,7 @@ struct Stage;
 class SceneGame : public SceneBase
 {
 public:
-    SceneGame(int curStage = 0, const Player* prevPlayerInfo = nullptr);
+    SceneGame(int curStage = 0);
     virtual ~SceneGame() override;
 
     virtual void Update() override;
@@ -25,7 +25,5 @@ private:
     Player* m_Player = nullptr;
     int m_TotalEnemiesCount = 0;
     int m_CurrentEnemiesCount = 0;
-
-    const Player* m_prevPlayerInfo;
 };
 
