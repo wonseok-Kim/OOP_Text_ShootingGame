@@ -2,7 +2,8 @@
 
 #include "Engine/GameBase.h"
 
-#include "ResourceLoader.h"
+#include "Resource/ResourceLoader.h"
+
 #include "GameDefine.h"
 
 class ShootingGame : public GameBase

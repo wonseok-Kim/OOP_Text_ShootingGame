@@ -132,4 +132,25 @@ Enemy 15
 	HP: 5
 }
 
-
+Item 3
+{
+	spawn: 60
+	coord: (10, 10)
+	dir: (-1, 1)
+	shotInfo: "Resources/ShotInfo/player2_shot.txt"
+	sprite: "Resources/Sprite/double_shot.sp"
+}
+{
+	spawn: 200
+	coord: (40, 20)
+	dir: (1, 1)
+	hp: 1
+	sprite: "Resources/Sprite/hp_up.sp"
+}
+{
+	spawn: 400
+	coord: (40, 20)
+	dir: (1, 1)
+	hp: 1
+	sprite: "Resources/Sprite/hp_up.sp"
+}

@@ -54,3 +54,26 @@ Enemy 6
 	pattern: "Resources/Pattern/boss_right.txt"
 	HP: 30
 }
+
+Item 3
+{
+	spawn: 120
+	coord: (10, 10)
+	dir: (-1, 1)
+	shotInfo: "Resources/ShotInfo/player2_shot.txt"
+	sprite: "Resources/Sprite/double_shot.sp"
+}
+{
+	spawn: 500
+	coord: (40, 20)
+	dir: (1, 1)
+	hp: 3
+	sprite: "Resources/Sprite/hp_up.sp"
+}
+{
+	spawn: 1000
+	coord: (40, 20)
+	dir: (1, 1)
+	hp: 3
+	sprite: "Resources/Sprite/hp_up.sp"
+}

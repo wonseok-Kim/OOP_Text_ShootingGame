@@ -4,15 +4,14 @@
 
 #include "Engine/Sprite.h"
 
+#ifdef _DEBUG
+#include "Engine/SceneManager.h"
+#include "Resource/ResourceManager.h"
+#endif
+
 #include "Game/ShootingGame.h"
 #include "Game/SceneTitle.h"
 #include "Game/SceneGame.h"
-
-#ifdef _DEBUG
-#include "Engine/GlobalObjectManager.h"
-#include "Engine/SceneManager.h"
-#include "ResourceManager.h"
-#endif
 
 static void MakeSprite();
 
@@ -27,7 +26,8 @@ int wmain()
     timeBeginPeriod(1);
     _wsetlocale(LC_ALL, L"");
 
-    auto game = new ShootingGame(new SceneTitle);
+    //auto game = new ShootingGame(new SceneTitle);
+     auto game = new ShootingGame(new SceneGame(2));
     if (game->Init())
     {
         game->Run();
@@ -37,7 +37,6 @@ int wmain()
     timeEndPeriod(1);
 
 #ifdef _DEBUG
-    GlobalObjectManager::Instance()->~GlobalObjectManager();
     SceneManager::Instance()->~SceneManager();
     ResourceManager::Instance()->~ResourceManager();
     _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG);
@@ -83,17 +82,17 @@ static void MakeSprite()
     //playerBullet.SetGlyph(0, 0, L'*');
     //playerBullet.Save(L"Resources/Sprite/default_bullet.sp");
 
-    Sprite hpUP{ 3,1 };
-    hpUP.SetGlyph(0, 0, L'<');
-    hpUP.SetGlyph(1, 0, L'H');
-    hpUP.SetGlyph(2, 0, L'>');
-    hpUP.Save(L"Resources/Item/hp_up.sp");
+    //Sprite hpUP{ 3,1 };
+    //hpUP.SetGlyph(0, 0, L'<');
+    //hpUP.SetGlyph(1, 0, L'H');
+    //hpUP.SetGlyph(2, 0, L'>');
+    //hpUP.Save(L"Resources/Item/hp_up.sp");
 
-    Sprite doubleShot{ 3, 1 };
-    doubleShot.SetGlyph(0, 0, L'<');
-    doubleShot.SetGlyph(1, 0, L'D');
-    doubleShot.SetGlyph(2, 0, L'>');
-    doubleShot.Save(L"Resources/Item/double_shot.sp");
+    //Sprite doubleShot{ 3, 1 };
+    //doubleShot.SetGlyph(0, 0, L'<');
+    //doubleShot.SetGlyph(1, 0, L'D');
+    //doubleShot.SetGlyph(2, 0, L'>');
+    //doubleShot.Save(L"Resources/Item/double_shot.sp");
 
     //const WCHAR* leftHand[] = {
     //    L"         ",

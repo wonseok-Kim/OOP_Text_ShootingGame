@@ -3,20 +3,16 @@
 
 #include "Engine/Renderer.h"
 #include "Engine/SceneBase.h"
+#include "Engine/Sprite.h"
+
+#include "Resource/ResourceManager.h"
 
 #include "Bullet.h"
 #include "GameDefine.h"
-#include "GameInfo.h"
-#include "ResourceManager.h"
+#include "InGameUI.h"
+#include "Item.h"
 #include "SceneGame.h"
 #include "SceneTitle.h"
-
-//Player::Player(SceneBase* scene, PlayerInfo* pInfo)
-//    :ObjectBase(scene, pInfo->sprite, ObjectType_Player, pInfo->startCoord.X, pInfo->startCoord.Y)
-//{
-//    m_ShotInfo = ResourceManager::Instance()->GetShotInfo(L"Resources/ShotInfo/player_shot.txt");
-//    assert(m_ShotInfo);
-//}
 
 Player::Player(PlayerInfo* pInfo, const Player* prevStagePlayerOrNull)
     :ObjectBase(ObjectType_Player)
@@ -90,53 +86,56 @@ void Player::Render(Renderer* renderer)
 
 void Player::OnCollision(ObjectBase* other)
 {
-    if (m_bInvicible)
-        return;
-
     int type = other->GetObjectType();
 
     if (type == ObjectType_Bullet)
     {
+        if (m_bInvicible)
+            return;
+
         Bullet* b = (Bullet*)other;
         if (b->GetWhoShot() != ObjectType_Enemy)
             return;
 
-        m_HP--;
-        m_bInvicible = true;
-        m_bVisible = false;
-        m_HittedFrame = m_Scene->GetFrames();
-        if (m_HP == 0)
-        {
-            SceneGame* gameScene = (SceneGame*)m_Scene;
-            SceneManager::Instance()->LoadScene(new SceneDefeat(gameScene->GetCurrentStageIdx()));
-        }
-
+        TakeDamage();
         Destroy(b);
-
-        if (m_GameInfo)
-            m_GameInfo->OnUpdate(m_HP);
     }
     else if (type == ObjectType_Enemy)
     {
-        m_HP--;
-        m_bInvicible = true;
-        m_bVisible = false;
-        m_HittedFrame = m_Scene->GetFrames();
-        if (m_HP == 0)
-        {
-            SceneGame* gameScene = (SceneGame*)m_Scene;
-            SceneManager::Instance()->LoadScene(new SceneDefeat(gameScene->GetCurrentStageIdx()));
-        }
+        if (m_bInvicible)
+            return;
 
-        if (m_GameInfo)
-            m_GameInfo->OnUpdate(m_HP);
+        TakeDamage();
+    }
+    else if (type == ObjectType_Item)
+    {
+        Item* item = (Item*)other;
+        const ItemInfo* pInfo = item->GetInfo();
+
+        m_HP += pInfo->hp;
+        m_HP = min(m_HP, 3);
+        m_InGameUI->OnUpdate(m_HP);
+
+        if (pInfo->shotInfo)
+            m_ShotInfo = pInfo->shotInfo;
+
+        Destroy(item);
     }
     
 }
 
+void Player::TakeDamage()
+{
+    m_HP--;
+    m_bInvicible = true;
+    m_bVisible = false;
+    m_HittedFrame = m_Scene->GetFrames();
+    if (m_HP == 0)
+    {
+        SceneGame* gameScene = (SceneGame*)m_Scene;
+        SceneManager::Instance()->LoadScene(new SceneDefeat(gameScene->GetCurrentStageIdx()));
+    }
 
-/*
-
-
-
-*/
+    if (m_InGameUI)
+        m_InGameUI->OnUpdate(m_HP);
+}

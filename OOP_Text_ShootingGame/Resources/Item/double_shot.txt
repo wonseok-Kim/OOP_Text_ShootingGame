@@ -1,2 +1,0 @@
-shotInfo: "Resources/ShotInfo/player2_shot.txt"
-sprite: "Resources/Sprite/double_shot.sp"

@@ -45,6 +45,16 @@ struct EnemyInfo
     int hp;
 };
 
+struct ItemInfo
+{
+    DWORD spawnFrame;
+    COORD startCoord;
+    COORD dir;
+    int hp;
+    ShotInfo* shotInfo;
+    Sprite* sprite;
+};
+
 struct Stage
 {
     PlayerInfo player;
@@ -54,9 +64,3 @@ struct Stage
     int itemsCount;
 };
 
-struct ItemInfo
-{
-    int hp;
-    ShotInfo* shotInfo;
-    Sprite* sprite;
-};

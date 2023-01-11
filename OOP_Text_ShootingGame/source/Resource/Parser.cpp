@@ -87,7 +87,6 @@ bool Parser::GetIdentifier(SubString* sub)
 {
     if (GetCharType(*m_Current) != CharType::Identifier)
     {
-        abort();
         return false;
     }
 
@@ -236,23 +235,3 @@ Parser::CharType Parser::GetCharType(char ch)
 
     return CharType::Error;
 }
-
-//inline bool Parser::GetLine(const char* current, int* out_Line)
-//{
-//    const char* search = m_Texts;
-//    int line = 1;
-//
-//    while (*search != L'\0')
-//    {
-//        if (search == current)
-//            break;
-//
-//        if (*search == '\n')
-//            line++;
-//
-//        search++;
-//    }
-//    *out_Line = line;
-//
-//    return true;
-//}

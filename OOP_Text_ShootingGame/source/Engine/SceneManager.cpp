@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 
-#include "GlobalObjectManager.h"
 #include "Input.h"
 #include "ObjectBase.h"
 #include "Renderer.h"
@@ -12,21 +11,20 @@ SceneManager::~SceneManager()
 	delete m_NextScene;
 }
 
-bool SceneManager::Run(DWORD gameFrames, Renderer* rendererOrNull)
+bool SceneManager::Run(Renderer* rendererOrNull)
 {
 	if (m_IsExit)
 		return false;
 
 	if (m_NextScene)
 	{
-		delete m_CurrentScene;
+		SceneBase* prevScene = m_CurrentScene;
 		m_CurrentScene = m_NextScene;
+		m_NextScene = nullptr;
 		if (!m_CurrentScene->OnInit())
 			return false;
-		m_NextScene = nullptr;
+		delete prevScene;
 	}
-
-	GlobalObjectManager* globalObjectManager = GlobalObjectManager::Instance();
 
 	Input::Instance()->Handle();
 
@@ -34,19 +32,21 @@ bool SceneManager::Run(DWORD gameFrames, Renderer* rendererOrNull)
 	m_CurrentScene->m_ObjectManager.Update(m_CurrentScene->m_FramesCount);
 	m_CurrentScene->m_FramesCount++;
 
-	globalObjectManager->Update(m_CurrentScene->m_FramesCount);
-	// TODO: 글로벌에 대해서도 처리해주기
 
 	if (rendererOrNull)
 	{
 		m_CurrentScene->Render(rendererOrNull);
 		m_CurrentScene->m_ObjectManager.Render(rendererOrNull);
 
-		globalObjectManager->Render(rendererOrNull);
-		// TODO: 글로벌에 대해서도 처리해주기
-
 		rendererOrNull->Flip();
 	}
 
 	return true;
+}
+
+void SceneManager::LoadScene(SceneBase* nextScene)
+{
+	delete m_NextScene;
+
+	m_NextScene = nextScene;
 }

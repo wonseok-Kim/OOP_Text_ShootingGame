@@ -51,7 +51,6 @@ protected:
     bool GetStringLiteral(WCHAR* wcs, int cchwcs);
     bool GetCoord(COORD* coord);
     bool GetNumberLiteral(int* out_int);
-    //bool GetLine(const char* current, int* out_Line);
 
 protected:
     WCHAR m_Filename[MAX_PATH];

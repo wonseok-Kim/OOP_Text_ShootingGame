@@ -7,7 +7,7 @@ struct ItemInfo;
 class Item : public ObjectBase
 {
 public:
-    Item(ItemInfo* itemInfo, int x, int y, COORD dir = { 0, 0 });
+    Item(ItemInfo* itemInfo);
 
     virtual void Update();
     virtual void Render(Renderer* renderer);

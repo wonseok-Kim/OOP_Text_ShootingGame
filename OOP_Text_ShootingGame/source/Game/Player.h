@@ -2,12 +2,14 @@
 
 #include "Engine/ObjectBase.h"
 
+#include "Resource/Infos.h"
+
+#include "GameDefine.h"
 #include "ObjectType.h"
-#include "Infos.h"
 
 class Sprite;
 class SceneBase;
-class GameInfo;
+class InGameUI;
 
 enum PlayerState
 {
@@ -32,19 +34,22 @@ public:
 
     void SetState(PlayerState state) { m_State |= state; }
 
-    void AttachGameInfo(GameInfo* gameInfo) { m_GameInfo = gameInfo; }
+    void AttachGameUI(InGameUI* inGameUI) { m_InGameUI = inGameUI; }
+
+private:
+    void TakeDamage();
 
 private:
     static constexpr DWORD m_InvicibleFrames = 60;
 
     UINT m_State = 0;
 
-    int m_HP = 3;
+    int m_HP = MAX_PLAYER_HP;
 
     DWORD m_HittedFrame = 0;
     bool m_bInvicible = false;
 
     ShotInfo* m_ShotInfo = nullptr;
-    GameInfo* m_GameInfo = nullptr;
+    InGameUI* m_InGameUI = nullptr;
 };
 

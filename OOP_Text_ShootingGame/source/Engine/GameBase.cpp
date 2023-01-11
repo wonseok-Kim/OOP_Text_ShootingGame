@@ -55,15 +55,15 @@ void GameBase::Run()
             incrementsOf1000ms += 1000;
         }
 
-        //if (errorTick >= ticksPerFrame)
-        //{
-        //    bGameLoop = sceneManager->Run(frameCount, nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
-
-        //    errorTick -= ticksPerFrame;
-        //}
-        //else
+        if (errorTick >= ticksPerFrame)
         {
-            bGameLoop = sceneManager->Run(frameCount, m_Renderer);
+            bGameLoop = sceneManager->Run(nullptr); // ·»´õ¸µ °Ç³Ê¶ç±â
+
+            errorTick -= ticksPerFrame;
+        }
+        else
+        {
+            bGameLoop = sceneManager->Run(m_Renderer);
 
             // Sleep(rand() % 50); // ·º À¯¹ß
         }

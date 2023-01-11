@@ -156,14 +156,10 @@
     <ClCompile Include="source\Engine\ObjectManager.cpp" />
     <ClCompile Include="source\Game\Bullet.cpp" />
     <ClCompile Include="source\Game\Enemy.cpp" />
-    <ClCompile Include="source\Game\GameInfo.cpp" />
+    <ClCompile Include="source\Game\InGameUI.cpp" />
     <ClCompile Include="source\Game\Item.cpp" />
-    <ClCompile Include="source\ItemParser.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\Parser.cpp" />
-    <ClCompile Include="source\Infos.cpp" />
     <ClCompile Include="source\Engine\GameBase.cpp" />
-    <ClCompile Include="source\Engine\GlobalObjectManager.cpp" />
     <ClCompile Include="source\Engine\Input.cpp" />
     <ClCompile Include="source\Engine\ObjectBase.cpp" />
     <ClCompile Include="source\Engine\Renderer.cpp" />
@@ -173,11 +169,12 @@
     <ClCompile Include="source\Game\Player.cpp" />
     <ClCompile Include="source\Game\SceneGame.cpp" />
     <ClCompile Include="source\Game\SceneTitle.cpp" />
-    <ClCompile Include="source\Game\ShootingGame.cpp" />
-    <ClCompile Include="source\PatternParser.cpp" />
-    <ClCompile Include="source\ResourceLoader.cpp" />
-    <ClCompile Include="source\ResourceManager.cpp" />
-    <ClCompile Include="source\StageParser.cpp" />
+    <ClCompile Include="source\Resource\Infos.cpp" />
+    <ClCompile Include="source\Resource\Parser.cpp" />
+    <ClCompile Include="source\Resource\PatternParser.cpp" />
+    <ClCompile Include="source\Resource\ResourceLoader.cpp" />
+    <ClCompile Include="source\Resource\ResourceManager.cpp" />
+    <ClCompile Include="source\Resource\StageParser.cpp" />
     <ClCompile Include="source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -189,14 +186,11 @@
     <ClInclude Include="source\Container\list.h" />
     <ClInclude Include="source\Engine\ObjectManager.h" />
     <ClInclude Include="source\Game\Bullet.h" />
+    <ClInclude Include="source\Game\CurStageDisplayer.h" />
     <ClInclude Include="source\Game\Enemy.h" />
-    <ClInclude Include="source\Game\GameInfo.h" />
+    <ClInclude Include="source\Game\InGameUI.h" />
     <ClInclude Include="source\Game\Item.h" />
-    <ClInclude Include="source\ItemParser.h" />
-    <ClInclude Include="source\PatternList.h" />
-    <ClInclude Include="source\Infos.h" />
     <ClInclude Include="source\Engine\GameBase.h" />
-    <ClInclude Include="source\Engine\GlobalObjectManager.h" />
     <ClInclude Include="source\Engine\Input.h" />
     <ClInclude Include="source\Engine\ObjectBase.h" />
     <ClInclude Include="source\Engine\ObjectList.h" />
@@ -210,11 +204,13 @@
     <ClInclude Include="source\Game\SceneGame.h" />
     <ClInclude Include="source\Game\SceneTitle.h" />
     <ClInclude Include="source\Game\ShootingGame.h" />
-    <ClInclude Include="source\Parser.h" />
-    <ClInclude Include="source\PatternParser.h" />
-    <ClInclude Include="source\ResourceLoader.h" />
-    <ClInclude Include="source\ResourceManager.h" />
-    <ClInclude Include="source\StageParser.h" />
+    <ClInclude Include="source\Resource\Infos.h" />
+    <ClInclude Include="source\Resource\Parser.h" />
+    <ClInclude Include="source\Resource\PatternList.h" />
+    <ClInclude Include="source\Resource\PatternParser.h" />
+    <ClInclude Include="source\Resource\ResourceLoader.h" />
+    <ClInclude Include="source\Resource\ResourceManager.h" />
+    <ClInclude Include="source\Resource\StageParser.h" />
     <ClInclude Include="source\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
